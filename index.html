@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0f172a">
+<title>金酒公司115年儲備技術員甄試｜行動刷題神器</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
+  body {
+    font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: #f8fafc;
+    color: #0f172a;
+    -webkit-tap-highlight-color: transparent;
+    padding-bottom: 84px;
+  }
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 16px);
+  }
+  .opt-btn {
+    transition: all 0.16s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .opt-btn:active {
+    transform: scale(0.985);
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>
+</head>
+<body class="min-h-screen select-none">
+
+<!-- Top Countdown & Header Bar -->
+<header class="sticky top-0 z-30 bg-slate-900 text-white shadow-md">
+  <div class="max-w-md mx-auto px-4 py-2.5 flex items-center justify-between">
+    <div class="flex items-center space-x-2">
+      <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-amber-500 text-slate-950 font-black text-sm shadow">金</span>
+      <div>
+        <h1 class="text-sm font-bold leading-tight tracking-wide">金酒儲備技術員甄試題庫</h1>
+        <p class="text-[11px] text-slate-400">1150924完整版・9大科共578題</p>
+      </div>
+    </div>
+    <div id="countdown-badge" class="bg-amber-500/15 border border-amber-400/40 rounded-lg px-2.5 py-1 text-right">
+      <div class="text-[10px] text-amber-300 font-medium leading-none">距離 11/01 筆試</div>
+      <div id="countdown-text" class="text-xs font-extrabold text-amber-400 tracking-tight mt-0.5">計算中...</div>
+    </div>
+  </div>
+</header>
+
+<!-- Main Container -->
+<main class="max-w-md mx-auto px-4 pt-4">
+
+  <!-- VIEW 1: DASHBOARD (首頁與統計) -->
+  <section id="view-home" class="space-y-4">
+    <!-- Hero Progress Card -->
+    <div class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-2xl p-5 text-white shadow-lg relative overflow-hidden">
+      <div class="flex justify-between items-start mb-4">
+        <div>
+          <span class="text-xs font-semibold uppercase tracking-wider text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded">學習總進度</span>
+          <div class="flex items-baseline space-x-2 mt-1.5">
+            <span id="stat-practiced" class="text-3xl font-black">0</span>
+            <span class="text-sm text-slate-400">/ 578 題 (<span id="stat-coverage">0</span>%)</span>
+          </div>
+        </div>
+        <div class="text-right">
+          <span class="text-xs text-slate-400 block">整體正確率</span>
+          <span id="stat-accuracy" class="text-2xl font-black text-emerald-400">0%</span>
+        </div>
+      </div>
+
+      <!-- Progress bar -->
+      <div class="w-full bg-slate-700/70 h-2.5 rounded-full overflow-hidden mb-4">
+        <div id="stat-progress-bar" class="bg-gradient-to-r from-amber-400 to-emerald-400 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+      </div>
+
+      <div class="grid grid-cols-3 gap-2 pt-2 border-t border-slate-700/60 text-center">
+        <div>
+          <div class="text-[11px] text-slate-400">累計作答</div>
+          <div id="stat-total-attempts" class="text-sm font-bold text-white mt-0.5">0 次</div>
+        </div>
+        <div>
+          <div class="text-[11px] text-slate-400">待消滅錯題</div>
+          <div id="stat-mistake-count" class="text-sm font-bold text-rose-400 mt-0.5">0 題</div>
+        </div>
+        <div>
+          <div class="text-[11px] text-slate-400">模擬考平均</div>
+          <div id="stat-exam-avg" class="text-sm font-bold text-amber-400 mt-0.5">-- 分</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Action Buttons -->
+    <div class="grid grid-cols-2 gap-3">
+      <button onclick="startPractice('ALL', 'UNSEEN_FIRST')" class="bg-amber-500 hover:bg-amber-600 active:scale-95 transition text-slate-950 font-black rounded-2xl p-4 shadow-sm flex flex-col justify-between text-left h-28">
+        <div class="flex items-center justify-between w-full">
+          <span class="text-xs bg-slate-950/15 px-2 py-0.5 rounded font-bold">通勤首選</span>
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        </div>
+        <div>
+          <div class="text-base font-black">未刷題優先快刷</div>
+          <div class="text-xs text-slate-900/80 font-medium mt-0.5">優先抽還沒做過的題目</div>
+        </div>
+      </button>
+
+      <button onclick="switchTab('mistakes')" class="bg-rose-600 hover:bg-rose-700 active:scale-95 transition text-white font-black rounded-2xl p-4 shadow-sm flex flex-col justify-between text-left h-28">
+        <div class="flex items-center justify-between w-full">
+          <span class="text-xs bg-white/20 px-2 py-0.5 rounded font-bold">連對2次移除</span>
+          <span id="home-mistake-badge" class="text-xs bg-white text-rose-600 font-black px-2 py-0.5 rounded-full">0</span>
+        </div>
+        <div>
+          <div class="text-base font-black">專攻錯題本</div>
+          <div class="text-xs text-rose-100 font-medium mt-0.5">針對弱點反覆強化記憶</div>
+        </div>
+      </button>
+    </div>
+
+    <!-- Category Breakdown List -->
+    <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200/80">
+      <div class="flex items-center justify-between mb-3">
+        <h2 class="text-sm font-extrabold text-slate-800">各科刷題進度與模擬考配分比例</h2>
+        <span class="text-[11px] text-slate-500">點擊科目直接開刷</span>
+      </div>
+      <div id="category-list" class="space-y-2.5"></div>
+    </div>
+
+    <!-- Backup & Reset Section -->
+    <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200/80 space-y-3">
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 class="text-xs font-bold text-slate-700">學習紀錄管理（自動儲存於本機）</h3>
+          <p class="text-[11px] text-slate-400">可匯出進度碼備份或傳給不同裝置接續刷題</p>
+        </div>
+      </div>
+      <div class="flex space-x-2">
+        <button onclick="exportProgress()" class="flex-1 py-2 px-3 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold">匯出進度碼</button>
+        <button onclick="importProgress()" class="flex-1 py-2 px-3 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold">匯入進度碼</button>
+        <button onclick="resetAllData()" class="py-2 px-3 bg-rose-50 hover:bg-rose-100 text-rose-600 rounded-xl text-xs font-bold">重置</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIEW 2: PRACTICE MODE (零碎時間快刷) -->
+  <section id="view-practice" class="hidden space-y-3">
+    <!-- Filter & Mode Header -->
+    <div class="bg-white rounded-2xl p-3 shadow-sm border border-slate-200/80 space-y-2.5">
+      <div class="flex items-center justify-between gap-2">
+        <select id="practice-cat-select" onchange="onChangePracticeFilter()" class="flex-1 bg-slate-100 text-slate-800 text-xs font-bold rounded-xl px-3 py-2 border-0 focus:ring-2 focus:ring-amber-500">
+          <option value="ALL">全部科目 (578題)</option>
+        </select>
+        <select id="practice-order-select" onchange="onChangePracticeFilter()" class="bg-slate-100 text-slate-800 text-xs font-bold rounded-xl px-3 py-2 border-0 focus:ring-2 focus:ring-amber-500">
+          <option value="UNSEEN_FIRST">未刷優先</option>
+          <option value="RANDOM">完全隨機</option>
+          <option value="SEQUENTIAL">依題號順序</option>
+        </select>
+      </div>
+      <div class="flex items-center justify-between text-xs text-slate-500 px-1">
+        <span id="practice-progress-label">目前題庫位置：1 / 578</span>
+        <label class="flex items-center space-x-1.5 cursor-pointer">
+          <input type="checkbox" id="auto-next-toggle" checked class="rounded text-amber-500 focus:ring-amber-500">
+          <span class="font-medium text-slate-600">答對自動下一題</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Question Card -->
+    <div id="practice-card" class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200/80 min-h-[340px] flex flex-col justify-between">
+      <div>
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <span id="p-cat-badge" class="text-[11px] font-bold bg-slate-100 text-slate-700 px-2.5 py-1 rounded-lg">科目</span>
+          <span id="p-qnum-badge" class="text-[11px] font-bold text-slate-400">原卷第 1 題</span>
+        </div>
+        <h3 id="p-question-text" class="text-base font-bold text-slate-900 leading-relaxed mb-5">題目載入中...</h3>
+        <div id="p-options" class="space-y-2.5"></div>
+      </div>
+
+      <!-- Feedback & Next Bar -->
+      <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between">
+        <button onclick="prevPracticeQuestion()" class="px-4 py-2.5 rounded-xl bg-slate-100 text-slate-700 text-xs font-bold active:scale-95">← 上一題</button>
+        <div id="p-feedback-text" class="text-xs font-bold text-slate-400">點選選項立即對答</div>
+        <button onclick="nextPracticeQuestion()" class="px-4 py-2.5 rounded-xl bg-slate-900 text-white text-xs font-bold active:scale-95">下一題 →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIEW 3: MISTAKE NOTEBOOK (智慧錯題本 - 答對2次才移除) -->
+  <section id="view-mistakes" class="hidden space-y-3">
+    <div class="bg-rose-950 text-white rounded-2xl p-4 shadow-md">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-base font-black flex items-center gap-2">
+            <span>智慧錯題本</span>
+            <span id="m-count-pill" class="text-xs bg-rose-500 text-white px-2 py-0.5 rounded-full">0 題</span>
+          </h2>
+          <p class="text-xs text-rose-200 mt-0.5">規則：在錯題本重練需「累計答對 2 次」才會自動消滅移除！</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div id="m-empty-state" class="bg-white rounded-2xl p-8 text-center shadow-sm border border-slate-200/80">
+      <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto mb-3 font-black text-xl">✓</div>
+      <h3 class="text-base font-bold text-slate-800">目前沒有待複習的錯題！</h3>
+      <p class="text-xs text-slate-500 mt-1 mb-4">在快刷或模擬考中答錯的題目會自動收錄到這裡。</p>
+      <button onclick="startPractice('ALL', 'UNSEEN_FIRST')" class="px-5 py-2.5 bg-amber-500 text-slate-950 font-black rounded-xl text-xs">去刷題累積紀錄</button>
+    </div>
+
+    <!-- Active Mistake Practice Card -->
+    <div id="m-active-container" class="hidden space-y-3">
+      <div class="bg-white rounded-2xl p-5 shadow-sm border border-rose-200 min-h-[340px] flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between gap-2 mb-3">
+            <span id="m-cat-badge" class="text-[11px] font-bold bg-rose-50 text-rose-700 px-2.5 py-1 rounded-lg">科目</span>
+            <div class="flex items-center gap-1.5">
+              <span id="m-wrong-times" class="text-[11px] font-bold bg-rose-100 text-rose-700 px-2 py-0.5 rounded">曾錯 1 次</span>
+              <span id="m-streak-badge" class="text-[11px] font-bold bg-amber-100 text-amber-800 px-2 py-0.5 rounded">移除進度：0 / 2</span>
+            </div>
+          </div>
+          <h3 id="m-question-text" class="text-base font-bold text-slate-900 leading-relaxed mb-5"></h3>
+          <div id="m-options" class="space-y-2.5"></div>
+        </div>
+
+        <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between">
+          <button onclick="prevMistakeQuestion()" class="px-3.5 py-2 rounded-xl bg-slate-100 text-slate-700 text-xs font-bold">← 上一題</button>
+          <span id="m-progress-text" class="text-xs font-bold text-slate-500">1 / 1</span>
+          <button onclick="nextMistakeQuestion()" class="px-3.5 py-2 rounded-xl bg-rose-600 text-white text-xs font-bold">下一題 →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIEW 4: MOCK EXAM (擬真模擬考 100題 / 60分鐘 / 按各科比例抽題) -->
+  <section id="view-exam" class="hidden space-y-3">
+    <!-- Exam Lobby -->
+    <div id="exam-lobby" class="space-y-4">
+      <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200/80">
+        <span class="text-xs font-bold bg-indigo-50 text-indigo-700 px-2.5 py-1 rounded-lg">全真模擬測驗</span>
+        <h2 class="text-lg font-black text-slate-900 mt-2">金酒生產線儲備技術員 筆試模擬考</h2>
+        <p class="text-xs text-slate-500 mt-1">依照題庫 9 大科目題數比例精準配題，共抽出 100 題，限時 60 分鐘。</p>
+
+        <div class="mt-4 bg-slate-50 rounded-xl p-3.5 space-y-1.5 text-xs border border-slate-200/60">
+          <div class="font-bold text-slate-700 mb-1">📊 各科抽題配比（共 100 題，每題 1 分）：</div>
+          <div class="grid grid-cols-2 gap-x-3 gap-y-1 text-[11px] text-slate-600">
+            <div>・勞動法令：<b class="text-slate-900">25 題</b></div>
+            <div>・商品的認識：<b class="text-slate-900">14 題</b></div>
+            <div>・勞工退休金條例：<b class="text-slate-900">9 題</b></div>
+            <div>・現場作業注意事項：<b class="text-slate-900">9 題</b></div>
+            <div>・職業安全衛生法規：<b class="text-slate-900">9 題</b></div>
+            <div>・品保概念：<b class="text-slate-900">9 題</b></div>
+            <div>・勞工保險條例：<b class="text-slate-900">9 題</b></div>
+            <div>・職災保險及保護法：<b class="text-slate-900">8 題</b></div>
+            <div>・就業服務法：<b class="text-slate-900">8 題</b></div>
+          </div>
+        </div>
+
+        <button onclick="startNewExam()" class="w-full mt-4 py-3.5 bg-indigo-600 hover:bg-indigo-700 active:scale-98 text-white font-black rounded-xl shadow text-sm">
+          立即開始 60 分鐘模擬考
+        </button>
+      </div>
+
+      <!-- Exam History -->
+      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200/80">
+        <h3 class="text-xs font-extrabold text-slate-800 mb-2.5">歷次模擬考成績紀錄</h3>
+        <div id="exam-history-list" class="space-y-2 text-xs text-slate-500">尚未進行過模擬考</div>
+      </div>
+    </div>
+
+    <!-- Active Exam Runner -->
+    <div id="exam-runner" class="hidden space-y-3">
+      <!-- Sticky Exam Status Bar -->
+      <div class="bg-indigo-950 text-white rounded-2xl p-3.5 shadow flex items-center justify-between">
+        <div>
+          <div class="text-[10px] text-indigo-300">剩餘時間</div>
+          <div id="exam-timer" class="text-base font-black font-mono text-amber-400">60:00</div>
+        </div>
+        <div class="text-center">
+          <div class="text-[10px] text-indigo-300">已作答題數</div>
+          <div id="exam-answered-count" class="text-sm font-bold">0 / 100</div>
+        </div>
+        <div class="flex space-x-1.5">
+          <button onclick="toggleExamGrid()" class="px-3 py-2 bg-indigo-800 hover:bg-indigo-700 rounded-xl text-xs font-bold">題號卡</button>
+          <button onclick="confirmSubmitExam()" class="px-3 py-2 bg-amber-500 text-slate-950 rounded-xl text-xs font-black">交卷</button>
+        </div>
+      </div>
+
+      <!-- Question Grid Drawer -->
+      <div id="exam-grid-drawer" class="hidden bg-white rounded-2xl p-4 shadow-md border border-slate-200">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-bold text-slate-700">點擊題號快速跳轉（藍色＝已答）</span>
+          <button onclick="toggleExamGrid()" class="text-xs text-slate-400 font-bold">收起 ✕</button>
+        </div>
+        <div id="exam-grid-buttons" class="grid grid-cols-10 gap-1.5 max-h-60 overflow-y-auto p-1"></div>
+      </div>
+
+      <!-- Exam Question Card -->
+      <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200/80 min-h-[340px] flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between gap-2 mb-3">
+            <span id="e-cat-badge" class="text-[11px] font-bold bg-indigo-50 text-indigo-700 px-2.5 py-1 rounded-lg">科目</span>
+            <span id="e-qindex-badge" class="text-xs font-extrabold text-slate-700">第 1 / 100 題</span>
+          </div>
+          <h3 id="e-question-text" class="text-base font-bold text-slate-900 leading-relaxed mb-5"></h3>
+          <div id="e-options" class="space-y-2.5"></div>
+        </div>
+
+        <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between">
+          <button onclick="prevExamQuestion()" class="px-4 py-2.5 rounded-xl bg-slate-100 text-slate-700 text-xs font-bold">← 上一題</button>
+          <button onclick="nextExamQuestion()" class="px-4 py-2.5 rounded-xl bg-indigo-600 text-white text-xs font-bold">下一題 →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Exam Result & Review -->
+    <div id="exam-result" class="hidden space-y-4">
+      <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200/80 text-center">
+        <span class="text-xs font-bold bg-amber-100 text-amber-800 px-2.5 py-1 rounded-full">測驗結果出爐</span>
+        <div id="exam-score-big" class="text-5xl font-black text-indigo-600 my-2">0 分</div>
+        <p id="exam-result-summary" class="text-xs text-slate-500 mb-4"></p>
+        <div class="flex space-x-2">
+          <button onclick="backToExamLobby()" class="flex-1 py-2.5 bg-slate-100 text-slate-700 font-bold rounded-xl text-xs">返回模擬考大廳</button>
+          <button onclick="switchTab('mistakes')" class="flex-1 py-2.5 bg-rose-600 text-white font-bold rounded-xl text-xs">前往錯題本複習</button>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200/80">
+        <h3 class="text-sm font-black text-slate-800 mb-3">本回答錯與未作答題目檢討</h3>
+        <div id="exam-wrong-review-list" class="space-y-3"></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur border-t border-slate-200 safe-bottom">
+  <div class="max-w-md mx-auto grid grid-cols-4 h-16">
+    <button onclick="switchTab('home')" id="nav-home" class="flex flex-col items-center justify-center space-y-1 text-amber-600 font-bold">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+      <span class="text-[11px]">總覽進度</span>
+    </button>
+    <button onclick="switchTab('practice')" id="nav-practice" class="flex flex-col items-center justify-center space-y-1 text-slate-400 font-medium">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+      <span class="text-[11px]">快刷練習</span>
+    </button>
+    <button onclick="switchTab('mistakes')" id="nav-mistakes" class="relative flex flex-col items-center justify-center space-y-1 text-slate-400 font-medium">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+      <span class="text-[11px]">錯題本</span>
+      <span id="nav-mistake-dot" class="hidden absolute top-1.5 right-6 bg-rose-600 text-white text-[10px] font-black px-1.5 rounded-full">0</span>
+    </button>
+    <button onclick="switchTab('exam')" id="nav-exam" class="flex flex-col items-center justify-center space-y-1 text-slate-400 font-medium">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+      <span class="text-[11px]">模擬考</span>
+    </button>
+  </div>
+</nav>
+
+<script>
+// 完整 578 題題庫
+const QUESTIONS = [{"id": "1-1", "cat": "現場作業注意事項", "num": "1", "q": "使用電器最容易發生傷害事故是", "opts": ["感電", "燙傷", "夾捲傷", "壓傷"], "a": 1}, {"id": "1-2", "cat": "現場作業注意事項", "num": "2", "q": "現場使用的延長線或電線，如果發現有銅線裸露的情形，該怎麼處理？", "opts": ["用普通的透明膠帶黏一黏繼續用", "只要電器還能通電，就當作沒看到", "立刻停止使用通報維修", "拿水潑一潑看會不會冒火花"], "a": 3}, {"id": "1-3", "cat": "現場作業注意事項", "num": "3", "q": "員工在現場生產作業時因故要離開，應向所屬", "opts": ["領班或總領班", "廠長", "經理", "總經理 報備允許後才可離開"], "a": 1}, {"id": "1-4", "cat": "現場作業注意事項", "num": "4", "q": "火災的分類有", "opts": ["普通火災", "油類火災", "電器火災", "以上皆是"], "a": 4}, {"id": "1-5", "cat": "現場作業注意事項", "num": "5", "q": "現場機械設備之操作應依", "opts": ["職業安全衛生教育訓練規則", "勞工健康保護規則", "安全作業標準", "勞動基準法 操作"], "a": 3}, {"id": "1-6", "cat": "現場作業注意事項", "num": "6", "q": "作業現場發生職災應向", "opts": ["領班或總領班", "議員", "縣長", "不用 回報"], "a": 1}, {"id": "1-7", "cat": "現場作業注意事項", "num": "7", "q": "下列何者屬不安全環境", "opts": ["人員誤操作", "故意使安全裝置失效", "機械防護措施有缺陷", "不配戴安全衛生防護具"], "a": 3}, {"id": "1-8", "cat": "現場作業注意事項", "num": "8", "q": "下列何者屬不安全行為", "opts": ["未停機即進行機械設備之故障排除", "確實使用安全衛生防護具", "依安全作業標準進行作業", "落實作業前檢點"], "a": 1}, {"id": "1-9", "cat": "現場作業注意事項", "num": "9", "q": "大部分的職業災害來自", "opts": ["天然災害", "交通事故", "人為疏失", "人口增加"], "a": 3}, {"id": "1-10", "cat": "現場作業注意事項", "num": "10", "q": "一般機器本身", "opts": ["有潛在危險", "絕對安全", "具保護裝置", "具安全功能使用時操作人員應加以注意"], "a": 1}, {"id": "1-11", "cat": "現場作業注意事項", "num": "11", "q": "電線著火處理方式，下列何者「不正確」？", "opts": ["切斷電源", "通知電力公司人員", "通知消防人員", "以水滅火"], "a": 4}, {"id": "1-12", "cat": "現場作業注意事項", "num": "12", "q": "手提滅火器之操作要領下列何者為「非」？", "opts": ["拉開安全插梢", "握住皮管，朝向火源", "用力壓下手壓柄", "朝向火源上部噴射"], "a": 4}, {"id": "1-13", "cat": "現場作業注意事項", "num": "13", "q": "配電盤、高壓電箱的前方為什麼嚴禁堆放任何原物料或雜物？", "opts": ["只是為了看起來美觀、整潔", "確保發生電氣火災或漏電緊急狀況時，人員能「毫無阻礙地立刻切斷總開關」救命", "怕雜物被電線弄髒", "沒有任何原因"], "a": 2}, {"id": "1-14", "cat": "現場作業注意事項", "num": "14", "q": "下列何者要配合職災調查", "opts": ["領班", "總領班", "操作人員", "以上皆是"], "a": 4}, {"id": "1-15", "cat": "現場作業注意事項", "num": "15", "q": "機械、設備檢修或保養應實施", "opts": ["停電", "掛牌", "上鎖", "以上皆是"], "a": 4}, {"id": "1-16", "cat": "現場作業注意事項", "num": "16", "q": "在潮濕的場所（如清洗區、積水地下室）使用手持電動工具（如手電鑽、電砂輪），應注意迴路上必須有什麼裝置？", "opts": ["延長線越長越好", "必須確認該迴路有安裝「漏電斷路器」", "只要穿一般布鞋就安全了", "不需要任何裝置，直接插電使用"], "a": 2}, {"id": "1-17", "cat": "現場作業注意事項", "num": "17", "q": "下列何種為噪音防護具", "opts": ["耳罩", "安全帶", "安全帽", "安全鞋 "], "a": 1}, {"id": "1-18", "cat": "現場作業注意事項", "num": "18", "q": "下列何種為高處作業防護具", "opts": ["安全帽", "安全帶", "防墜器", "以上皆是"], "a": 4}, {"id": "1-19", "cat": "現場作業注意事項", "num": "19", "q": "每日作業前、中、後，對機械、設備所做自動檢查應？", "opts": ["確實依檢查項目表給予檢查", "如發現異狀或故障，應給予記錄並反應及報修", "保持現場完整，待領班、總領班確認", "以上皆是"], "a": 4}, {"id": "1-20", "cat": "現場作業注意事項", "num": "20", "q": "堆高機操作人員應遵守以下那一項規定", "opts": ["不可載運人員", "使用安全帶", "不可超載", "以上皆是"], "a": 4}, {"id": "1-21", "cat": "現場作業注意事項", "num": "21", "q": "工作場所的二氧化碳容許濃度為多少 ppm？", "opts": ["1000", "5000", "10000", "20000 "], "a": 2}, {"id": "1-22", "cat": "現場作業注意事項", "num": "22", "q": "下列何者防止感電效果最佳？", "opts": ["漏電斷路器", "無熔絲開關", "保險絲", "消弧開關"], "a": 1}, {"id": "1-23", "cat": "現場作業注意事項", "num": "23", "q": "下列何者可防止燙傷？", "opts": ["隔熱手套", "隔熱圍裙", "高溫管路予以隔熱包覆", "以上皆是"], "a": 4}, {"id": "1-24", "cat": "現場作業注意事項", "num": "24", "q": "生產現場下列何種行為需至指定場所或區域才可做？", "opts": ["抽菸", "嚼食檳榔", "飲食", "以上皆是"], "a": 4}, {"id": "1-25", "cat": "現場作業注意事項", "num": "25", "q": "經常實施安全衛生檢查的好處是", "opts": ["發現不安全因素，予以改正", "提高員工警覺注意安全", "降低機械設備故障之機率", "以上皆是"], "a": 4}, {"id": "1-26", "cat": "現場作業注意事項", "num": "26", "q": "在啟動任何大型設備、輸送帶前，操作員第一件事必須做什麼？", "opts": ["直接按下去，別浪費時間", "閉上眼睛祈禱機器不會壞", "「確認周圍安全」，確保沒有其他同仁在設備內部或危險區域維修", "先去喝杯咖啡再回來看"], "a": 3}, {"id": "1-27", "cat": "現場作業注意事項", "num": "27", "q": "看見電箱或配電盤上掛有「維修中禁止送電」的紅色警告牌時，你該怎麼做？", "opts": ["覺得別人掛錯了，直接幫他把開關扳上去通電", "「絕對不能碰開關」，這代表有人正在線路上維修，送電會當場電死同事", "把警告牌撕掉，當作沒看到", "指責維修人員做太慢"], "a": 2}, {"id": "1-28", "cat": "現場作業注意事項", "num": "28", "q": "下列哪項是作業人員所應有之行為", "opts": ["機械、設備有異常立即回報", "落實自動檢查", "作業時應專心，不使用 3C 產品", "以上皆是"], "a": 4}, {"id": "1-29", "cat": "現場作業注意事項", "num": "29", "q": "下列何者非 5S 運動之項目", "opts": ["整理、整頓", "清掃、清潔", "教養", "節能"], "a": 4}, {"id": "1-30", "cat": "現場作業注意事項", "num": "30", "q": "推行 5S 的作用", "opts": ["提高企業形象", "提高生產效率", "減少故障，保障品質", "以上皆是"], "a": 4}, {"id": "1-31", "cat": "現場作業注意事項", "num": "31", "q": "現場使用的氣瓶（如焊接用的氧氣瓶、乙炔瓶），在放置和移動時，哪一項行為是極度危險的？", "opts": ["氣瓶必須直立放置，並用鏈條或固定架固定，防止傾倒", "橫躺在地上用腳踩著滾動，或者沒有固定任由它碰撞", "移動時有隨手裝上安全帽蓋", "遠離火源和陽光直射的地方"], "a": 2}, {"id": "1-32", "cat": "現場作業注意事項", "num": "32", "q": "堆高機行駛時，如果前方的貨物疊得太高，擋住了駕駛員的視線，正確的開車方式是什麼？", "opts": ["伸長脖子從側邊看，繼續往前開", "「改用倒車行駛（倒著開）」，並指派專人在旁引導，確保前方無人", "一邊開車一邊按喇叭，叫大家自己閃開", "憑感覺往前開"], "a": 2}, {"id": "1-33", "cat": "現場作業注意事項", "num": "33", "q": "當你需要爬上鐵皮屋頂或採光罩進行維修或清理時，為什麼不能直接踩在上面走動？", "opts": ["怕把屋頂踩髒", "怕踩出聲音影響樓下", "屋頂太熱，鞋底會融化", "這些材料可能老化脆化，直接踩踏會當場破裂踏穿，導致人員直接摔落到地面"], "a": 4}, {"id": "1-34", "cat": "現場作業注意事項", "num": "34", "q": "在現場使用「A 字梯（移動式梯子）」進行高處輕便作業時，哪一種做法是錯誤且危險的？", "opts": ["梯子腳部要有防滑腳墊，且中間的金屬硬質繫材要完全扣牢", "為了夠高，直接站在「梯子最頂端的平台」作業", "攀爬時面向梯子，保持雙手雙腳的「三點接觸」", "下方有另一位同仁幫忙扶穩梯子"], "a": 2}, {"id": "1-35", "cat": "現場作業注意事項", "num": "35", "q": "現場看到有用警示帶圍起來的「管制區」，此時你應該", "opts": ["直接從警示帶下方鑽過去", "把警示帶扯斷", "鑽進去觀看在做什麼", "繞道而行，避免發生危險"], "a": 4}, {"id": "1-36", "cat": "現場作業注意事項", "num": "36", "q": "當你需要進入「人孔、下水道、儲槽、污水池」等通風不良的「局限空間」工作前，第一步必須做什麼？", "opts": ["帶好手電筒，直接跳下去工作", "點燃一根火柴或打火機丟下去，看會不會爆炸", "噴灑大量的明星花露水除臭", "先進行「氣體監測（確認氧氣濃度、有無毒性氣體）」，並強制通風並取得許可後才能進去"], "a": 4}, {"id": "1-37", "cat": "現場作業注意事項", "num": "37", "q": "當看見正在地下室或人孔內工作的同事突然暈倒，你該怎麼做？", "opts": ["發揮義氣，立刻下去救他", "「絕對不能盲目下去救人」，應配戴空氣呼吸器後才可進行救援", "在上面大聲叫他的名字看他會不會醒", "拿石頭丟他，看他有沒有反應"], "a": 2}, {"id": "1-38", "cat": "現場作業注意事項", "num": "38", "q": "使用有機溶劑（如油漆、去漬油、殺蟲劑）作業，下列何者正確？", "opts": ["嚴禁煙火（不抽煙、不用明火）", "保持通風良好", "正確使用安全衛生防護具", "以上皆是"], "a": 4}, {"id": "1-39", "cat": "現場作業注意事項", "num": "39", "q": "在炎熱的夏天進行戶外工作，為了防止中暑、熱衰竭等熱危害，員工應該怎麼照顧自己？", "opts": ["為了趕工不休息、少喝水，以免一直跑廁所", "「定時到陰涼處休息」，並且「多補充水分與鹽分（或運動飲料）」", "多喝冰啤酒來消暑", "穿著密不透風的雨衣防曬"], "a": 2}, {"id": "1-40", "cat": "現場作業注意事項", "num": "40", "q": "當你在現場操作割草機、砂輪機、化學藥劑時，為什麼必須佩戴「防護面罩或護目鏡」？", "opts": ["因為法規規定，不戴會被罰錢", "為了遮擋陽光", "防止碎石、鐵屑、高溫火花、化學品直接刺穿或灼傷眼睛", "讓自己看起來比較專業"], "a": 3}, {"id": "1-41", "cat": "現場作業注意事項", "num": "41", "q": "工作場所內的緊急逃生通道、安全門以及滅火器前方，為什麼隨時都要保持空無一物、不能堆放任何物品？", "opts": ["為了讓掃地機器人好推過去", "確保火災或意外發生時，大家能順利逃生，且能第一時間拿到滅火器滅火", "怕貨物沾到滅火器的藥劑", "純粹是主管看堆放的貨物不順眼"], "a": 2}, {"id": "1-42", "cat": "現場作業注意事項", "num": "42", "q": "在工作中如果自己或同事不幸受傷了，正確的應變態度是什麼？", "opts": ["怕被主管罵，隱瞞不報", "在現場大吵大鬧追究責任", "叫受傷的同事趕快下班回家，當作沒這回事", "不論傷勢大小，都要立刻向主管通報並進行急救"], "a": 4}, {"id": "1-43", "cat": "現場作業注意事項", "num": "43", "q": "公司每年依規定安排的健康檢查，身為員工，我們的義務和權利是什麼？", "opts": ["健檢是浪費時間，可以找藉口不去", "有配合接受檢查的義務，是追蹤自己有沒有職業病的重要保障", "只要自己覺得身體健康，就可以不用配合", "健檢只是公司用來開除生病員工的手段"], "a": 2}, {"id": "1-44", "cat": "現場作業注意事項", "num": "44", "q": "生產作業現場嚴禁下列何種行為？", "opts": ["抽菸", "嚼食檳榔", "飲食", "以上皆是"], "a": 4}, {"id": "1-45", "cat": "現場作業注意事項", "num": "45", "q": "每日上班依規定可穿著", "opts": ["睡衣", "拖鞋", "打赤腳", "以上皆非"], "a": 4}, {"id": "1-46", "cat": "現場作業注意事項", "num": "46", "q": "公司舉辦的職業安全衛生教育訓練，員工應該抱持什麼心態參加？", "opts": ["反正不用工作，去現場睡覺或滑手機聽課就好", "認真學習防災與自救技能，因為這些知識在關鍵時刻能救自己和同事一命", "抱怨上課很無聊，能逃避就逃避", "只要簽名報到就可以離開了"], "a": 2}, {"id": "1-47", "cat": "現場作業注意事項", "num": "47", "q": "ISO 45001是指", "opts": ["品質管理系統", "環境管理系統", "食品安全管理系統", "職業安全衛生管理系統"], "a": 4}, {"id": "1-48", "cat": "現場作業注意事項", "num": "48", "q": "安全衛生工作守則、安全作業標準是設計來做什麼的？", "opts": ["用來應付勞檢的", "故意整員工用的", "用無數個血淋淋的受傷經驗換來的保命公式，大家必須嚴格遵行", "只有新進員工才要看，老手憑經驗不用管"], "a": 3}, {"id": "1-49", "cat": "現場作業注意事項", "num": "49", "q": "職業安全衛生都是安衛管理人員的事，我們只要負責把工作完成就好，關於這種觀念，下列敘述何者正確？", "opts": ["正確，安衛人員領薪水就該承擔所有安全責任", "錯誤，安衛人員負責規劃與巡查，但「真正操作機械、面對危險」的是現場每位同仁，因此安全衛生工作需要大家配合", "正確，基層員工只要聽領班的話，不需要知道任何安全法規", "錯誤，應該把所有安全責任推給機械設備不良"], "a": 2}, {"id": "1-50", "cat": "現場作業注意事項", "num": "50", "q": "作業中若發現主管因為生產壓力，下達了違反安全程序的指令（例如：要求不搭施工架直接爬上高處）。此時同仁最正確的做法是：", "opts": ["為了保住飯碗，不管危險直接照做", "現場所有人裝作沒聽到，集體提早下班", "為了保護自己，應委婉但堅定地向主管反映：「這樣做太危險，我們依法可以行使退避權，請讓我們用安全的方式完成任務。」", "在背後痛罵主管，但最後還是照著危險的方法去做"], "a": 3}, {"id": "2-1", "cat": "職業安全衛生法規", "num": "1", "q": "依職業安全衛生法規定，勞工應遵守及接受之義務事項有", "opts": ["安全衛生工作守則", "安全衛生教育訓練", "體格及健康檢查", "以上皆是"], "a": 4}, {"id": "2-2", "cat": "職業安全衛生法規", "num": "2", "q": "勞工如不接受法定之職業安全衛生教育訓練者，可能受以下之何種處罰", "opts": ["1000", "2000", "3000", "5000  元以下罰鍰"], "a": 3}, {"id": "2-3", "cat": "職業安全衛生法規", "num": "3", "q": "下列關於「職業災害」之定義，何者錯誤？", "opts": ["必須是因勞動場所之建築物、機械、設備、原料、材料、化學品、氣體、蒸氣、粉塵等引起", "必須是因工作活動及其他職業上原因引起", "導致工作者疾病、傷害、失能或死亡", "勞工在下班後私自參與的私人聚會受傷也算職災"], "a": 4}, {"id": "2-4", "cat": "職業安全衛生法規", "num": "4", "q": "工作場所中若存在有害物（如特定化學物質、有機溶劑），雇主應如何使勞工知悉其危害？", "opts": ["密而不宣，以免勞工恐慌", "依規定標示，並置備「安全資料表(SDS)」供勞工隨時查閱", "僅口頭告知警衛即可", "每隔五年開一次會說明"], "a": 2}, {"id": "2-5", "cat": "職業安全衛生法規", "num": "5", "q": "對於高度幾公尺以上之高處作業，勞工應確實使用雇主所提供防墜設備（如安全帶、安全網）以防止墜落？", "opts": ["1", "2", "5", "10 "], "a": 2}, {"id": "2-6", "cat": "職業安全衛生法規", "num": "6", "q": "事業單位交付承攬時，若原事業單位與承攬人分別僱用勞工共同作業，原事業單位應採取何種措施？", "opts": ["不必管承攬人，各顧各的", "設置協議組織，並指定工作場所負責人擔任指揮、監督及協調工作", "幫承攬人的勞工加薪", "停止自己的所有作業"], "a": 2}, {"id": "2-7", "cat": "職業安全衛生法規", "num": "7", "q": "勞工對於雇主依職業安全衛生教育訓練規則舉辦之教育訓練，下列敘述何者正確？", "opts": ["可自由選擇是否參加", "必須自費參加", "有接受之義務", "只能在假日自修，不能佔用上班時間"], "a": 3}, {"id": "2-8", "cat": "職業安全衛生法規", "num": "8", "q": "當工作場所發生立即性危險之虞時，勞工有權利採取下列何種行動？", "opts": ["自行退避至安全場所，並立即報告直屬主管", "堅持繼續工作以展現敬業精神", "直接罷工回家並要求加薪", "在現場拍照上傳社群媒體後繼續工作"], "a": 1}, {"id": "2-9", "cat": "職業安全衛生法規", "num": "9", "q": "有關勞工對於「安全衛生工作守則」之責任，下列敘述何者正確？", "opts": ["守則僅供參考，沒有強制力", "勞工有確實遵守之義務", "守則是由政府統一制定，公司不能修改", "只有高風險行業的勞工才需要遵守"], "a": 2}, {"id": "2-10", "cat": "職業安全衛生法規", "num": "10", "q": "雇主提供之個人防護具（如安全帽、安全鞋、防塵口罩），勞工在作業時應如何對待？", "opts": ["嫌麻煩可以不戴", "帶回家給家人使用", "依規定正確佩戴與使用", "自行修改外觀以展現個性"], "a": 3}, {"id": "2-11", "cat": "職業安全衛生法規", "num": "11", "q": "勞工在接受健康檢查後，其健檢報告之正本或副本應如何處理？", "opts": ["依個人資料保護法及職安法妥善保存與保密，並通知勞工本人", "由雇主公告在佈告欄讓全公司核對", "健檢醫院直接銷毀", "直接寄給勞工配偶"], "a": 1}, {"id": "2-12", "cat": "職業安全衛生法規", "num": "12", "q": "若勞工在工作時發現機械安全防護裝置（如護罩、光電式安全裝置）損壞，應如何處理？", "opts": ["立即報告直屬主管進行維修", "裝作沒看到繼續操作", "自行用膠帶將防護裝置固定在失效狀態以利加速作業", "離職"], "a": 1}, {"id": "2-13", "cat": "職業安全衛生法規", "num": "13", "q": "除了死亡職災，下列何種狀況，雇主亦須於 8 小時內通報勞動檢查機構？", "opts": ["罹災人數在 3 人以上之職業災害", "勞工感冒請假 3 天", "同事間發生口角", "財物損失超過新臺幣 10 萬元"], "a": 1}, {"id": "2-14", "cat": "職業安全衛生法規", "num": "14", "q": "工作場所發生重大職業災害後，除必要之急救、搶救外，雇主對現場應如何處理", "opts": ["立即派人清理乾淨，以便恢復生產", "未經勞動檢查機構許可，不得移動或破壞現場", "將損壞的機器直接變賣", "拍照後即可將現場完全拆除"], "a": 2}, {"id": "2-15", "cat": "職業安全衛生法規", "num": "15", "q": "有害物作業環境中氣狀有害物之濃度表示單位為 ppm，其表示之意義為", "opts": ["百分之一", "千分之一", "萬分之一", "百萬分之一"], "a": 4}, {"id": "2-16", "cat": "職業安全衛生法規", "num": "16", "q": "職業安全衛生教育的目的是防止", "opts": ["天然災害", "交通事故", "職業災害", "社會糾紛"], "a": 3}, {"id": "2-17", "cat": "職業安全衛生法規", "num": "17", "q": "使勞工從事局限空間或缺氧危險作業時，應採取適當換氣，以保持該作業場所空氣中氧氣濃度在百分之", "opts": ["15", "16", "17", "18 以上"], "a": 4}, {"id": "2-18", "cat": "職業安全衛生法規", "num": "18", "q": "操作鑽床、車床等旋轉切削機械時，為了防止手指被捲入，員工應該怎麼做？", "opts": ["戴上厚實的棉紗手套保護手部", "「嚴禁配戴手套」，並且要把長髮紮好、袖口紮緊", "戴上橡膠手套可以防滑", "一邊操作一邊用手去撥切屑"], "a": 2}, {"id": "2-19", "cat": "職業安全衛生法規", "num": "19", "q": "在有噪音的廠房或機房內工作，如果不戴耳塞或耳罩，會有什麼後果？", "opts": ["只是暫時聽不到，回家睡一覺就恢復了", "沒有任何影響", "會讓聽力變得更好", "聽力會逐漸受損，最後導致「永久性失聰（耳聾）」，且無法醫治"], "a": 4}, {"id": "2-20", "cat": "職業安全衛生法規", "num": "20", "q": "局限空間作業之危害預防，在行政管理方面，下列哪項是必須實施之工作？", "opts": ["建立工作許可制度", "實施必要教育訓練", "應設置監督人員", "以上皆是"], "a": 4}, {"id": "2-21", "cat": "職業安全衛生法規", "num": "21", "q": "依法令規定，多少公斤以上之物品宜以人力車輛或工具搬運為原則？", "opts": ["40", "45", "50", "55 "], "a": 1}, {"id": "2-22", "cat": "職業安全衛生法規", "num": "22", "q": "下列敘述何者有誤？", "opts": ["事業單位勞工有不得洩漏業務知悉秘密之義務", "勞工離職後得與原服務事業單位作營業競爭", "雇主對勞工有照扶之義務", "勞工對雇主有忠實提供勞務之義務"], "a": 2}, {"id": "2-23", "cat": "職業安全衛生法規", "num": "23", "q": "選擇防護具的第一要素是考慮其", "opts": ["便利性", "經濟性", "美觀性", "防護性能"], "a": 4}, {"id": "2-24", "cat": "職業安全衛生法規", "num": "24", "q": "依法令規定實施之定期檢查、重點檢查紀錄應保存幾年？", "opts": ["1", "2", "3", "4 "], "a": 3}, {"id": "2-25", "cat": "職業安全衛生法規", "num": "25", "q": "依法令規定，良導體機械設備內之檢修工作所用照明燈具，其使用之電壓不得超過多少伏特", "opts": ["12", "18", "24", "60 "], "a": 3}, {"id": "2-26", "cat": "職業安全衛生法規", "num": "26", "q": "事業單位工作場所如發生職業災害，雇主應即採取何種必要之措施？並實施調查、分析及作成紀錄。", "opts": ["停工", "急救搶救", "向法院自首", "報告檢查機構"], "a": 2}, {"id": "2-27", "cat": "職業安全衛生法規", "num": "27", "q": "適用於油類火災的滅火原理是", "opts": ["冷卻法", "窒息法", "隔離法", "抑制法"], "a": 2}, {"id": "2-28", "cat": "職業安全衛生法規", "num": "28", "q": "於工廠工作時不宜穿著過於寬鬆之衣物主要目的為", "opts": ["好看", "避免被機械捲入", "工作方便", "使動作靈活"], "a": 2}, {"id": "2-29", "cat": "職業安全衛生法規", "num": "29", "q": "工作場所之噪音超過多少分貝，依規定應標示並公告噪音危害之預防事項，使勞工周知？", "opts": ["80", "85", "90", "95 "], "a": 3}, {"id": "2-30", "cat": "職業安全衛生法規", "num": "30", "q": "物料的貯存原則應為", "opts": ["堆積愈高愈好", "斜靠放置", "間隔堆放", "散亂放置"], "a": 3}, {"id": "2-31", "cat": "職業安全衛生法規", "num": "31", "q": "在搬運重物（如大箱貨物、鐵件）時，為了保護自己的腰部不因用力過猛而閃傷，正確的姿勢是什麼？", "opts": ["直接彎腰、雙腿伸直，用腰部的力量把重物拉起來", "雙腳打開蹲下，保持「背部挺直」，用大腿和臀部的力量將重物站著舉起", "站得遠遠的，用身體往前傾的姿勢去拉重物", "憋氣用全身爆發力猛然甩起重物"], "a": 2}, {"id": "2-32", "cat": "職業安全衛生法規", "num": "32", "q": "依據職業安全衛生設施規則規定，作業場所的高低差距達到多少公尺以上時，雇主應設置能使勞工安全上下之設備？", "opts": ["1", "1.5", "2", "3 "], "a": 2}, {"id": "2-33", "cat": "職業安全衛生法規", "num": "33", "q": "第一種壓力容器定期檢查每年至少", "opts": ["一次", "二次", "三次", "四次"], "a": 1}, {"id": "2-34", "cat": "職業安全衛生法規", "num": "34", "q": "當機械在運轉中突然卡料，或者需要進行清潔、擦拭、調整時，最安全的操作步驟是什麼？", "opts": ["用手快速伸進去把卡住的料掏出來", "拿木棍或鐵條在運轉中去戳、去勾", "「先切斷電源停止機械運轉」，在開關鎖定（掛牌上鎖），確認完全靜止後再處理", "請旁邊的同事幫忙看著開關，直接用手進去修"], "a": 3}, {"id": "2-35", "cat": "職業安全衛生法規", "num": "35", "q": "在設備維護操作前，誰應就作業有關事項實施檢點？", "opts": ["雇主", "現場主管", "職業安全衛生人員", "現場作業人員"], "a": 4}, {"id": "2-36", "cat": "職業安全衛生法規", "num": "36", "q": "依據職業安全衛生設施規則規定，下列關於合梯使用的操作何者錯誤？", "opts": ["合梯腳底端應裝設防滑絕緣套", "梯腳與地面之角度應維持在 75 度以內", "為了增加工作高度，勞工可以直接站立於合梯頂板（最上層踏條）上作業", "兩梯腳間應有堅固材料之繫條扣牢"], "a": 3}, {"id": "2-37", "cat": "職業安全衛生法規", "num": "37", "q": "為防止墜落災害，使用移動式施工架作業之安全注意事項，下列何者錯誤？", "opts": ["人在架上，應以寸動方式移動施工架", "作業時應使用安全帶", "兩人不得同時於同側作業", "使用時應將腳輪之止滑裝置予以固定"], "a": 1}, {"id": "2-38", "cat": "職業安全衛生法規", "num": "38", "q": "防塵口罩選用原則，下列敘述何者錯誤？", "opts": ["視野愈小愈好", "吸氣阻抗愈低愈好", "捕集效率愈高愈好", "重量愈輕愈好"], "a": 1}, {"id": "2-39", "cat": "職業安全衛生法規", "num": "39", "q": "有關工作場所作業安全，下列何者為非？", "opts": ["佩戴適合之防護具", "有害揮發性物質應隨時加蓋", "為節省時間，機械操作中可逕行上油調整之", "毒性及腐蝕性物質應存放在安全處所"], "a": 3}, {"id": "2-40", "cat": "職業安全衛生法規", "num": "40", "q": "安全帽受過大衝擊，雖外觀良好，應採下列何種處理方式？", "opts": ["送修", "油漆保護", "更換新品", "繼續使用"], "a": 3}, {"id": "2-41", "cat": "職業安全衛生法規", "num": "41", "q": "有關堆高機搬運作業，下列何者為非？", "opts": ["載貨荷重不得超過該機械所能承受最大荷重", "作業前應實施檢點", "可搭乘及托舉人員", "作業完畢人員離開座位時，應關閉動力並拉上手煞車"], "a": 3}, {"id": "2-42", "cat": "職業安全衛生法規", "num": "42", "q": "光電感應器或安全防護罩等裝置，其真正作用是什麼？", "opts": ["妨礙工作速度、阻擋視線的障礙物", "當員工誤入危險區時，能緊急停機或阻擋，用來「保護員工」的救命裝置", "應付勞動檢查用的裝飾品", "讓機械看起來比較高級的配件"], "a": 2}, {"id": "2-43", "cat": "職業安全衛生法規", "num": "43", "q": "灌注、卸收危險物於液槽車、儲槽、油桶等之設備，有因靜電引起爆炸或火災之虞者， 可採取之安全措施或去除靜電之裝置，下列何者錯誤？", "opts": ["接地", "加濕", "使用除電劑", "漏電斷路器"], "a": 4}, {"id": "2-44", "cat": "職業安全衛生法規", "num": "44", "q": "防護具之保管應儲放於下列何處所？", "opts": ["潮溼之密閉櫃內", "日曬乾燥處所", "不受有害物污染且通風良好場所", "高溫爐旁"], "a": 3}, {"id": "2-45", "cat": "職業安全衛生法規", "num": "45", "q": "防止噪音危害之治本對策為何？", "opts": ["使用耳塞、耳罩", "實施勞工安全衛生教育訓練", "消除發生源", "實施特殊健康檢查"], "a": 3}, {"id": "2-46", "cat": "職業安全衛生法規", "num": "46", "q": "一般可燃性固體如木材、紙張所引起之火災屬於", "opts": ["甲類", "乙類", "丙類", "丁類 "], "a": 1}, {"id": "2-47", "cat": "職業安全衛生法規", "num": "47", "q": "防護具選用為預防職業病之第幾道防線？", "opts": ["第一道", "第二道", "第三道", "最後一道"], "a": 4}, {"id": "2-48", "cat": "職業安全衛生法規", "num": "48", "q": "下列何者屬不安全動作？", "opts": ["修理運轉中之機械", "開挖 1.5 公尺未設擋土支撐", "高處作業之開口邊緣未設置護欄", "吊掛設備無防止吊掛物脫落裝置"], "a": 1}, {"id": "2-49", "cat": "職業安全衛生法規", "num": "49", "q": "防範有害物產生最好由何處著手？", "opts": ["發生源", "傳播途徑", "人員管理", "衛生習慣"], "a": 1}, {"id": "2-50", "cat": "職業安全衛生法規", "num": "50", "q": "防範有害物危害之對策，應優先考慮下列何者？", "opts": ["健康管理", "工程改善", "行政管理", "教育訓練"], "a": 2}, {"id": "3-1", "cat": "商品的認識", "num": "1", "q": "下列有關本公司「承襲古法『三高二低一翻』 」之敘述，何者為是：", "opts": ["三高： 「高溫製麴」 、 「高溫接酒」 、 「高壓蒸糧」", "二低： 「低溫拌麴」 、 「低溫入窖」", "一翻： 「翻醪發酵」", "以上皆是"], "a": 4}, {"id": "3-2", "cat": "商品的認識", "num": "2", "q": "俗稱「黑金剛」的本公司酒品為：", "opts": ["陳年特級高粱酒", "金箔酒", "58 度金門高粱酒", "瓷陳年大高酒禮盒"], "a": 1}, {"id": "3-3", "cat": "商品的認識", "num": "3", "q": "俗稱「白金龍」的本公司酒品為：", "opts": ["陳年特級高粱酒", "金箔酒", "58 度金門高粱酒", "瓷陳年大高酒禮盒"], "a": 3}, {"id": "3-4", "cat": "商品的認識", "num": "4", "q": "本公司「金酒典藏珍品」先窖藏幾年後再灌裝成酒品：", "opts": ["3 年", "5 年", "10年", "15 年"], "a": 1}, {"id": "3-5", "cat": "商品的認識", "num": "5", "q": "本公司「陳年金門高粱酒」至少先窖藏幾年後再灌裝成酒品：", "opts": ["3 年", "5 年", "10 年", "15 年"], "a": 2}, {"id": "3-6", "cat": "商品的認識", "num": "6", "q": "下列何者為「防偽鋁蓋」的功能?例如在紫外線源照射下，蓋側上緣圓環處會顯現“KKL” 之英文字樣", "opts": ["蓋側 360 度字磨光處理 “ 金 門 高 粱 酒” 及“KINMENKAOLIANGLIQUOR”字樣，瓶蓋外表呈現立體圖案，整齊美觀", "防盜環上緣增加紅色文字", "瓶蓋一經旋轉啟開，防盜環上之接觸點立即斷裂無法復原，可分辨瓶蓋是否被開啟過或遭破壞", "以上皆是"], "a": 4}, {"id": "3-7", "cat": "商品的認識", "num": "7", "q": "下列何者為「防偽酒標」的功能?例如將酒瓶迎光輕轉 15 度，酒標籤左、右兩邊龍型圖案，下端之彩色雲紋中，左邊會顯現凹版K，右邊會出現凹版L 隱藏字樣", "opts": ["凹版印紋線條清晰分明，墨膜凸起，以手觸摸酒標籤，即有浮凸效果和感覺", "酒標籤中之金門酒廠標誌、金門高粱酒中英文、金門酒廠中英文全名，是以特殊金屬油墨，利用凹版方式印刷，迎光上下輕轉，會顯現金屬閃爍光澤", "以平版特殊油墨印製，在紫外光照射下，酒標邊框、雙龍、中間數字圖案及中央出現金酒LOGO圖樣，會顯現不同顏色螢光反應", "以上皆是"], "a": 4}, {"id": "3-8", "cat": "商品的認識", "num": "8", "q": "「金門高粱酒之香、純、甘、冽原味，由舌尖入喉，真實原味、清香恣意散發，何種方式能品酌出金門高粱酒的道地風味」為：", "opts": ["純飲", "凍飲", "熱飲", "以上皆非"], "a": 1}, {"id": "3-9", "cat": "商品的認識", "num": "9", "q": "「由於金門高粱酒具有不結凍的特質，故冰鎮後的金門高粱酒，減少了酒精的刺激，減緩嗆味，入喉更順口，酒香更清冽，炎夏飲用時別有一番滋味」 為：", "opts": ["純飲", "凍飲", "熱飲", "以上皆非"], "a": 2}, {"id": "3-10", "cat": "商品的認識", "num": "10", "q": "「金門高粱酒經稍加溫熱後再飲用，酒中的乙醛、甲醇等辛辣口味的成分較易揮發，故口味將較柔順，香氣將更濃郁，寒冬酌飲，猶如暖流，通體舒泰」為：", "opts": ["純飲", "凍飲", "熱飲", "以上皆非"], "a": 3}, {"id": "3-11", "cat": "商品的認識", "num": "11", "q": "下列何者為本公司現有 「50 度以上金門高粱酒台灣地區 （金門地區除外） 總經銷」為：", "opts": ["維他露公司", "味丹公司", "黑松公司", "以上皆非"], "a": 3}, {"id": "3-12", "cat": "商品的認識", "num": "12", "q": "下列何者為本公司現有「50 度(不含)以下金門高粱酒台灣地區（金門地區除外）總經銷」為：", "opts": ["維他露公司", "味丹公司", "黑松公司", "以上皆非"], "a": 2}, {"id": "3-13", "cat": "商品的認識", "num": "13", "q": "下列何者為「非」本公司金門高粱酒品牌系列酒品:", "opts": ["戰酒黑金龍", "58 度千日醇", "八八坑道", "金酒典藏珍品"], "a": 3}, {"id": "3-14", "cat": "商品的認識", "num": "14", "q": "金門高粱酒屬於哪一種酒類:", "opts": ["蒸餾酒類", "啤酒類", "酒精類", "穀類釀造酒類"], "a": 1}, {"id": "3-15", "cat": "商品的認識", "num": "15", "q": "本公司客服專線:0800-033-XXX，後三碼為何:", "opts": ["123", "987", "823", "000"], "a": 3}, {"id": "3-16", "cat": "商品的認識", "num": "16", "q": "台灣地區中式白酒市占率最高品牌為何:", "opts": ["金門高粱酒", "八八坑道", "玉山高粱酒", "馬祖高粱酒"], "a": 1}, {"id": "3-17", "cat": "商品的認識", "num": "17", "q": "窖藏一年以上，調合優質陳年老酒精心製作而成為哪種金高酒品特色：", "opts": ["特級金門高粱酒", "特優金門高粱酒", "特選金門高粱酒", "以上都不是"], "a": 2}, {"id": "3-18", "cat": "商品的認識", "num": "18", "q": "三年窖藏老酒調和為哪項酒品行銷主訴求：", "opts": ["58 度金高", "38 度金高", "46度戰酒黑金龍", "56 度陳年金門高粱酒"], "a": 3}, {"id": "3-19", "cat": "商品的認識", "num": "19", "q": "下列何者非金門高粱酒工藝特色：", "opts": ["添加香料", "坑道恆溫恆濕儲酒", "純糧固態發酵工藝", "花崗岩地質水質"], "a": 1}, {"id": "3-20", "cat": "商品的認識", "num": "20", "q": "採用「金選21 號」純糯高粱品種所釀製出來的特殊酒品為何?", "opts": ["金酒典藏珍品", "原釀 21", "二鍋頭", "陳年金門高粱酒"], "a": 2}, {"id": "3-21", "cat": "商品的認識", "num": "21", "q": "下列哪項酒精濃度為目前金門高粱酒銷售主力商品", "opts": ["58 度", "38 度", "56度", "46 度"], "a": 1}, {"id": "3-22", "cat": "商品的認識", "num": "22", "q": "金門酒廠創立之時稱為九龍江酒廠是指哪一年", "opts": ["1949", "1950", "1951", "1952"], "a": 4}, {"id": "3-23", "cat": "商品的認識", "num": "23", "q": "金門酒廠哪一年正式改制為金門酒廠實業股份有限公司", "opts": ["1998", "1999", "2000", "2001"], "a": 1}, {"id": "3-24", "cat": "商品的認識", "num": "24", "q": "金酒首次參加 2016 年美國舊金山世界烈酒大賽即拿到最大獎最佳白酒獎是哪一款", "opts": ["0.6L-58 度金門高粱酒(紅標)", "0.75L-58 度金門高粱酒", "金酒典藏珍品", "陳年金門高粱酒"], "a": 2}, {"id": "3-25", "cat": "商品的認識", "num": "25", "q": "金門酒廠與臺灣多縣市共同推廣糯性高粱契作，讓「在地高粱、在地生產」不僅節省水資源，還可增加糧食自給率是哪一款酒", "opts": ["原釀21", "金門純麥酒", "一穀作契", "瓏時"], "a": 3}, {"id": "3-26", "cat": "商品的認識", "num": "26", "q": "三節配售酒的容量、酒度是多少?", "opts": ["0.75L-53 度", "0.75L-58 度", "1L-53度", "1L-58 度"], "a": 3}, {"id": "3-27", "cat": "商品的認識", "num": "27", "q": "下列哪一款是瓏時金門高粱酒系列的設計?例如磚紅厝", "opts": ["暖白霧", "海洋藍", "高粱金", "以上皆是"], "a": 4}, {"id": "3-28", "cat": "商品的認識", "num": "28", "q": "陳年金門高粱酒系列共有幾種年份", "opts": ["5、15 年", "5、8、15 年", "5、8、12、15 年", "5、8、12、15、22 年"], "a": 4}, {"id": "3-29", "cat": "商品的認識", "num": "29", "q": "瓶身仿金門名泉「寶月古泉」之八角造型， 「八」音同「發」及「八卦」守護意念，斟酒時宛如從古泉倒出清醇好酒，以上是指哪一款酒", "opts": ["精選高粱酒", "寶月泉金門高粱酒", "金門紀念酒", "823 金門高粱酒"], "a": 2}, {"id": "3-30", "cat": "商品的認識", "num": "30", "q": "下列哪款不是瓷瓶包裝產品", "opts": ["一穀作契金門高粱酒", "金門大橋迎賓酒", "8 吋榴彈砲車金門高粱酒", "金門電話亭紀念酒"], "a": 1}, {"id": "3-31", "cat": "商品的認識", "num": "31", "q": "金門啤酒的酒精度是?", "opts": ["3.5 度", "4.5 度", "5 度", "8 度"], "a": 4}, {"id": "3-32", "cat": "商品的認識", "num": "32", "q": "在瓶身設計將「青花瓷」歌曲的意境融入，透過窗花一窺江南小鎮的浪漫與飄逸，充滿濃厚東方雅韻，在細節上除能見獨特的江南水鄉景象外，以上是指哪一款酒", "opts": ["煙雨青花金門高粱酒", "青花富貴", "青花蟠龍", "以上皆是"], "a": 1}, {"id": "3-33", "cat": "商品的認識", "num": "33", "q": "金門高粱酒應如何保存?例如置於陰涼、乾燥、通風及清潔處存放", "opts": ["瓶身直立存放，瓶口向上，避免酒液接觸瓶蓋", "開瓶後儘量保持密封並於短期內飲用", "不可置於高溫處，容易造成酒液蒸發", "以上皆是"], "a": 4}, {"id": "3-34", "cat": "商品的認識", "num": "34", "q": "被譽為烈酒界奧斯卡的「美國舊金山世界烈酒大賽（SFWSC） 」 ，金門酒廠在2026 年參賽，有六款佳釀獲得評審團一致最高評價，榮獲「雙金獎」 ，是哪個產品?", "opts": ["0.75L-58 度金門高粱酒(2015 年千日醇)", "0.6L-56 度 8 年陳年金門高粱酒", "1L-58 度罈裝金門高粱酒", "0.6L-56 度 12 年陳年金門高粱酒"], "a": 1}, {"id": "3-35", "cat": "商品的認識", "num": "35", "q": "近年來金酒公司推出『儲酒銀行-500 公升窖藏陳年優質陶罈酒』 ，分別有3 年、5年、8 年三種年份酒基可挑選，儲放於窖藏坑道代為保管，三年儲放期滿提領，可選擇分裝於一公升或二公升之藍彩瓷瓶，該分裝產品的品牌名稱是", "opts": ["經典窖藏", "寄心知己", "陳釀優存", "千金藏"], "a": 2}, {"id": "3-36", "cat": "商品的認識", "num": "36", "q": "金酒公司LOGO所代表的含意為何？例如高粱穗代表產品精醇、技術領先之意", "opts": ["高粱穗象徵釀酒的高粱、小麥等植物原料", "雙C外環象徵全員的和諧、有效率的組織，並且有未來發展之多元空間、步步高昇；另一象徵是產銷一體、勞資雙贏", "整體圖形象徵全員的滿意，並且有如「金門」 、 「高」之字形意義", "以上皆是"], "a": 4}, {"id": "3-37", "cat": "商品的認識", "num": "37", "q": "下列敘述何者錯誤?", "opts": ["金門高粱酒具有不結凍的特質，故冰鎮後的金門高粱酒，減少了酒精的刺激，減緩嗆味，入喉更順口", "金門高粱酒酒精度偏高，不適合加溫熱後再飲用", "金門高粱酒的好酒質、好品質，來自於金門本島特有的水質、空氣、原料及氣候四大天然釀酒條件", "因網路購買酒類無法辨識消費者為已成年或未成年，依法規定酒類不能於網路上販售"], "a": 2}, {"id": "3-38", "cat": "商品的認識", "num": "38", "q": "下列哪一款和金門地區紅標是完全相同酒基?", "opts": ["白金龍(白標)", "特優", "特選", "三節家配"], "a": 1}, {"id": "3-39", "cat": "商品的認識", "num": "39", "q": "高粱酒儲放特色是持續陳化，越陳越香，請問白金龍放5 年會變成甚麼酒?", "opts": ["5年的陳高", "5 年的老酒", "1 年的特優", "3 年的典藏"], "a": 2}, {"id": "3-40", "cat": "商品的認識", "num": "40", "q": "2026年首次出戰 SFWSC 美國舊金山世界烈酒大賽就榮獲金獎肯定，此款創新的桶陳高粱酒為金門酒廠建廠 70 多年來百變求精、由首席品酒師跨界玩味的全新傑作?", "opts": ["SONARE 奏鳴曲", "金釀", "創世者桶陳", "金門威士忌"], "a": 1}, {"id": "3-41", "cat": "商品的認識", "num": "41", "q": "2025年於交通部觀光署舉辦的第二屆「觀光亮點獎」評選活動中脫穎而出，從全臺 191 處推薦景點中成功入選「十大觀光亮點獎」 。這是金酒公司繼首屆榮獲「十大活動體驗獎」及「最佳人氣獎」 ，是指哪個坑道?", "opts": ["長江", "光華", "經武", "夏興"], "a": 3}, {"id": "3-42", "cat": "商品的認識", "num": "42", "q": "早年霧季時，金門交通滯礙難行；如今跨海大橋竣成，不僅能舒心暢遊海嶼間，更能愜意觀賞奇幻霧橋景。起名「霧‧橋‧海」 ，即是呼應此獨特季節限定美。以上描述是指哪支酒?", "opts": ["金門大橋紀念酒", "金門大橋迎賓酒", "金門大橋通車紀念酒", "金門大橋開工紀念酒"], "a": 1}, {"id": "3-43", "cat": "商品的認識", "num": "43", "q": "深受遊客喜愛的亮眼地景，為黃邦雄先生於1989 年所設計，紅色亭身象徵金門在戰火中求生與重生的堅韌意志，斜斜的閩南建築屋簷，搭配簡潔的白色字體將「金門」二字勾畫出來，代表人與人之間愛的傳遞與連結。以上描述是指哪支酒?", "opts": ["金門大橋紀念酒", "金門電話亭紀念酒", "8 吋榴彈砲車金門高粱酒", "金門酒廠建廠 73 週年紀念酒"], "a": 2}, {"id": "3-44", "cat": "商品的認識", "num": "44", "q": "以金門獨特的歷史、文化底蘊為靈感，設計此款戰地主題酒品，勳功彪炳的武器造型酒器，不僅凝結了沙場記憶，也盛載著歲月軌跡。雄渾威武的酒器，厚盛淨醇爽洌的金門高粱酒，致敬那段扭轉時局、捍衛家園的英勇時光。以上描述是指哪支酒?", "opts": ["老兵召集令金門高粱酒", "古寧頭戰役75 週年紀念酒", "8 吋榴彈砲車金門高粱酒", "823 金門高粱酒"], "a": 3}, {"id": "3-45", "cat": "商品的認識", "num": "45", "q": "大膽島神秘面紗，為前線的前哨站，距大陸咫尺之遙，離廈門四千四百公尺，離金門一萬兩千公尺，形式險要具戰略地位，是軍事管制重地，島上最著名地標心戰牆，是為傳達自由、民主、均富的理念，是歷史的見證，是和平的力量。以上描述是指哪支酒?", "opts": ["823 金門高粱酒", "古寧頭戰役75 週年紀念酒", "三民主義統一中國金門高粱酒", "老兵召集令金門高粱酒"], "a": 3}, {"id": "3-46", "cat": "商品的認識", "num": "46", "q": "金門酒廠特別精心結合中國十二生肖推出開運商品，於2015年首度發行系列性的十二生肖玉璽酒。請問首發款和最終款生肖?", "opts": ["龍、兔", "蛇、龍", "馬、蛇", "羊、馬"], "a": 4}, {"id": "3-47", "cat": "商品的認識", "num": "47", "q": "自古以來，視鹿茸為珍貴藥材，亦為常用中藥，金門畜養的鹿，飼養用高粱酒糟，使得鹿隻精壯，鹿茸優質高產量，是金門特色產品之一，為融入在地產業，金酒公司特與金門畜試所及與地區養鹿場合作開發哪款酒?", "opts": ["金剛酒", "龍鳳酒", "鹿茸酒", "以上皆是"], "a": 3}, {"id": "3-48", "cat": "商品的認識", "num": "48", "q": "技藝無止境，唯心可至之，金門高粱酒首度參賽即獲頂級殊榮，接連榮獲2016 與2019 舊金山烈酒競賽最高殊榮， 「最佳白酒獎」及「雙金牌獎」 ，為分享得獎殊榮，推出哪 2 款「最佳白酒雙金榮耀紀念版」酒品?", "opts": ["白耀、黑耀", "黑耀、紅耀", "紅耀、白耀", "白耀、金耀"], "a": 2}, {"id": "3-49", "cat": "商品的認識", "num": "49", "q": "2024年終回饋金門鄉親，以特別開發的祥龍浮雕玻璃瓶，裝盛嚴選窖藏三年優質酒基，添加金箔點綴，如祥龍駕雲行海，瑞氣綿亙騰吉宇，象徵「龍運輝煌，富貴自來」 ，不僅祝福意涵深厚，更獨具高收藏價值與潛在增值空間，給符合抽籤資格的金門縣民是哪支酒?", "opts": ["祥龍藏金", "龍鎮天下", "龍騰四海", "雙龍盈珠"], "a": 1}, {"id": "3-50", "cat": "商品的認識", "num": "50", "q": "金酒公司和金門農會著手研發「純麥白酒」，中華民國農會和金門農會接上線，發現這款酒很有潛力，決心為它平反，由金酒公司正式量產，中華民國農會負責行銷，金門農會則確保原料來源無虞。請問是哪支酒?", "opts": ["原釀21", "一穀作契", "金門純麥酒", "以上皆是"], "a": 3}, {"id": "3-51", "cat": "商品的認識", "num": "51", "q": "「係承襲傳統古法『三高二低一翻』的固態發酵釀酒工藝，蒸餾所得之酒液，經『擷頭去尾』後入庫，經五年以上長期地窖貯存，窖內先天自然之陰冷空氣，使酒中成份在長年的相互融合吸收後自然醇化，並經勾兌師傅的精心調配，去蕪存菁，所醞釀之酒質芳香、甘冽、醇厚、適口，酒齡越長風味愈顯香郁醇和，回味愈陳愈香」的金酒公司酒品為：", "opts": ["二鍋頭", "陳年金門高粱酒", "陳年大麯酒", "以上皆非"], "a": 2}, {"id": "3-52", "cat": "商品的認識", "num": "52", "q": "下列何者不是金酒公司「鴻福百壽酒」的酒品特色：", "opts": ["以『百壽流金牡丹紅，福貴雙全喜臨門』為設計概念，將壽字主題表現在紅色與金色交乘的梅瓶上", "酒質精選存放於戰備坑道具恆溫恆濕窖藏 15 年以上不同年份、不同季節、不同酒度之各式單型酒基勾調而成", "瓶身印有江蕙授權肖像", "當時售價為新台幣29,800元"], "a": 3}, {"id": "3-53", "cat": "商品的認識", "num": "53", "q": "俗稱「春福酒」的金酒公司酒品為：", "opts": ["陳年特級高粱酒", "金箔酒", "58 度金門高粱酒", "瓷陳年大高酒禮盒"], "a": 4}, {"id": "3-54", "cat": "商品的認識", "num": "54", "q": "金酒公司「金門老窖酒」先窖藏幾年後再灌裝成酒品：", "opts": ["3 年", "5 年", "10年", "15 年"], "a": 3}, {"id": "3-55", "cat": "商品的認識", "num": "55", "q": "下列金酒公司現有酒品中以何者酒精濃度最高：", "opts": ["八達樓子", "精選高粱酒", "陳年特級高粱酒", "陳年大麯酒"], "a": 4}, {"id": "3-56", "cat": "商品的認識", "num": "56", "q": "金酒公司最晚成立的在台展售處為：", "opts": ["台北展售處", "台中展售處", "高雄展售處", "桃園展售處"], "a": 4}, {"id": "3-57", "cat": "商品的認識", "num": "57", "q": "蒸餾酒類應徵稅額為每公升按酒精成份每度徵收多少元(新台幣)：", "opts": ["26 元", "2.5 元", "7 元", "185 元"], "a": 2}, {"id": "3-58", "cat": "商品的認識", "num": "58", "q": "115年為金酒公司建廠第幾年：", "opts": ["71 年", "72 年", "73 年", "74 年"], "a": 4}, {"id": "3-59", "cat": "商品的認識", "num": "59", "q": "古時釀造白酒採用天鍋蒸餾，當更換第二鍋冷卻水時，蒸餾出的白酒剛好是酒心,簡稱為：", "opts": ["特選", "典藏珍品", "二鍋頭", "大麯酒"], "a": 3}, {"id": "3-60", "cat": "商品的認識", "num": "60", "q": "下列何者「非」酒類容量標示方式：", "opts": ["公升", "毫升", "ml", "公斤"], "a": 4}, {"id": "3-61", "cat": "商品的認識", "num": "61", "q": "下列何者為桶陳金門高粱酒熟陳的容器：", "opts": ["陶甕", "不鏽鋼酒桶", "橡木桶", "塑膠桶"], "a": 3}, {"id": "3-62", "cat": "商品的認識", "num": "62", "q": "酒品標示陳年年數:5 年，請問代表該產品酒液的年數最短為幾年以上：", "opts": ["3 年", "5 年", "8 年", "12 年"], "a": 2}, {"id": "3-63", "cat": "商品的認識", "num": "63", "q": "下列何者「非」金門高粱酒近年創新品牌新品：", "opts": ["桶陳金門高粱酒", "戰酒黑金龍南國玫瑰", "紹興酒", "粱芯金門高粱酒"], "a": 3}, {"id": "3-64", "cat": "商品的認識", "num": "64", "q": "下列何者為桶陳金門高粱酒系列品牌名稱：", "opts": ["創世者", "金釀", "奏鳴曲", "以上皆是"], "a": 4}, {"id": "3-65", "cat": "商品的認識", "num": "65", "q": "金酒公司 2025 年參加 ISC 國際烈酒競賽，哪一款酒品勇奪中式白酒類別最高榮譽「冠軍獎盃」：", "opts": ["58 度金門高粱酒", "8 年陳年金門高粱酒", "12 年陳年金門高粱酒", "22 年陳年金門高粱酒"], "a": 3}, {"id": "3-66", "cat": "商品的認識", "num": "66", "q": "下列哪款酒品為金門地區門市專售：", "opts": ["金門紀念酒", "金酒典藏珍品", "金門電話亭紀念酒", "二鍋頭金門高粱酒"], "a": 3}, {"id": "3-67", "cat": "商品的認識", "num": "67", "q": "113 年辦理「20L-59.2 度金門高粱酒」縣民抽籤價購，可儲放於坑道 3 年，請問儲放於哪個坑道：", "opts": ["經武坑道", "光華園坑道", "山前坑道", "寨子山坑道"], "a": 2}, {"id": "3-68", "cat": "商品的認識", "num": "68", "q": "金酒公司配合縣府生育優惠措施，開發哪款酒品供新生兒父母優惠購酒：", "opts": ["感恩釀金門高粱酒", "彌足珍釀金門高粱酒", "金門喜宴酒", "惜福酒"], "a": 2}, {"id": "3-69", "cat": "商品的認識", "num": "69", "q": "金酒公司辦理縣民新婚優惠購酒，開發哪款酒品：", "opts": ["感恩釀金門高粱酒", "彌足珍釀金門高粱酒", "金門喜宴酒", "惜福酒"], "a": 3}, {"id": "3-70", "cat": "商品的認識", "num": "70", "q": "下列哪款酒品為儲存於橡木桶中熟陳：", "opts": ["奏鳴曲桶陳金門高粱酒", "陳年特級高粱酒", "金門老窖酒", "二鍋頭金門高粱酒"], "a": 1}, {"id": "3-71", "cat": "商品的認識", "num": "71", "q": "下列哪款酒品非金門地區門市專售：", "opts": ["金門大橋紀念酒(霧橋海)", "金門大橋迎賓酒（瓷瓶）", "金門電話亭紀念酒", "一穀作契金門高粱酒"], "a": 4}, {"id": "3-72", "cat": "商品的認識", "num": "72", "q": "金酒公司 2025 年參加哪一場國際烈酒競賽，獲得「中式白酒年度最佳蒸餾酒廠」的殊榮：", "opts": ["SFWSC 舊金山世界烈酒競賽", "ISC 國際烈酒競賽", "Monde Selection世界食品品質評鑑大賞", "IWSC 國際葡萄酒暨烈酒競賽"], "a": 2}, {"id": "3-73", "cat": "商品的認識", "num": "73", "q": "下列哪一個坑道，非儲放儲酒銀行銷售酒品：", "opts": ["經武坑道", "夏興坑道", "山前坑道", "長江坑道"], "a": 1}, {"id": "3-74", "cat": "商品的認識", "num": "74", "q": "金酒公司現有銷售酒品中，最高年份酒品為幾年：", "opts": ["20 年", "22 年", "25 年", "30 年"], "a": 2}, {"id": "3-75", "cat": "商品的認識", "num": "75", "q": "下列何者為金酒公司暨廈門子公司現任「金門高粱酒大陸地區總經銷」為：", "opts": ["建發(海南)公司", "旺大順公司", "天福公司", "鹿鳴公司"], "a": 1}, {"id": "3-76", "cat": "商品的認識", "num": "76", "q": "下列哪款精釀啤酒為金酒公司出品：", "opts": ["K BEER 金門精釀", "金螢啤酒", "金色三麥啤酒", "金門精釀啤酒"], "a": 4}, {"id": "3-77", "cat": "商品的認識", "num": "77", "q": "下列哪款養生酒為金酒公司現有銷售酒款：", "opts": ["金門金剛酒", "金門鹿茸酒", "金門風濕酒", "金門龍鳳酒"], "a": 2}, {"id": "3-78", "cat": "商品的認識", "num": "78", "q": "下列哪款酒品為金酒公司完全採用台灣契作高粱所產製：", "opts": ["老鄉好酒", "二鍋頭金門高粱酒", "一穀作契金門高粱酒", "原釀 21 金門高粱酒"], "a": 3}, {"id": "3-79", "cat": "商品的認識", "num": "79", "q": "下列哪款酒品於 2017 年 9 月在中國廈門舉辦的 「第九屆金磚國家領導人會晤」 （金磚五國峰會）中，獲選為工商論壇與官方活動的迎賓與招待指定用酒，成功讓臺灣中式白酒躍上國際重要元首級峰會舞台：", "opts": ["0.6L-58 度台灣金門高粱酒", "0.6L-50 度台商精選酒", "0.5L-56 度金酒典藏珍品", "0.6L-56 度陳年金門高粱酒"], "a": 3}, {"id": "3-80", "cat": "商品的認識", "num": "80", "q": "下列何者為行銷 4P 元素?例如促銷", "opts": ["產品", "通路", "價格", "以上皆是"], "a": 4}, {"id": "4-1", "cat": "品保概念", "num": "1", "q": "為何公司要執行內部品質稽核", "opts": ["找出優劣之單位", "ISO9000 之規定", "找出改進的機會", "找出更佳之管理系統"], "a": 3}, {"id": "4-2", "cat": "品保概念", "num": "2", "q": "人因工程學須考慮人體之特性有", "opts": ["身體尺寸", "工作環境", "人的習慣", "以上皆是"], "a": 4}, {"id": "4-3", "cat": "品保概念", "num": "3", "q": "品質稽核執行步驟中，首先要做的是何者", "opts": ["召開稽核執行會議", "擬出稽核計畫", "提出矯正報告", "協調各單位預備稽核案件或項目"], "a": 2}, {"id": "4-4", "cat": "品保概念", "num": "4", "q": "品質目標合理化，最好由何部門來推動", "opts": ["總經理", "所有人員共同參與", "品管部門", "管理部門"], "a": 2}, {"id": "4-5", "cat": "品保概念", "num": "5", "q": "系統安全之作法應最優考量何者", "opts": ["設計加設安全裝置", "用設計方法減除危害", "設計加設警示裝置", "訂定操作程序"], "a": 2}, {"id": "4-6", "cat": "品保概念", "num": "6", "q": "品管小組活動之主要目的何在", "opts": ["提高產量", "主管與員工打成一片", "提高員工品質意識", "建立體制內溝通管理"], "a": 3}, {"id": "4-7", "cat": "品保概念", "num": "7", "q": "有關全面品質管理(TQM)的敘述，以下敘述何者正確？", "opts": ["強調顧客滿意、持續改善及全員參與", "高階管理者必須提出企業的品質願景(Vision)並營造品質經營與改善的環境與文化", "TQM 推行模式之內涵其實就是 PDCA 的落實", "以上皆是"], "a": 4}, {"id": "4-8", "cat": "品保概念", "num": "8", "q": "在品管七大手法中，針對不同的機台、時間、工作環境、操作員而分類的方法稱為", "opts": ["特性要因圖法", "柏拉圖法", "查檢表法", "層別法"], "a": 4}, {"id": "4-9", "cat": "品保概念", "num": "9", "q": "管制圖最主要用途為", "opts": ["決定交貨可否", "了解品質之滿意程度", "察覺製程之「非機遇原因」所造成之變異", "顧客要求"], "a": 3}, {"id": "4-10", "cat": "品保概念", "num": "10", "q": "使用平均值加減 3 個標準差，稱為最經濟之管制界線，原因在", "opts": ["容易作業，節省成本", "生產與消費雙方損失風險總和為最小", "得到界外不合格率 0.27％為小", "檢驗時誤判之機率為最小"], "a": 2}, {"id": "4-11", "cat": "品保概念", "num": "11", "q": "何者不屬於ISO9000 之品質管理系統模式", "opts": ["管理階層責任", "財務管理", "產品實現", "量測、分析及改善"], "a": 2}, {"id": "4-12", "cat": "品保概念", "num": "12", "q": "ISO9000管理系統明白表示，要將何項要求放在首位", "opts": ["品質", "營運", "顧客", "成本"], "a": 3}, {"id": "4-13", "cat": "品保概念", "num": "13", "q": "下列何項手法對發現原因及結果間關係，能一看即了解", "opts": ["管制圖", "魚骨圖", "直方圖", "散佈圖"], "a": 2}, {"id": "4-14", "cat": "品保概念", "num": "14", "q": "何項手法可收集大量意見，但較易偏離主題", "opts": ["層別法", "柏拉圖", "查檢表", "腦力激盪術"], "a": 4}, {"id": "4-15", "cat": "品保概念", "num": "15", "q": "平時多燒香，到時不慌亂，在產品責任中，指的是哪一項工作", "opts": ["作好設計審核", "準備完整之品質紀錄", "多做產品廣告宣傳", "多結交名律師"], "a": 2}, {"id": "4-16", "cat": "品保概念", "num": "16", "q": "製品在部門間轉移時之檢驗階段，稱為", "opts": ["供應商檢驗", "進料檢驗", "製成品檢驗", "製程檢驗"], "a": 4}, {"id": "4-17", "cat": "品保概念", "num": "17", "q": "下列何者並非企業推行標準化原則", "opts": ["找出有助於重大改善者，使之步上軌道", "必須有實行之可能性", "定期檢討改進", "只要短期的方針與制度"], "a": 4}, {"id": "4-18", "cat": "品保概念", "num": "18", "q": "品質成本（Qualitycost）結構中，沒有下列那一項？", "opts": ["內部失效成本", "預防成本", "外部失效成本", "評估成本"], "a": 4}, {"id": "4-19", "cat": "品保概念", "num": "19", "q": "擲一骰子共60 次，其出現 6 點之理論次數應為", "opts": ["5 次", "10 次", "15 次", "20 次"], "a": 2}, {"id": "4-20", "cat": "品保概念", "num": "20", "q": "品質改進計畫中，需分析時可藉重下列何人", "opts": ["品管工程師", "作業員", "專業部門主管", "以上皆是"], "a": 4}, {"id": "4-21", "cat": "品保概念", "num": "21", "q": "下列何者與品質改進無密切關聯", "opts": ["建立服務過程之測量與監視", "教育訓練", "重製與外包", "內部稽核"], "a": 3}, {"id": "4-22", "cat": "品保概念", "num": "22", "q": "建立操作標準、檢驗規範是屬於下列何種標準", "opts": ["人的標準", "事的標準", "時的標準", "地的標準"], "a": 2}, {"id": "4-23", "cat": "品保概念", "num": "23", "q": "一組數據1、2、3、4、5 請問", "opts": ["中位數為 3", "平均數為 4", "中位數為7.5", "組距為 15"], "a": 1}, {"id": "4-24", "cat": "品保概念", "num": "24", "q": "於目視檢查時，保持品質水準之最好方法是", "opts": ["經常訓練檢查員", "給予工作之變化", "經常檢查眼睛", "準備對比用之標準品"], "a": 4}, {"id": "4-25", "cat": "品保概念", "num": "25", "q": "本公司無能力作進料檢驗時，可採行之措施有", "opts": ["委託他人檢驗", "供應商出具檢驗合格證明", "派員至供應商抽檢", "以上皆是"], "a": 4}, {"id": "4-26", "cat": "品保概念", "num": "26", "q": "PDCA循環中的「C」代表何者？", "opts": ["Correction（修正）", "Check（查核）", "Control（控制）", "Confirm（確認） "], "a": 2}, {"id": "4-27", "cat": "品保概念", "num": "27", "q": "品質保證（QA）的主要目的為何？", "opts": ["找出所有不良品", "降低生產成本", "增加產品抽驗數量", "建立制度以預防品質問題發生"], "a": 4}, {"id": "4-28", "cat": "品保概念", "num": "28", "q": "下列何者最符合品質管制（QC）的工作內容？", "opts": ["執行產品檢驗與測試", "建立品質政策", "規劃教育訓練制度", "制定公司經營策略"], "a": 1}, {"id": "4-29", "cat": "品保概念", "num": "29", "q": "下列何者不是 5S 活動內容？", "opts": ["整理", "整頓", "整修", "清潔"], "a": 3}, {"id": "4-30", "cat": "品保概念", "num": "30", "q": "品質成本中的「預防成本」包括下列何者？", "opts": ["客戶退貨損失", "人員教育訓練", "報廢成本", "重工成本"], "a": 2}, {"id": "4-31", "cat": "品保概念", "num": "31", "q": "HACCP英文全名為何？", "opts": ["Hazard Analysis and Critical ControlPoints", "Health Analysis and Control Program", "Hazard Assessment andCritical Program", "Health Audit and Critical Control Plan"], "a": 1}, {"id": "4-32", "cat": "品保概念", "num": "32", "q": "品質管理中的「顧客」包括？", "opts": ["外部顧客", "經銷商而已", "內部與外部顧客", "消費者而已"], "a": 3}, {"id": "4-33", "cat": "品保概念", "num": "33", "q": "ISO 22000屬於下列何種管理系統？", "opts": ["食品安全管理系統", "品質管理系統", "環境管理系統", "職業安全衛生管理系統"], "a": 1}, {"id": "4-34", "cat": "品保概念", "num": "34", "q": "洗瓶機若清洗不完全，導致清潔劑殘留，屬於哪一類危害？", "opts": ["生物性危害", "化學性危害", "物理性危害", "品質危害"], "a": 2}, {"id": "4-35", "cat": "品保概念", "num": "35", "q": "下列何者最適合監控酒精度等連續性數據的製程？", "opts": ["魚骨圖", "柏拉圖", "X̄-R 管制圖", "散布圖"], "a": 3}, {"id": "4-36", "cat": "品保概念", "num": "36", "q": "若管制圖中連續 8 個點都落在中心線同一側，表示最可能發生何種情況？", "opts": ["製程仍完全正常", "製程可能已產生系統性偏移，應進一步調查", "儀器一定故障", "產品一定不合格"], "a": 2}, {"id": "4-37", "cat": "品保概念", "num": "37", "q": "品質改善活動中， 「5 Why」分析法主要目的為何？", "opts": ["增加品質文件", "增加抽樣數", "提高生產效率", "找出問題根本原因"], "a": 4}, {"id": "4-38", "cat": "品保概念", "num": "38", "q": "下列哪一項最適合作為品質改善成果的衡量指標？", "opts": ["員工人數", "廠區面積增加", "停車位增加", "不良率下降"], "a": 4}, {"id": "4-39", "cat": "品保概念", "num": "39", "q": "酒類發酵主要依賴哪一種微生物？", "opts": ["酵母菌", "大腸桿菌", "金黃色葡萄球菌", "沙門氏菌"], "a": 1}, {"id": "4-40", "cat": "品保概念", "num": "40", "q": "HACCP制度最主要的目的為何？", "opts": ["增加產品產量", "預防食品安全危害，而非僅依賴成品檢驗", "降低原料成本", "提高設備使用率"], "a": 2}, {"id": "4-41", "cat": "品保概念", "num": "41", "q": "文件管制最重要的目的為何？", "opts": ["增加文件數量", "確保使用最新版文件", "增加列印成本", "保存舊文件即可"], "a": 2}, {"id": "4-42", "cat": "品保概念", "num": "42", "q": "品保教育訓練完成後，最重要的是？", "opts": ["發證書", "增加課程時間", "評估教育訓練成效", "增加教材"], "a": 3}, {"id": "4-43", "cat": "品保概念", "num": "43", "q": "建立產品追溯追蹤制度的最主要目的為何？", "opts": ["增加產品售價", "發生異常時可迅速追查原料來源及產品流向", "增加生產效率", "降低包裝成本"], "a": 2}, {"id": "4-44", "cat": "品保概念", "num": "44", "q": "下列何者不是食品安全危害三大類之一？", "opts": ["生物性危害", "化學性危害", "物理性危害", "經濟性危害"], "a": 4}, {"id": "4-45", "cat": "品保概念", "num": "45", "q": "全面品質管理（TQM）的核心精神為何？", "opts": ["品保部門負責品質", "全員參與、持續改善、顧客滿意", "增加抽驗即可", "提高產量即可"], "a": 2}, {"id": "4-46", "cat": "品保概念", "num": "46", "q": "品質改善完成後，下一步應做什麼？", "opts": ["結案即可", "修改品質目標", "停止追蹤", "確認改善效果並標準化"], "a": 4}, {"id": "4-47", "cat": "品保概念", "num": "47", "q": "品質稽核最主要的目的為何？", "opts": ["確認制度是否有效執行", "找人處罰", "增加文件", "降低成本"], "a": 1}, {"id": "4-48", "cat": "品保概念", "num": "48", "q": "一般而言，Cpk 值愈高代表：", "opts": ["製程能力愈佳", "製程能力愈差", "不良率愈高", "與製程能力無關"], "a": 1}, {"id": "4-49", "cat": "品保概念", "num": "49", "q": "統計製程管制（SPC）的主要目的為何？", "opts": ["增加產品抽驗比例", "利用統計方法監控製程是否穩定，及早發現異常", "降低產品售價", "增加生產速度"], "a": 2}, {"id": "4-50", "cat": "品保概念", "num": "50", "q": "品質改善專案成功後，最重要的後續工作為何？", "opts": ["停止追蹤", "將改善成果納入標準作業程序", "刪除紀錄", "更換主管"], "a": 2}, {"id": "5-1", "cat": "勞動法令", "num": "1", "q": "勞動基準法第 36 條所定休息日工作，工作時間在 2 小時以內者，其延長工作時間之工資應如何計算？", "opts": ["加倍發給，並應於事後補假休息", "加倍發給", "按平日每小時工資額另再加給一又三分之二以上", "按平日每小時工資額另再加給一又三分之一以上"], "a": 4}, {"id": "5-2", "cat": "勞動法令", "num": "2", "q": "有關於勞工受僱試用期間之論述，下列何者正確？", "opts": ["勞工於試用期間，如有符合勞動基準法第 12 條第 1 項之事由，仍得不經預告終止勞動契約，無須等待試用期滿", "試用期間為定期勞動契約，除有重大事由外，雇主必須待試用期滿，始得終止契約", "試用期間，雇主認定勞工工作不能勝任，無須經由評定，即可於試用期滿前，終止勞動契約", "試用期間以 40 天為原則，最長不得逾越 6 個月"], "a": 1}, {"id": "5-3", "cat": "勞動法令", "num": "3", "q": "在雇主有歇業、清算或宣告破產之情事時，關於工資優先受償權及工資墊償基金之敘述，何者正確？", "opts": ["對於本於勞動契約所積欠之工資未滿 6 個月部分，勞工之受償順序劣於第一順位抵押權、質權或留置權所擔保之債權", "雇主未依勞動基準法或勞工退休金條例給付之資遣費，經勞工請求未獲清償時，在 6 個月平均工資之範圍內，由積欠工資墊償基金墊償", "雇主之工資墊償基金，由中央主管機關於萬分之十範圍內擬訂", "積欠工資墊償基金之收繳有關業務，得由中央主管機關，委託各地方政府勞動局辦理"], "a": 2}, {"id": "5-4", "cat": "勞動法令", "num": "4", "q": "有關勞動基準法之退休，下列敘述何者正確？", "opts": ["工作 25 年以上者", "工作10年以上或年滿 60 歲者，即可退休", "年滿 65 歲，即須退休不得再工作", "對於擔任具有危險、堅強體力等特殊性質之工作者，最晚 55 歲即應退休"], "a": 1}, {"id": "5-5", "cat": "勞動法令", "num": "5", "q": "下列關於勞動基準法第 84 條之1 之工作時間規制除外適用規定的敘述，何者錯誤？", "opts": ["適用的對象限於經中央主管機關核定公告之特定工作人員", "應報請當地主管機關核備", "雇主可使適用本條規定之勞工連續工作 7 小時而不需休息", "適用本條規定之勞工，其工作時間應由勞雇雙方另行約定，但仍應參考勞動基準法所定之基準"], "a": 3}, {"id": "5-6", "cat": "勞動法令", "num": "6", "q": "下列何者非屬勞動基準法第 11 條所明文規定之不須經預告的終止勞動契約事由？", "opts": ["不可抗力暫停工作在 1 個月以上時", "業務性質變更，有減少勞工之必要，又無適當工作可供安置時", "勞工業績未達公司營運目標時", "虧損或業務緊縮時"], "a": 3}, {"id": "5-7", "cat": "勞動法令", "num": "7", "q": "採取何種變形工時制度時，勞工的每日正常工作時間為 8 小時？", "opts": ["8 週變形工時", "2 週變形工時", "4 週變形工時", "所有變形工時之每日正常工作時間均為 8 小時"], "a": 1}, {"id": "5-8", "cat": "勞動法令", "num": "8", "q": "下列有關勞動基準法第 15 條之1 之最低服務年限規定，何者錯誤？", "opts": ["雇主為勞工進行專業技術培訓，並提供該項培訓費用時，得與勞工約定最低服務年限", "雇主提供勞工合理補償時，得與勞工約定最低服務年限", "勞動契約因不可歸責於勞工之事由而於最低服務年限屆滿前終止者，勞工仍負違反最低服務年限約定或返還訓練費用之責任", "最低服務年限之約定，不得逾合理範圍"], "a": 3}, {"id": "5-9", "cat": "勞動法令", "num": "9", "q": "下列何者非屬勞動基準法第 9 條之 1 所訂，雇主與勞工為離職後競業禁止約定，所應遵守之規定？", "opts": ["雇主有應受保護之正當營業利益", "勞工擔任之職位或職務，能接觸或使用雇主之營業秘密", "競業禁止之期間、區域、職業活動之範圍及就業對象，未逾合理範疇", "雇主不得向勞工提起補償費用"], "a": 4}, {"id": "5-10", "cat": "勞動法令", "num": "10", "q": "下列非有關勞動基準法，雇主對勞工因不從事競業行為所受損失有合理補償應，所做綜合考量", "opts": ["每月補償金額不低於勞工離職前六個月平均工資百分之五十", "補償金額足以維持勞工離職後競業禁止期間之生活所需", "補償金額與勞工遵守競業禁止之期間、區域、職業活動範圍及就業對象之範疇所受損失相當", "合理補償，應約定離職後一次預為給付或按月給付"], "a": 1}, {"id": "5-11", "cat": "勞動法令", "num": "11", "q": "何者為勞動基準法所定義「臨時性工作」", "opts": ["可在特定期間完成之非繼續性工作。其工作期間超過一年者，應報請主管機關核備", "係指無法預期之非繼續性工作，其工作期間在六個月以內者", "係指可預期於六個月內完成之非繼續性工作", "係指受季節性原料、材料來源或市場銷售影響之非繼續性工作，其工作期間在九個月以內者"], "a": 2}, {"id": "5-12", "cat": "勞動法令", "num": "12", "q": "何者應為不定期契約", "opts": ["臨時性", "短期性", "派遣事業單位與派遣勞工訂定之勞動契約", "季節性及特定性"], "a": 3}, {"id": "5-13", "cat": "勞動法令", "num": "13", "q": "下列何項非所謂勞動基準法第 10-1 條規定雇主調動勞工工作原則", "opts": ["對勞工之工資及其他勞動條件，未作不利之變更", "考量勞工及其家庭之生活利益", "調動工作地點過遠，雇主要給工資津貼", "調動後工作為勞工體能及技術可勝任"], "a": 3}, {"id": "5-14", "cat": "勞動法令", "num": "14", "q": "依勞動基準法第 11 條規定，下列情事，非雇主得預告勞工終止勞動契約", "opts": ["歇業或轉讓時", "業務性質變更，有減少勞工之必要，又無適當工作可供安置時", "勞工對於所擔任之工作確不能勝任時", "不可抗力暫停工作在六個月以上時"], "a": 4}, {"id": "5-15", "cat": "勞動法令", "num": "15", "q": "勞工非有下列情形之一者，雇主得不經預告終止契約", "opts": ["於訂立勞動契約時為虛偽意思表示，使雇主誤信而有受損害之虞者", "無正當理由繼續曠工三日及一個月內曠工達六日者", "對於雇主、雇主家屬、雇主代理人或其他共同工作之勞工，實施暴行或有重大侮辱之行為者", "違反勞動契約或工作規則，情節重大者"], "a": 2}, {"id": "5-16", "cat": "勞動法令", "num": "16", "q": "非有下列情形之一者，勞工得不經預告終止契約", "opts": ["對於雇主、雇主家屬、雇主代理人或其他共同工作之勞工，實施暴行或有重大侮辱之行為者", "雇主於訂立勞動契約時為虛偽之意思表示，使勞工誤信而有受損害之虞者", "雇主、雇主代理人或其他勞工患有法定傳染病，對共同工作之勞工有傳染之虞，且重大危害其健康者", "雇主違反勞動契約或勞工法令，致有損害勞工權益之虞者"], "a": 1}, {"id": "5-17", "cat": "勞動法令", "num": "17", "q": "下列有關勞動基準法終止勞動契約預告期間規定，何者有誤？", "opts": ["繼續工作六個月以上一年未滿者，於十日前預告之", "繼續工作一年以上三年未滿者，於二十日前預告之", "繼續工作三年以上者，於三十日前預告", "勞工於接到預告後，期間為另謀工作得於工作時間請假外出"], "a": 1}, {"id": "5-18", "cat": "勞動法令", "num": "18", "q": "依勞動基準法，發給勞工資遣費，何者正確？", "opts": ["在同一雇主之事業單位繼續工作，每滿一年發給相當於 0.5 個月平均工資之資遣費", "在同一雇主之事業單位繼續工作，每滿一年發給相當於一個月平均工資之資遣費", "未滿一年者以一年計", "未滿一個月者以比例計給之"], "a": 2}, {"id": "5-19", "cat": "勞動法令", "num": "19", "q": "雇主延長勞工工作時間者，其延長工作時間之工資應如何計算？", "opts": ["延長工作時間在二小時以內者，按平日每小時工資額加給三分之一以上", "延長工作時間在二小時以內者，按平日每小時工資額加給三分之二以上", "延長工作時間在四小時以內者，按平日每小時工資額加給三分之一以上", "延長工作時間在四小時以內者，按平日每小時工資額加給三分之二以上"], "a": 1}, {"id": "5-20", "cat": "勞動法令", "num": "20", "q": "有關勞動基準法，規定工資下列有誤？", "opts": ["工資之給付，應以法定通用貨幣為之", "指勞工因工作而獲得之報酬", "工資之給付，除當事人有特別約定或按月預付者外，每月至少定期發給二次", "工資之給付，除當事人有特別約定或按月預付者外，每月至少定期發給一次"], "a": 4}, {"id": "5-21", "cat": "勞動法令", "num": "21", "q": "有關正常工作時間，何者敘述有誤？", "opts": ["勞工正常工作時間，每日不得超過八小時", "正常工作時間，雇主經工會同意，如事業單位無工會者，經勞資會議同意後，得將其二週內二日之正常工作時數，分配於其他工作日", "其分配於其他工作日之時數，每日不得超過二小時", "其分配於其他工作日之時數，每日不得超過二小時。但每週工作總時數不得超過四十小時"], "a": 4}, {"id": "5-22", "cat": "勞動法令", "num": "22", "q": "有關勞動基準法，勞工出勤紀錄規定，何者有誤？", "opts": ["雇主應置備勞工出勤紀錄", "出勤紀錄，應逐日記載勞工出勤情形至秒為止", "勞工向雇主申請其出勤紀錄副本或影本時，雇主不得拒絕", "雇主應置備勞工出勤紀錄，並保存五年"], "a": 2}, {"id": "5-23", "cat": "勞動法令", "num": "23", "q": "依勞基法規定，雇主延長勞工之工作時間連同正常工作時間，雇主經工會同意，如事業單位無工會者，經勞資會議同意後，可延長之工作時間，一個月不得超過", "opts": ["46 小時", "54 小時", "56 小時", "48 小時"], "a": 1}, {"id": "5-24", "cat": "勞動法令", "num": "24", "q": "有關勞工工作時間，何者有誤？", "opts": ["勞工正常工作時間，每日不得超過八小時，每週不得超過四十小時", "在坑道或隧道內工作之勞工，以入坑口時起至出坑口時止為工作時間", "正常工作時間，雇主經工會同意，如事業單位無工會者，經勞資會議同意後，得將其二週內二日之正常工作時數，分配於其他工作日", "其分配於其他工作日之時數，每日不得超過二小時。但每週工作總時數不得超過四十六小時"], "a": 4}, {"id": "5-25", "cat": "勞動法令", "num": "25", "q": "雇主延長勞工之工作時間連同正常工作時間，延長之工作時間，經工會同意，如事業單位無工會者，經勞資會議同意後，延長之工作時間，每三個月不得超過幾小時？", "opts": ["120", "160", "138", "162"], "a": 3}, {"id": "5-26", "cat": "勞動法令", "num": "26", "q": "因天災、事變或突發事件，雇主有使勞工在正常工作時間以外工作之必要者，得將工作時間延長之，應於延長開始後幾小時內通知工會；無工會組織者，應報當地主管機關備查？", "opts": ["8 小時", "24 小時", "12 小時", "4 小時"], "a": 2}, {"id": "5-27", "cat": "勞動法令", "num": "27", "q": "中央主管機關指定之行業，雇主經工會同意，如事業單位無工會者，經勞資會議同意後，其工作時間得依下列原則變更？", "opts": ["四週內正常工作時數分配於其他工作日之時數，每日不得超過二小時，不受第 30 條第二項至第四項規定之限制", "四週內正常工作時數分配於其他工作日之時數，每日不得超過四小時，不受第 30 條第二項至第四項規定之限制", "當日正常工作時間達八小時者，其延長之工作時間不得超過二小時", "女性勞工，除妊娠或哺乳期間者外，於夜間工作，受第四十九條第一項之限制"], "a": 1}, {"id": "5-28", "cat": "勞動法令", "num": "28", "q": "有關勞動基準法規範勞工工作採輪班制者，何者正確？", "opts": ["勞工工作採輪班制者，其工作班次，每週更換一次。但經勞工同意者不在此限", "雇主僱用勞工人數在一百人以上者，雇主變更休息時間者，應報當地主管機關備查", "其工作班次，每月更換一次。但經勞工同意者不在此限", "變更休息時間者，無須經工會及勞資會議同意後，始得為之"], "a": 1}, {"id": "5-29", "cat": "勞動法令", "num": "29", "q": "有關因應天災、事變或突發事件，雇主有使勞工在正常工作時間規定，何者有誤？", "opts": ["因天災、事變或突發事件，雇主有使勞工在正常工作時間以外工作之必要者，得將工作時間延長之", "應於延長開始後十二小時內通知工會；無工會組織者，應報當地主管機關備查", "延長之工作時間，雇主應於事後補給勞工以適當之休息", "應於延長開始後二十四小時內通知工會；無工會組織者，應報當地主管機關備查"], "a": 2}, {"id": "5-30", "cat": "勞動法令", "num": "30", "q": "依勞動基準法規定，勞工繼續工作四小時，至少應有多少之休息時間？", "opts": ["15分鐘", "1.5 小時", "30 分鐘", "1 小時"], "a": 3}, {"id": "5-31", "cat": "勞動法令", "num": "31", "q": "有關勞動基準法，針對休息日規定，何者有誤？", "opts": ["勞工每七日中應有二日之休息日", "依第三十條第二項規定變更正常工作時間者，勞工每七日中至少應有一日之例假，每二週內之例假及休息日至少應有四日", "依第三十條第三項規定變更正常工作時間者，勞工每七日中至少應有一日之例假，每八週內之例假及休息日至少應有十六日", "依第三十條之一規定變更正常工作時間者，勞工每二週內至少應有二日之例假，每四週內之例假及休息日至少應有八日"], "a": 1}, {"id": "5-32", "cat": "勞動法令", "num": "32", "q": "勞工在同一雇主或事業單位，繼續工作滿六個月以上一年未滿者，應依規定給予幾天特別休假？", "opts": ["7 日", "6 日", "3 日", "10 日"], "a": 3}, {"id": "5-33", "cat": "勞動法令", "num": "33", "q": "勞工在同一雇主或事業單位，繼續工作滿一定期間者，應依下列規定給予特別休假，何者有誤？", "opts": ["三年以上五年未滿者，每年 14 日", "五年以上十年未滿者，每年 15 日", "十年以上者，每一年加給一日，加至三十日為止", "十五年以上者，每一年加給一日，加至三十日為止"], "a": 4}, {"id": "5-34", "cat": "勞動法令", "num": "34", "q": "有關勞動基準法，規範勞工特別休假，何者有誤？", "opts": ["特別休假期日，由勞工排定之", "特別休假期日，由雇主先排定之", "雇主基於企業經營上之急迫需求或勞工因個人因素，得與他方協商調整", "勞工之特別休假，因年度終結或契約終止而未休之日數，雇主應發給工資"], "a": 2}, {"id": "5-35", "cat": "勞動法令", "num": "35", "q": "因天災、事變或突發事件，雇主認有繼續工作之必要時，得停止第三十六條至第三十八條所定勞工之假期，有關停止假期之工資？", "opts": ["加倍發給", "應於事後補假休息", "應加倍發給，並應於事後補假休息", "依實際時數給予"], "a": 3}, {"id": "5-36", "cat": "勞動法令", "num": "36", "q": "依據勞動基準法，受僱幾歲從事工作者，稱童工？", "opts": ["十五歲以上未滿十六歲", "未滿十八歲", "十六歲以上未滿十八歲", "未滿二十歲"], "a": 1}, {"id": "5-37", "cat": "勞動法令", "num": "37", "q": "雇主雇用童工，其工作時間，何者有誤？", "opts": ["童工每日之工作時間不得超過八小時", "童工每週之工作時間不得超過四十小時", "童工不得於午後八時至翌晨六時之時間內工作", "童工不得於午後六時至翌晨六時之時間內工作"], "a": 4}, {"id": "5-38", "cat": "勞動法令", "num": "38", "q": "雇主雇用女工，其工作時間，何者有誤？", "opts": ["雇主不得使女工於午後十時至翌晨六時之時間內工作", "女工因健康或其他正當理由，不能於午後十時至翌晨六時之時間內工作者，雇主不得強制其工作", "雇主不得使女工於午後八時至翌晨六時之時間內工作", "但雇主經工會同意，如事業單位無工會者，經勞資會議同意後，且符合法規規定，提供必要設施，不在此限"], "a": 3}, {"id": "5-39", "cat": "勞動法令", "num": "39", "q": "雇主雇用女工分娩前後，應停止工作，給予多久星期產假期間？", "opts": ["8 星期", "4 星期", "6 星期", "12 星期"], "a": 1}, {"id": "5-40", "cat": "勞動法令", "num": "40", "q": "女工受僱工作期間多久期間，雇主就應於在其分娩前後，停止工作期間，期間工資照給？", "opts": ["受僱工作一定需滿 1 年以上者", "受僱工作在六個月以上者", "受僱工作在三個月以下者", "開始受僱即可"], "a": 2}, {"id": "5-41", "cat": "勞動法令", "num": "41", "q": "雇主雇用符合子女未滿一歲須女工親自哺乳者，何者敘述有誤？", "opts": ["於第三十五條規定之休息時間外，雇主應每日另給哺乳時間二次", "於第三十五條規定之休息時間外，雇主應每日另給哺乳時間一次", "每次以三十分鐘為度", "哺乳時間，視為工作時間"], "a": 2}, {"id": "5-42", "cat": "勞動法令", "num": "42", "q": "有關基本工資定義，何者正確？", "opts": ["工資包括延長工作時間之工資與休息日、休假日及例假工作加給之工資", "採計件工資之勞工所得基本工資，以每日工作時數之生產額或工作量換算之", "勞工在正常工作時間內所得之報酬", "勞工工作時間每日少於八小時者，除工作規則、勞動契約另有約定或另有法令規定者外，其基本工資仍得按工作時間八小時計算之"], "a": 3}, {"id": "5-43", "cat": "勞動法令", "num": "43", "q": "有關工作時間敘述，何者有誤？", "opts": ["勞工於同一事業單位或同一雇主所屬不同事業場所工作時，應將在各該場所之工作時間合併計算", "勞工於同一事業單位或同一雇主所屬不同事業場所工作時，應將往來於事業場所間所必要之交通時間扣除", "勞工因出差或其他原因於事業場所外從事工作致不易計算工作時間者，以平時之工作時間為其工作時間", "勞工因出差或其他原因於事業場所外從事工作致不易計算工作時間者，實際工作時間經證明者，以實際工作時間計"], "a": 2}, {"id": "5-44", "cat": "勞動法令", "num": "44", "q": "有關勞動基準法規範補休，何者有誤？", "opts": ["應依勞工延長工作時間或休息日工作事實發生時間先後順序補休", "應依勞工工作之時數計算補休時數", "於契約約定之工資給付日發給或於補休期限屆期後三個月內發給工資", "於契約約定之工資給付日發給或於補休期限屆期後三十日內發給工資"], "a": 3}, {"id": "5-45", "cat": "勞動法令", "num": "45", "q": "有關勞基法規定，勞工行使特別休假權利期間，何者有誤？", "opts": ["以勞工受僱當日起算，每一週年之期間", "全每年一月一日至十二月三十一日之期間", "教育單位之學年度、事業單位之會計年度或勞雇雙方約定年度之期間", "但其工作三個月以上六個月未滿者，為取得特別休假權利後六個月之期間"], "a": 4}, {"id": "5-46", "cat": "勞動法令", "num": "46", "q": "依勞基法第 70 條規定，雇主僱用勞工人數幾人以上者，應依其事業性質，就左列事項訂立工作規則，報請主管機關核備後並公開揭示？", "opts": ["100 人", "60 人", "1000 人", "30 人"], "a": 4}, {"id": "5-47", "cat": "勞動法令", "num": "47", "q": "雇主依第十一條或第十三條但書規定終止勞動契約者，勞工繼續工作一年以上三年未滿者，應給予幾日預告期間？", "opts": ["20 日", "10 日", "30 日", "15 日"], "a": 1}, {"id": "5-48", "cat": "勞動法令", "num": "48", "q": "勞動基準法所定義「短期性工作」 ，指可預期於幾個月內完成之非繼續性工作？", "opts": ["6 個月", "3 個月", "9 個月", "1 年"], "a": 1}, {"id": "5-49", "cat": "勞動法令", "num": "49", "q": "依據勞動基準法，資清冊應保存幾年？", "opts": ["1 年", "5 年", "6 個月", "3 年"], "a": 2}, {"id": "5-50", "cat": "勞動法令", "num": "50", "q": "定期契約屆滿後或不定期契約因故停止履行後，未滿幾個月而訂定新約或繼續履行原約時，勞工前後工作年資，應合併計算？", "opts": ["1 個月", "3 個月", "6 個月", "12 個月"], "a": 2}, {"id": "5-51", "cat": "勞動法令", "num": "51", "q": "定期契約屆滿後，雖經另訂新約，惟其前後勞動契約之工作期間超過幾日，視為不定期契約？", "opts": ["30 日", "60 日", "90 日", "120 日"], "a": 3}, {"id": "5-52", "cat": "勞動法令", "num": "52", "q": "勞工一個月內曠工達幾日者，雇主得不經預告終止契約？", "opts": ["10 日", "15 日", "3日", "6 日"], "a": 4}, {"id": "5-53", "cat": "勞動法令", "num": "53", "q": "依勞動基準法規定，勞工於正常工作時間者(未變更正常工作時間者)，每幾日中至少應有一日之例假？", "opts": ["7 日", "5 日", "6 日", "3 日"], "a": 1}, {"id": "5-54", "cat": "勞動法令", "num": "54", "q": "依勞工請假規則規定，勞工結婚者給予婚假幾日，工資照給？", "opts": ["8 日", "7 日", "10 日", "14 日"], "a": 1}, {"id": "5-55", "cat": "勞動法令", "num": "55", "q": "依勞工請假規則規定，核定給予勞工喪假，何者有誤？", "opts": ["父母、配偶喪亡者，給予喪假八日", "祖父母、子女喪亡者，給予喪假六日", "父母、配偶之養父母或繼父母喪亡者，給予喪假八日", "曾祖父母、配偶之祖父母喪亡者，給予喪假三日"], "a": 3}, {"id": "5-56", "cat": "勞動法令", "num": "56", "q": "依勞工請假規則規定，勞工因有事故必須親自處理，得請事假，一年內合計不得超過幾日？", "opts": ["7 日", "14 日", "15 日", "6 日"], "a": 2}, {"id": "5-57", "cat": "勞動法令", "num": "57", "q": "依勞工請假規則規定，有關勞工下列情事，雇主不得視為缺勤而影響其全勤獎金，何者說明有誤？", "opts": ["勞工請婚假、喪假、公傷病假及公假", "勞工因妊娠未滿六個月流產未請產假，而請普通傷病假", "勞工因親自照顧家庭成員，依規定請事假", "勞工因妊娠未滿三個月流產未請產假，而請普通傷病假"], "a": 2}, {"id": "5-58", "cat": "勞動法令", "num": "58", "q": "依勞工請假規則規定，勞工一年內請普通傷病假日數未超過幾日者，除本規則或其他法律另有規定，從其規定者外，雇主不得因勞工請普通傷病假而為不利之處分？", "opts": ["7 日", "14 日", "15 日", "10 日"], "a": 4}, {"id": "5-59", "cat": "勞動法令", "num": "59", "q": "依勞工請假規則規定，勞工因普通傷害、疾病或生理原因必須治療或休養者，得請普通傷病假，何者有誤？", "opts": ["未住院傷病假與住院傷病假合計不得超過二年", "未住院者，一年內合計不得超過三十日", "住院者，二年內合計不得超過一年", "普通傷病假一年內未超過三十日部分，工資折半發給"], "a": 1}, {"id": "5-60", "cat": "勞動法令", "num": "60", "q": "依勞工請假規則規定，有關勞工普通傷病假，何者有誤？", "opts": ["勞工因普通傷害、疾病或生理原因必須治療或休養者，得請普通傷病假", "勞工普通傷病假超過可請假期限，經以事假或特別休假抵充後仍未痊癒者，得予留職停薪", "勞工普通傷病假超過可請假期限，不需以事假或特別休假抵充後，得予留職停薪", "留職停薪期間以一年為限"], "a": 3}, {"id": "5-61", "cat": "勞動法令", "num": "61", "q": "依勞工請假規則規定，祖父母喪亡者，給予勞工喪假幾日，工資照給？", "opts": ["6 日", "7 日", "10 日", "3 日"], "a": 1}, {"id": "5-62", "cat": "勞動法令", "num": "62", "q": "依勞工請假規則規定，勞工因普通傷害、疾病或生理原因必須治療或休養者，請普通傷病假一年內未超過三十日部分，工資計算？", "opts": ["工資照給", "工資不給予", "工資折半發給", "工資加倍發給"], "a": 3}, {"id": "5-63", "cat": "勞動法令", "num": "63", "q": "依性別平等工作法規定，女性受僱者因生理日致工作有困難者，有關申請生理假，何者有誤？", "opts": ["每月得請生理假一日", "全年請假日數，不併入病假計算", "生理假薪資，減半發給", "全年請假日數未逾三日，不併入病假計算"], "a": 2}, {"id": "5-64", "cat": "勞動法令", "num": "64", "q": "依性別平等工作法規定，雇主於女性受僱者，其妊娠三個月以上流產者，應使其停止工作，給予產假幾天？", "opts": ["四星期", "八星期", "一星期", "五日"], "a": 1}, {"id": "5-65", "cat": "勞動法令", "num": "65", "q": "依性別平等工作法規定，雇主於女性受僱者，其妊娠多久期間流產者，應使其停止工作，給予產假五日？", "opts": ["妊娠二個月以上未滿三個月流產者", "妊娠一個月以上未滿六個月流產者", "妊娠三個月以上流產者", "妊娠未滿二個月流產者"], "a": 4}, {"id": "5-66", "cat": "勞動法令", "num": "66", "q": "雇主於女性受僱者，受僱者妊娠期間，雇主應給予產檢假幾日？", "opts": ["5 日", "8 日", "7 日", "12 日"], "a": 3}, {"id": "5-67", "cat": "勞動法令", "num": "67", "q": "受僱者陪伴其配偶妊娠產檢或其配偶分娩時，雇主應給予陪產檢及陪產假幾日？", "opts": ["8 日", "7 日", "5 日", "12 日"], "a": 2}, {"id": "5-68", "cat": "勞動法令", "num": "68", "q": "依性別平等工作法規定，規定產檢假部分，何者有誤？", "opts": ["受僱者妊娠期間，雇主應給予產檢假七日", "產檢假期間，薪資照給", "雇主依前項規定給付產檢假薪資後，就其中各逾五日之部分得向中央主管機關申請補助", "補助業務，由中央主管機關委任衛生福利部中央健康保險署辦理"], "a": 4}, {"id": "5-69", "cat": "勞動法令", "num": "69", "q": "受僱者任職滿多久後，育有子女滿三歲前，可得向雇主申請育嬰留職停薪？", "opts": ["3 個月", "6 個月", "入職即可", "1 年"], "a": 2}, {"id": "5-70", "cat": "勞動法令", "num": "70", "q": "受僱者同時撫育子女二人以上，申請育嬰留職停薪規定，何者有誤？", "opts": ["於每一子女滿三歲前，得申請育嬰留職停薪", "育嬰留職停薪期間應分別計算期間", "育嬰留職停薪期間應合併計算，最長以最幼子女受撫育二年為限", "申請育嬰留職停薪，期間至該子女滿三歲止"], "a": 2}, {"id": "5-71", "cat": "勞動法令", "num": "71", "q": "受僱者於育嬰留職停薪期間，得繼續參加原有之社會保險，原由雇主負擔之保險費，規定為何？", "opts": ["雇主繳納", "受僱者繳納", "免予繳納", "遞延三年繳納"], "a": 3}, {"id": "5-72", "cat": "勞動法令", "num": "72", "q": "受僱者於育嬰留職停薪期滿後，申請復職時，何者非雇主不得拒絕原因？", "opts": ["不可抗力暫停工作在三個月以上者", "歇業、虧損或業務緊縮者", "雇主依法變更組織、解散或轉讓者", "業務性質變更，有減少受僱者之必要，又無適當工作可供安置者"], "a": 1}, {"id": "5-73", "cat": "勞動法令", "num": "73", "q": "雇主依法未能使受僱者育嬰留職停薪期滿後復職時，應於幾日前通知之，並應依法定標準發給資遣費或退休金？", "opts": ["10 日", "30 日", "15 日", "20 日"], "a": 2}, {"id": "5-74", "cat": "勞動法令", "num": "74", "q": "子女未滿二歲須受僱者親自哺（集）乳者，除規定之休息時間外，雇主應每日另給多久哺（集）乳時間？", "opts": ["15 分鐘", "30 分鐘", "60 分鐘", "20 分鐘"], "a": 3}, {"id": "5-75", "cat": "勞動法令", "num": "75", "q": "依性別平等工作法規定，規定受僱者親自哺（集）乳部分，何者有誤？", "opts": ["子女未滿二歲須受僱者親自哺（集）乳者", "受僱者於每日正常工作時間以外之延長工作時間達一小時以上者，雇主應給予哺（集）乳時間三十分鐘", "哺（集）乳時間，視為工作時間", "子女未滿三歲須受僱者親自哺（集）乳者"], "a": 4}, {"id": "5-76", "cat": "勞動法令", "num": "76", "q": "受僱於僱用幾人以上雇主之受僱者，為撫育未滿三歲子女，得向雇主請求每天減少工作時間一小時？", "opts": ["50 人", "100 人", "30 人", "1000 人"], "a": 3}, {"id": "5-77", "cat": "勞動法令", "num": "77", "q": "依性別平等工作法規定，規定受僱者申請家庭照顧假，何者有誤？", "opts": ["受僱者於其家庭成員預防接種、發生嚴重之疾病或其他重大事故須親自照顧時，得請家庭照顧假", "其請假日數併入事假計算，全年以五日為限", "請假日數併入事假計算", "受僱者依規定為請求時，雇主不得拒絕"], "a": 2}, {"id": "5-78", "cat": "勞動法令", "num": "78", "q": "雇主僱用多少人，應訂定申訴管道，並在工作場所公開揭示，防治性騷擾之發生？", "opts": ["僱用受僱者十人以上未達三十人者", "僱用受僱者三十人以上者", "僱用受僱者五人以上未達二十人者", "僱用受僱者三人以上者"], "a": 1}, {"id": "5-79", "cat": "勞動法令", "num": "79", "q": "申訴案件經雇主或地方主管機關調查後，認定為性騷擾，且情節重大者，雇主得於知悉該調查結果之日起幾日內，不經預告終止勞動契約？", "opts": ["30 日", "20 日", "10 日", "15 日"], "a": 1}, {"id": "5-80", "cat": "勞動法令", "num": "80", "q": "依性別平等工作法規定，規定性別平等工作會部分，何者有誤？", "opts": ["處理審議、諮詢及促進性別平等工作事項", "應置委員五人至十一人", "由具備勞工事務、性別問題之相關學識經驗或法律專業人士擔任", "任期三年"], "a": 4}, {"id": "5-81", "cat": "勞動法令", "num": "81", "q": "依性別平等工作法規定，規定性別平等工作會部分，女性委員人數應占全體委員人數？", "opts": ["四分之一", "二分之一以上", "三分之一", "五分之一"], "a": 2}, {"id": "5-82", "cat": "勞動法令", "num": "82", "q": "依性別平等工作法規定，行為人因權勢性騷擾，應依規定負損害賠償責任者，法院得因被害人之請求，依侵害情節，酌定懲罰性賠償金？", "opts": ["酌定損害額三倍至五倍", "酌定損害額一倍至三倍", "酌定損害額五倍至八倍", "酌定損害額十倍"], "a": 2}, {"id": "5-83", "cat": "勞動法令", "num": "83", "q": "依性別平等工作法規定，受僱者或求職者遭受性騷擾，向地方主管機關提起申訴之期限？", "opts": ["被申訴人非具權勢地位，自知悉性騷擾時起，逾二年提起者，不予受理", "被申訴人非具權勢地位，自知悉性騷擾時起，逾三年提起者，不予受理", "被申訴人具權勢地位，自知悉性騷擾時起，逾一年提起者，不予受理", "被申訴人具權勢地位，自知悉性騷擾時起，逾二年提起者，不予受理"], "a": 1}, {"id": "5-84", "cat": "勞動法令", "num": "84", "q": "依性別平等工作法規定，性騷擾發生時，申訴人為未成年，得於成年之日起幾年內提起申訴？", "opts": ["1 年", "2 年", "3 年", "5 年"], "a": 3}, {"id": "5-85", "cat": "勞動法令", "num": "85", "q": "依性別平等工作法規定，性騷擾發生時，被申訴人為最高負責人或僱用人，申訴人得於離職之日起幾年內提起申訴？", "opts": ["1 年", "2 年", "3 年", "5 年"], "a": 1}, {"id": "5-86", "cat": "勞動法令", "num": "86", "q": "依性別平等工作法規定，受僱者陪產之請假，應於配偶分娩之當日及其前後合計幾日期間內為之？", "opts": ["10 日", "15 日", "30 日", "20 日"], "a": 2}, {"id": "5-87", "cat": "勞動法令", "num": "87", "q": "有關工會法規定，何者規定有誤？", "opts": ["工會為法人", "勞工均有組織及加入工會之權利", "教師不得依本法組織及加入工會", "現役軍人與國防部所屬及依法監督之軍火工業員工，不得組織工會"], "a": 3}, {"id": "5-88", "cat": "勞動法令", "num": "88", "q": "何者為結合同一廠場、同一事業單位、依公司法所定具有控制與從屬關係之企業，或依金融控股公司法所定金融控股公司與子公司內之勞工，所組織之工會？", "opts": ["產業工會", "職業工會", "勞動工會", "企業工會"], "a": 4}, {"id": "5-89", "cat": "勞動法令", "num": "89", "q": "組織工會至少應勞工幾人以上之連署發起，組成籌備會辦理公開徵求會員、擬定章程及召開成立大會？", "opts": ["100 人", "500 人", "30 人", "1000 人"], "a": 3}, {"id": "5-90", "cat": "勞動法令", "num": "90", "q": "工會章程之訂定，應經成立大會會員或會員代表多少之出席，並經出席會員或會員代表多少以上之同意？", "opts": ["1/2 ，2/3", "1/3 ，2/3", "2/3，1/2", "1/4，1/2"], "a": 1}, {"id": "5-91", "cat": "勞動法令", "num": "91", "q": "依工會法規定，工會會員代表每一任之任期多久？", "opts": ["4 年", "2 年", "3 年", "5 年"], "a": 1}, {"id": "5-92", "cat": "勞動法令", "num": "92", "q": "依工會法規定，何者正確？", "opts": ["代表雇主行使管理權之主管人員，得加入該企業之工會", "工會會員人數在 30 人以上者，得依章程選出會員代表", "工會會員代表之任期，每一任不得超過二年", "工會會員大會為工會之最高權力機關"], "a": 4}, {"id": "5-93", "cat": "勞動法令", "num": "93", "q": "工會應置理事及監事，工會會員人數五百人以下者，置理事多少人？", "opts": ["1-2 人", "3-4 人", "5-9 人", "9-12 人"], "a": 3}, {"id": "5-94", "cat": "勞動法令", "num": "94", "q": "依工會法規定，何者有誤？", "opts": ["工會應置理事長一人", "理事長、副理事長應具理事身分", "工會監事名額在三人以上者，應設監事會，置監事會召集人一人", "理事長得連選連任"], "a": 4}, {"id": "5-95", "cat": "勞動法令", "num": "95", "q": "依工會法規定，工會理事會至少應多久召開一次工會理事會定期會議？", "opts": ["每年一次", "每 3 個月一次", "每半年一次", "每一個月一次"], "a": 2}, {"id": "5-96", "cat": "勞動法令", "num": "96", "q": "依工會法規定，何者有誤？", "opts": ["工會會員大會或會員代表大會，分定期會議及臨時會議二種", "臨時會議，經理事會決議，或會員五分之一或會員代表三分之一以上請求", "但因緊急事故召集臨時會議，得於會議召開當日之三日前送達", "或監事之請求，由理事長召集之"], "a": 3}, {"id": "5-97", "cat": "勞動法令", "num": "97", "q": "依工會法規定，何者有誤？", "opts": ["工會理事會分為定期會議及臨時會議二種", "理事應親自出席會議", "監事得列席理事會陳述意見", "臨時會議，須經理事二分之一以上之請求，由理事長召集之"], "a": 4}, {"id": "5-98", "cat": "勞動法令", "num": "98", "q": "依工會法規定，有關工會經費何者有誤？", "opts": ["經常會費每人不得低於其入會時之一日工資所得", "經常會費不得低於該會員當月工資之百分之零點五", "企業工會經會員同意，雇主應自該勞工加入工會為會員之日起，自其工資中代扣工會會費，轉交該工會", "會員工會對工會聯合組織之會費繳納，應按申報參加工會聯合組織之人數繳納之"], "a": 1}, {"id": "5-99", "cat": "勞動法令", "num": "99", "q": "依工會法規定，工會應於每年年度決算後幾日內，將財務報表報請主管機關備查？", "opts": ["30 日", "3 個月", "6 個月", "15 日"], "a": 1}, {"id": "5-100", "cat": "勞動法令", "num": "100", "q": "依工會法規定，工會會員大會或會員代表大會之召集程序或決議方法，違反法令或章程時，何者有誤？", "opts": ["會員或會員代表得於決議後三十日內，訴請法院撤銷其決議", "但出席會議之會員或會員代表未當場表示異議者，不得為之", "會員或會員代表得於決議後三個月內，訴請法院撤銷其決議", "法院對於前項撤銷決議之訴，認為其違反之事實非屬重大且於決議無影響者，得駁回其請求"], "a": 3}, {"id": "5-101", "cat": "勞動法令", "num": "101", "q": "依工會法規定，雇主應給予理事或監事得於每月幾小時之範圍內，請公假辦理會務？", "opts": ["50 小時", "32 小時", "40 小時", "80 小時"], "a": 1}, {"id": "5-102", "cat": "勞動法令", "num": "102", "q": "依工會法規定，主管機關受理工會登記時，下列情事，非主管機關不予登記原因？", "opts": ["未召開成立大會", "連署發起人數未滿一百人", "未組成籌備會", "未擬定章程"], "a": 2}, {"id": "5-103", "cat": "勞動法令", "num": "103", "q": "依工會法規定，工會自行宣告解散者，應於解散後幾日內，將其解散事由及時間，報請主管機關備查？", "opts": ["30 日", "3 個月", "6 個月", "15 日"], "a": 4}, {"id": "5-104", "cat": "勞動法令", "num": "104", "q": "依工會法規定，工會得經會員大會或會員代表大會議決，自行宣告解散，何者為非？", "opts": ["破產", "會員人數不足", "勞資協商", "合併或分立"], "a": 3}, {"id": "5-105", "cat": "勞動法令", "num": "105", "q": "依工會法規定，工會工會之理事、監事規定，何者為非？", "opts": ["工會之理事、監事，應於任期屆滿前辦理改選", "理事、監事之任期，自前任期屆滿後次日起算", "理事、監事之任期，自召開第一次理事會議、監事會議之日起算", "第一次理事會議、監事會議，應於前屆任期屆滿日起十日內召開"], "a": 2}, {"id": "5-106", "cat": "勞動法令", "num": "106", "q": "依工會法規定，同一直轄市或縣（市）內之同種類職業工會，以組織幾個為限？", "opts": ["3 個", "1 個", "2 個", "不限制"], "a": 2}, {"id": "5-107", "cat": "勞動法令", "num": "107", "q": "依工會法規定，工會合併或分立時，何者敘述為非？", "opts": ["工會經議決為合併或分立時，應於議決之日起三十日內完成合併或分立", "企業工會因廠場或事業單位合併時，屆期未合併者，主管機關得令其限期改善，未改善者，令其重新組織", "依規定為合併或分立時，應於完成合併或分立後三十日內，將其過程、工會章程、理事、監事名冊等，報請主管機關備查", "工會經議決為合併或分立時，應於議決之日起一年內完成合併或分立"], "a": 1}, {"id": "5-108", "cat": "勞動法令", "num": "108", "q": "依團體協約法規定，勞資之一方於有協商資格之他方提出協商時，下列情形，非為無正當理由？", "opts": ["對於他方提出合理適當之協商內容、時間、地點及進行方式，拒絕進行協商", "未於六十日內針對協商書面通知提出對應方案，並進行協商", "拒絕提供進行協商所必要之資料", "未於三十日內針對協商書面通知提出對應方案，並進行協商"], "a": 4}, {"id": "5-109", "cat": "勞動法令", "num": "109", "q": "依團體協約法規定，工會或雇主團體以其團體名義簽訂團體協約，除依其團體章程之規定為之者外，應先經其會員大會或會員代表大會之會員或會員代表多少出席，出席會員或會員代表多少之決議？", "opts": ["會員大會或會員代表大會之會員或會員代表過 1/2 出席，出席會員或會員代表 2/3 以上之決議", "會員大會或會員代表大會之會員或會員代表過 1/2 出席，出席會員或會員代表 1/2 以上之決議", "會員大會或會員代表大會之會員或會員代表過 1/3 出席，出席會員或會員代表 1/2 以上之決議", "會員大會或會員代表大會之會員或會員代表過 1/2 出席，出席會員或會員代表 1/3 以上之決議"], "a": 1}, {"id": "5-110", "cat": "勞動法令", "num": "110", "q": "依團體協約法規定，團體協約簽訂的形式？", "opts": ["定期", "不定期", "完成一定工作為期限", "以上皆是"], "a": 4}, {"id": "5-111", "cat": "勞動法令", "num": "111", "q": "依團體協約法規定，團體協約為不定期者，當事人之一方於團體協約簽訂幾年後，得隨時終止團體協約？", "opts": ["三年後", "五年後", "一年後", "二年後"], "a": 3}, {"id": "5-112", "cat": "勞動法令", "num": "112", "q": "依團體協約法規定，團體協約以完成一定工作為期限者，其工作於三年內尚未完成時，視為多久期限簽訂之團體協約？", "opts": ["以五年為期限", "以三年為期限", "以完成一定工作為期限", "以一年為期限"], "a": 2}, {"id": "5-113", "cat": "勞動法令", "num": "113", "q": "依大量解僱勞工保護法第 2 條規定，何謂本法所稱大量解僱勞工，同一事業單位於六十日內解僱勞工逾多少人或單日逾多少人？", "opts": ["六十日內解僱勞工逾 150人或單日逾 100 人", "六十日內解僱勞工逾 500 人或單日逾 150 人", "六十日內解僱勞工逾 1000 人或單日逾 500 人", "六十日內解僱勞工逾 200 人或單日逾 100人"], "a": 4}, {"id": "5-114", "cat": "勞動法令", "num": "114", "q": "依大量解僱勞工保護法規定，勞雇雙方拒絕協商或無法達成協議時，主管機關應於幾日內召集勞雇雙方組成協商委員會，就解僱計畫書內容進行協商，並適時提出替代方案？", "opts": ["20 日", "30 日", "10 日", "60 日"], "a": 3}, {"id": "5-115", "cat": "勞動法令", "num": "115", "q": "依大量解僱勞工保護法規定，主管機關召集勞雇雙方組成協商委員會，協商委員會置委員多少人？", "opts": ["5 至 11 人", "2 至 5 人", "6 至 12 人", "15 至 20 人"], "a": 1}, {"id": "5-116", "cat": "勞動法令", "num": "116", "q": "事業單位大量解僱勞工時，提出之解僱計畫書內容，下列非所應記載事項？", "opts": ["解僱理由", "解僱日期", "資遣費計算方式", "解僱人員名單"], "a": 4}, {"id": "5-117", "cat": "勞動法令", "num": "117", "q": "依大量解僱勞工保護法規定，有關協商委員會規定，下列何者為非？", "opts": ["協商委員會協商達成之協議，其效力及於個別勞工", "主管機關得於協議成立之日起10 日內，將協議書送請管轄法院審核", "協商委員會應由主席至少每二週召開一次", "協商委員會協商達成之協議，其效力及於個別勞工"], "a": 2}, {"id": "5-118", "cat": "勞動法令", "num": "118", "q": "依大量解僱勞工保護法規定，僱用勞工三十人以上之事業單位，由相關單位或人員向主管機關通報，下列規定何者為非？", "opts": ["全部或主要之營業部分停工", "決議併購", "最近一年曾發生重大勞資爭議", "積欠勞工保險保險費、工資墊償基金、全民健康保險保險費或未依法提繳勞工退休金達二個月，且金額分別在新臺幣二十萬元以上"], "a": 3}, {"id": "5-119", "cat": "勞動法令", "num": "119", "q": "僱用勞工人數在二百人以下者，積欠勞工工資達幾個月，由相關單位或人員向主管機關通報？", "opts": ["2 個月", "3 個月", "1 個月", "6 個月"], "a": 1}, {"id": "5-120", "cat": "勞動法令", "num": "120", "q": "事業單位於大量解僱勞工時，積欠勞工退休金、資遣費或工資，經主管機關限期令其清償；屆期未清償者，中央主管機關得函請入出國管理機關禁止其代表人及實際負責人出國，下列規定何者為非？", "opts": ["僱用勞工人數在十人以上未滿三十人者，積欠全體被解僱勞工之總金額達新臺幣一百萬元", "僱用勞工人數在十人以上未滿三十人者，積欠全體被解僱勞工之總金額達新臺幣三百萬元", "僱用勞工人數在三十人以上未滿一百人者，積欠全體被解僱勞工之總金額達新臺幣五百萬元", "僱用勞工人數在一百人以上未滿二百人者，積欠全體被解僱勞工之總金額達新臺幣一千萬元"], "a": 1}, {"id": "5-121", "cat": "勞動法令", "num": "121", "q": "依大量解僱勞工保護法規定，有關解僱勞工下列規定何者為非？", "opts": ["協商期間，雇主不得任意將經預告解僱勞工調職或解僱", "經預告解僱之勞工於協商期間就任他職，原雇主仍應依法發給資遣費或退休金", "協商期間，雇主可任意將經預告解僱勞工調職", "事業單位大量解僱勞工時，不得以種族、語言、階級為由解僱勞工"], "a": 3}, {"id": "5-122", "cat": "勞動法令", "num": "122", "q": "依勞資爭議處理法中，何謂勞資雙方當事人對於勞動條件主張繼續維持或變更之爭議？", "opts": ["勞資爭議", "權利事項之勞資爭議", "調整事項之勞資爭議", "爭議行為"], "a": 3}, {"id": "5-123", "cat": "勞動法令", "num": "123", "q": "依勞資爭議處理法中，何者非為勞方當事人？", "opts": ["工會", "未加入工會，而具有相同主張之勞工達十人以上", "受僱於僱用勞工未滿十人之事業單位，其未加入工會之勞工具有相同主張者達三分之二以上", "未加入工會，而具有相同主張之勞工達三十人以上"], "a": 4}, {"id": "5-124", "cat": "勞動法令", "num": "124", "q": "依勞資爭議處理法中，有關調解規定，何者正確？", "opts": ["調解人應調查事實，並於指派之日起十日內開始進行調解", "直轄市或縣（市）主管機關指派調解人進行調解者，應於收到調解申請書三日內為之", "直轄市或縣（市）主管機關指派調解人進行調解者，應於收到調解申請書七日內為之", "調解人應調查事實，並於指派之日起三日內開始進行調解"], "a": 2}, {"id": "5-125", "cat": "勞動法令", "num": "125", "q": "依勞資爭議處理法中，有關調解委員會規定，何者有誤？", "opts": ["調解委員會置委員三人或五人", "勞資爭議雙方當事人各自選定 1-3 人", "以直轄市或縣（市）主管機關代表一人為主席", "直轄市、縣（市）主管機關指派一人或三人"], "a": 2}, {"id": "5-126", "cat": "勞動法令", "num": "126", "q": "依勞資爭議處理法中，有關調解委員會開會規定，何者有誤？", "opts": ["調解委員會開會時，調解委員因故請假，得委任他人代理", "調解委員會開會時，受指派調查者，不得委任他人代理", "受通知或受訪查人員，不得為虛偽說明、提供不實資料或無正當理由拒絕說明", "調解委員會開會時，調解委員應親自出席，不得委任他人代理"], "a": 1}, {"id": "5-127", "cat": "勞動法令", "num": "127", "q": "依勞資爭議處理法中，何者非調解不成立？", "opts": ["勞資爭議當事人對調解委員會之調解方案不同意者", "經調解委員會主席召集會議，連續二次調解委員出席人數未過半數", "經調解委員會主席召集會議，連續三次調解委員出席人數未過半數", "未能作成調解方案"], "a": 3}, {"id": "5-128", "cat": "勞動法令", "num": "128", "q": "依勞資爭議處理法中，有關仲裁委員會何者有誤？", "opts": ["裁委員會由主任仲裁委員召集", "由委員三人組成者，應有全體委員出席，經出席委員過半數同意", "委員五人或七人組成者，應有三分之二以上委員出席，經出席委員四分之三以上同意", "委員五人或七人組成者，應有半數以上委員出席，經出席委員二分之一以上同意"], "a": 4}, {"id": "5-129", "cat": "勞動法令", "num": "129", "q": "依勞資爭議處理法中，何者不得罷工？", "opts": ["自來水事業", "醫院", "教師", "電力及燃氣供應業"], "a": 3}, {"id": "5-130", "cat": "勞動法令", "num": "130", "q": "依勞資爭議處理法中，有關爭議行為，何者有誤？", "opts": ["爭議行為期間，爭議當事人雙方先暫停工作場所安全及衛生設備之正常運轉", "工會非經會員以直接、無記名投票且經全體過半數同意，不得宣告罷工及設置糾察線", "爭議行為應依誠實信用及權利不得濫用原則為之", "雇主不得以工會及其會員依本法所為之爭議行為所生損害為由，向其請求賠償"], "a": 1}, {"id": "5-131", "cat": "勞動法令", "num": "131", "q": "依勞資爭議處理法中，仲裁委員會作成仲裁判斷後，應於幾日內作成仲裁判斷書，報由主管機關送達勞資爭議雙方當事人？", "opts": ["30 日", "20 日", "10 日", "15 日"], "a": 3}, {"id": "5-132", "cat": "勞動法令", "num": "132", "q": "事業單位應依勞資會議實施辦法規定舉辦勞資會議，其事業場所勞工人數在多少人以上者，應分別舉辦之？", "opts": ["20 人", "30 人", "50 人", "100 人"], "a": 2}, {"id": "5-133", "cat": "勞動法令", "num": "133", "q": "依勞資會議實施辦法規定，事業單位人數在一百人以上者，勞資會議勞資雙方代表各不得少於幾人？", "opts": ["5 人", "10 人", "20 人", "30 人"], "a": 1}, {"id": "5-134", "cat": "勞動法令", "num": "134", "q": "依勞資會議實施辦法規定，勞資會議之資方代表，由事業單位於資方代表任期屆滿前幾日就熟悉業務、勞工情形之人指派之？", "opts": ["30 日", "20 日", "10 日", "15 日"], "a": 1}, {"id": "5-135", "cat": "勞動法令", "num": "135", "q": "依勞資會議實施辦法規定，勞工年滿幾歲，有選舉及被選舉為勞資會議勞方代表之權？", "opts": ["16 歲", "18 歲", "15 歲", "20 歲"], "a": 3}, {"id": "5-136", "cat": "勞動法令", "num": "136", "q": "依勞資會議實施辦法規定，有關勞方代表規定，何者有誤？", "opts": ["勞資會議勞方代表之候補代表名額不得超過應選出代表總額", "勞資會議勞方代表出缺時，由候補代表遞補之", "事業單位單一性別勞工人數逾勞工人數二分之一者，其當選勞方代表名額不得少於勞方應選出代表總額二分之一", "代表雇主行使管理權之一級業務行政主管人員，不得為勞方代表"], "a": 3}, {"id": "5-137", "cat": "勞動法令", "num": "137", "q": "依勞資會議實施辦法規定，有關勞資會議勞資雙方代表規定，何者有誤？", "opts": ["任期為四年", "勞方代表連選得連任", "資方代表連派得連任", "勞資雙方代表皆不得連任"], "a": 4}, {"id": "5-138", "cat": "勞動法令", "num": "138", "q": "依勞資會議實施辦法規定，有關勞資會議代表選派完成後，事業單位應將勞資會議代表及勞方代表候補名單於幾日內報請當地主管機關備查？", "opts": ["30 日", "20 日", "10 日", "15 日"], "a": 4}, {"id": "5-139", "cat": "勞動法令", "num": "139", "q": "依勞資會議實施辦法規定，何者非勞資會議之報告事項？", "opts": ["關於上次會議決議事項辦理情形", "關於勞動條件事項", "關於勞工人數、勞工異動情形、離職率等勞工動態", "關於勞工活動、福利項目及工作環境改善等事項"], "a": 2}, {"id": "5-140", "cat": "勞動法令", "num": "140", "q": "依勞資會議實施辦法規定，勞資會議至少每幾個月舉辦一次，必要時得召開臨時會議？", "opts": ["3 個月", "4 個月", "6 個月", "2 個月"], "a": 1}, {"id": "5-141", "cat": "勞動法令", "num": "141", "q": "有關勞資會議下列何者規定有誤？", "opts": ["勞資會議之主席，由勞資雙方代表各推派一人輪流擔任之", "勞資會議應有勞資雙方代表各過三分之二之出席，協商達成共識後應做成決議", "勞資會議代表因故無法出席時，得提出書面意見", "勞資會議得設專案小組處理有關議案、重要問題及辦理選舉工作"], "a": 2}, {"id": "5-142", "cat": "勞動法令", "num": "142", "q": "依據職工福利金條例，每月於每個職員工人薪津內各扣多少，提撥作為職工福利金？", "opts": ["百分之 1", "百分之 0.5", "百分之 0.15", "百分之 0.05"], "a": 2}, {"id": "5-143", "cat": "勞動法令", "num": "143", "q": "依據職工福利金條例，廠礦場及其他企業組織下腳變價，提撥作為職工福利金？", "opts": ["10%-15%", "20%-40%", "50%-60%", "5%-10%"], "a": 2}, {"id": "5-144", "cat": "勞動法令", "num": "144", "q": "有關職工福利委員會規定何者有誤？", "opts": ["職工福利委員會每三個月應召開會議一次", "委員會議由主任委員召集", "臨時會議經全體委員三分之一連署請求者，主任委員應於十日內召集之", "主任委員無正當理由不召開定期會議或臨時會議者，得經全體委員三分之一連署"], "a": 3}, {"id": "5-145", "cat": "勞動法令", "num": "145", "q": "職工福利委員會應於年度終了前幾個月內，擬具下年度實施計畫及預算，經委員會議決議通過，報請主管機關備查？", "opts": ["一個月", "二個月", "三個月", "六個月"], "a": 1}, {"id": "5-146", "cat": "勞動法令", "num": "146", "q": "僱用員工人數在五百人以上之事業單位，職工福利委員會得置專任人員多少人，於職工中遴選派充之？", "opts": ["6-8 人", "9-12 人", "10-15 人", "1-5 人"], "a": 4}, {"id": "5-147", "cat": "勞動法令", "num": "147", "q": "有關職工福利委員規定，何者有誤？", "opts": ["職工福利委員會置主任委員一人，綜理會務", "職工福利委員之任期，每一任不得超過四年", "職工福利委員會委員均為無給職", "委員連選連任者不得超過二分之一，但當然委員任期不受限制"], "a": 4}, {"id": "6-1", "cat": "勞工保險條例及施行細則", "num": "1", "q": "依據《勞工保險條例》第 6 條，受僱於僱用勞工 5 人以上之公司、行號之勞工，其投保年齡下限與上限分別為何？", "opts": ["年滿 15 歲以上，70 歲以下", "年滿 16 歲以上，60 歲以下", "年滿 15 歲以上，65 歲以下", "年滿 18 歲以上，65 歲以下 "], "a": 3}, {"id": "6-2", "cat": "勞工保險條例及施行細則", "num": "2", "q": "下列何者「非」勞工保險條例所定之強制加保對象？", "opts": ["僱用 5 人以上公司之受僱勞工", "無一定雇主而參加職業工會之自營作業者", "僱用 3 人之家庭看護工", "依法不得參加公務人員保險之公務機關約僱人員"], "a": 3}, {"id": "6-3", "cat": "勞工保險條例及施行細則", "num": "3", "q": "僱用勞工未滿5 人之事業單位，其保險效力如何規範？", "opts": ["絕對不得參加勞工保險", "得準用勞工保險條例規定自願參加勞工保險", "須送請中央主管機關專案核准後始得加保", "一律強制參加提繳就業保險即可，不得加勞保"], "a": 2}, {"id": "6-4", "cat": "勞工保險條例及施行細則", "num": "4", "q": "實際從事勞動之雇主若欲參加勞工保險，其前提條件為何？", "opts": ["必須與其受僱勞工共同參加", "無須僱用勞工，隨時可以個人身份單獨加保", "必須參加商業保險滿三年", "雇主一律不得參加勞工保險"], "a": 1}, {"id": "6-5", "cat": "勞工保險條例及施行細則", "num": "5", "q": "勞工保險效力之開始，自何時起算？", "opts": ["投保單位將加保申報表送達保險人或郵寄登記之當日二十四時起", "投保單位填寫申報表之當日零時起", "保險人核准加保之次日零時起", "勞工到職之次日零時起"], "a": 1}, {"id": "6-6", "cat": "勞工保險條例及施行細則", "num": "6", "q": "投保單位未於勞工到職當日申報加保者，其保險效力自何時開始？", "opts": ["追溯至到職當日零時起", "申報之次日算起", "申報之當日二十四時起算", "補辦手續並繳清罰鍰後追溯生效"], "a": 3}, {"id": "6-7", "cat": "勞工保險條例及施行細則", "num": "7", "q": "勞工保險之保險人為何機構？", "opts": ["勞動部職業安全衛生署", "勞動部勞工保險局", "各直轄市及縣市政府勞工局", "勞工保險監理委員會"], "a": 2}, {"id": "6-8", "cat": "勞工保險條例及施行細則", "num": "8", "q": "被保險人因傷病請假致留職停薪，期間普通傷病未超過多久者，得繼續參加勞工保險？", "opts": ["6 個月", "1 年", "2 年", "3 年"], "a": 2}, {"id": "6-9", "cat": "勞工保險條例及施行細則", "num": "9", "q": "普通事故保險費率，目前法令規定之上限為何？", "opts": ["10﹪", "12﹪", "13﹪", "15﹪"], "a": 3}, {"id": "6-10", "cat": "勞工保險條例及施行細則", "num": "10", "q": "受僱於一般事業單位之被保險人（勞工保險條例第 6 條第 1 項第 1 款至第 5 款） ，其普通事故保險費之負擔比例，下列何者正確？", "opts": ["勞工 20﹪，僱主 70﹪，政府 10﹪", "勞工 30﹪，僱主 60﹪，政府 10﹪", "勞工 50﹪，僱主 50﹪，政府0﹪", "勞工 20﹪，僱主 80﹪，政府 0﹪"], "a": 1}, {"id": "6-11", "cat": "勞工保險條例及施行細則", "num": "11", "q": "無一定僱主或自營作業而參加職業工會之被保險人，其普通事故保險費負擔比例為何？", "opts": ["被保險人 50﹪，政府 50﹪", "被保險人 60﹪，政府 40﹪", "被保險人 70﹪，政府 20﹪", "被保險人 80﹪，政府 20﹪"], "a": 2}, {"id": "6-12", "cat": "勞工保險條例及施行細則", "num": "12", "q": "職業災害保險費率之負擔，依規定由誰全額負擔？", "opts": ["被保險人負擔 20﹪，投保單位 80﹪", "政府全額負擔", "投保單位全額負擔", "被保險人與投保單位各半負擔"], "a": 3}, {"id": "6-13", "cat": "勞工保險條例及施行細則", "num": "13", "q": "投保薪資調整之通知，其調整自何時生效？", "opts": ["申報當日生效", "次月一日生效", "當月一日生效", "次月十五日生效"], "a": 2}, {"id": "6-14", "cat": "勞工保險條例及施行細則", "num": "14", "q": "勞工之薪資在當年二月至七月調整者，投保單位最遲應於何時向保險人申報調整投保薪資：", "opts": ["當年五月底前", "當年八月底前", "當年十月底前", "次年二月底前"], "a": 2}, {"id": "6-15", "cat": "勞工保險條例及施行細則", "num": "15", "q": "被保險人之月投保薪資，應按其薪資總額依「勞工保險投保薪資分級表」之規定申報。若薪資介於兩級之間者，應如何申報？", "opts": ["按較低等級申報", "按較高等級申報", "取兩級平均值申報", "由雇主自由選擇"], "a": 2}, {"id": "6-16", "cat": "勞工保險條例及施行細則", "num": "16", "q": "投保單位扣繳被保險人負擔之保險費後，應於何時繳納給保險人？", "opts": ["當月月底前", "次月月底前", "兩個月內", "每季結算一次"], "a": 2}, {"id": "6-17", "cat": "勞工保險條例及施行細則", "num": "17", "q": "投保單位逾期未繳納保險費者，自加保期限屆滿之次日起，每逾一日加徵多少滞納金？", "opts": ["百分之零點一", "百分之零點二", "百分之零點五", "百分之二"], "a": 1}, {"id": "6-18", "cat": "勞工保險條例及施行細則", "num": "18", "q": "投保單位未依規定加徵滯納金之上限，最高不得超過應繳保險費總額之多少比例？", "opts": ["10%", "15%", "20%", "30%"], "a": 1}, {"id": "6-19", "cat": "勞工保險條例及施行細則", "num": "19", "q": "被保險人或其受益人請領勞工保險各項給付之權利，自得請領之日起，經過幾年不行使而消滅", "opts": ["2 年", "3 年", "5 年", "10 年"], "a": 3}, {"id": "6-20", "cat": "勞工保險條例及施行細則", "num": "20", "q": "被保險人參加勞保滿多少日以上後分娩者，得請領生育給付？", "opts": ["60 日", "180 日", "280 日", "300 日"], "a": 3}, {"id": "6-21", "cat": "勞工保險條例及施行細則", "num": "21", "q": "目前勞工保險之生育給付標準，按被保險人分娩或早產當月起前 6 個月之平均月投保薪資，一次給與幾個月？", "opts": ["1 個月", "2 個月", "3 個月", "6 個月"], "a": 2}, {"id": "6-22", "cat": "勞工保險條例及施行細則", "num": "22", "q": "被保險人雙生（雙胞胎）分娩者，其生育給付應如何給與？", "opts": ["按給付標準給與2 個月，不另加給", "按給付標準比例增給，雙生者給與 4 個月", "不論胎數，統一發給 3 個月", "依加保年資按比例加給"], "a": 2}, {"id": "6-23", "cat": "勞工保險條例及施行細則", "num": "23", "q": "勞工保險之生育給付之給付對象為何？", "opts": ["僅限女性被保險人", "包括女性被保險人及配偶分娩之男性被保險人", "僅限參加保險滿三年之被保險人", "不論性別均得請領"], "a": 1}, {"id": "6-24", "cat": "勞工保險條例及施行細則", "num": "24", "q": "同一事故符合多項給付條件時，原則上應如何處理？", "opts": ["得重領所有給付", "僅得擇一請領", "由保險人直接指定發給額度最高者", "一律發給各半額度"], "a": 2}, {"id": "6-25", "cat": "勞工保險條例及施行細則", "num": "25", "q": "被保險人領取各項保險給付之權利，是否得作為扣押、讓與或供擔保之標的？", "opts": ["可以自由扣押及讓與", "得供金融機構貸款擔保", "不得扣押、讓與或供擔保", "經投保單位同意後得扣押"], "a": 3}, {"id": "6-26", "cat": "勞工保險條例及施行細則", "num": "26", "q": "被保險人請領保險給付，得開立專戶存入，該專戶內之存款如何保障？", "opts": ["專戶內之存款不得作為抵銷、扣押、供擔保或強制執行之標的", "專戶免收手續費，但得視情況強制執行", "專戶額度以新臺幣 100 萬元為限", "僅限郵局專戶得免受強制執行"], "a": 1}, {"id": "6-27", "cat": "勞工保險條例及施行細則", "num": "27", "q": "被保險人因普通傷病住院診療，不能工作，以致未能取得原有薪資，自住院之第幾日起得請領普通傷病補助費", "opts": ["第 1 日", "第 3 日", "第 4 日", "第7 日"], "a": 3}, {"id": "6-28", "cat": "勞工保險條例及施行細則", "num": "28", "q": "普通傷病補助費之給付標準，前 6 個月按平均月投保薪資之多少比例發給？", "opts": ["50%", "60%", "70%", "80%"], "a": 1}, {"id": "6-29", "cat": "勞工保險條例及施行細則", "num": "29", "q": "參加保險年資未滿 2 年之被保險人，普通傷病補助費最長發給多久？", "opts": ["6 個月", "18 個月", "1 年", "2 年"], "a": 1}, {"id": "6-30", "cat": "勞工保險條例及施行細則", "num": "30", "q": "職業災害傷病給付之給付標準，第一年按平均月投保薪資之多少比例發給？自2022 年《勞工職業災害保險及保護法》施行後，前兩個月按平均月投保薪資之多少比例發給？", "opts": ["50%，70%", "70%，100%", "50%，100%", "100%，100%"], "a": 2}, {"id": "6-31", "cat": "勞工保險條例及施行細則", "num": "31", "q": "被保險人遭遇身體失能，經審定為「終身無工作能力」者，請領失能年金給付，其加保年資每滿一年，按其平均月投保薪資之多少比例計算？", "opts": ["1%", "1.55%", "2%", "2.5%"], "a": 2}, {"id": "6-32", "cat": "勞工保險條例及施行細則", "num": "32", "q": "請領失能年金給付者，若其計算之基本保障金額未滿多少元時，按多少元發給？", "opts": ["3,000 元", "4,000 元", "4,000 元加發眷屬補助", "依基本工資半數發給"], "a": 2}, {"id": "6-33", "cat": "勞工保險條例及施行細則", "num": "33", "q": "被保險人保險年資滿 15 年，未滿 65 歲已退保，但於 65 歲前死亡，其遺屬請領「遺屬年金」之給付標準，按年資每滿一年發給 1.55%，若計算金額未滿多少元，發給最低保障金額？", "opts": ["3,000 元", "3,500 元", "4,000 元", "5,000元"], "a": 1}, {"id": "6-34", "cat": "勞工保險條例及施行細則", "num": "34", "q": "被保險人因「職業傷害」致成終身無工作能力請領失能年金者，除發給失能年金外，另按其平均月投保薪資一次發給多少個月之職業傷病失能補償一次金？", "opts": ["6 個月", "12 個月", "20 個月", "30 個月"], "a": 3}, {"id": "6-35", "cat": "勞工保險條例及施行細則", "num": "35", "q": "請領失能年金給付之被保險人，其配偶若符合一定條件（如年滿 55 歲、無工作能力等） ，每滿一人可加發多少眷屬補助？", "opts": ["加發失能年金金額之 10%", "加發失能年金金額之 25%", "固定金額 2,000 元", "加發失能年金金額之 50%"], "a": 2}, {"id": "6-36", "cat": "勞工保險條例及施行細則", "num": "36", "q": "被保險人領取失能年金給付後，若失能程度減輕，不復符合失能年金請領條件時，保險人應如何處理？", "opts": ["繼續發給至死亡為止", "停止發給年金，並視情況改發一次金或終止給付", "一經核發就不再變更給付方式", "減半發給年金"], "a": 2}, {"id": "6-37", "cat": "勞工保險條例及施行細則", "num": "37", "q": "老年年金給付之計算公式有 A 式（0.775% + 3,000 元）與 B 式（1.55%） ，其平均月投保薪資之採計基準為何？", "opts": ["退保當月起前 36 個月之平均月投保薪資", "退保當月起前 60 個月之平均月投保薪資", "加保期間最高 60 個月之平均月投保薪資", "全加保期間之平均月投保薪資"], "a": 3}, {"id": "6-38", "cat": "勞工保險條例及施行細則", "num": "38", "q": "被保險人未達法定請領年齡，提前請領「展減老年年金」 ，每提前 1 年，年金給付金額減發多少？最多得提前幾年", "opts": ["提前 1 年減發 3%，最多提前 3 年（減發 9%）", "提前 1 年減發 4%，最多提前 5 年（減發 20%）", "提前 1 年減發5%，最多提前 5 年（減發 25%）", "提前 1 年減發 6%，最多提前 4 年（減發24%）"], "a": 2}, {"id": "6-39", "cat": "勞工保險條例及施行細則", "num": "39", "q": "符合請領老年年金條件之被保險人，選擇延後請領「展延老年年金」 ，每延後 1年，年金給付金額增發多少？最高增發上限為何？", "opts": ["每延後 1 年增發 4%，最高增發 20%", "每延後 1 年增發 5%，最高增發 25%", "每延後 1 年增發2%，最高增發 10%", "每延後 1 年增發 6%，最高增發 30%"], "a": 1}, {"id": "6-40", "cat": "勞工保險條例及施行細則", "num": "40", "q": "在 97 年 12 月 31 日以前有保險年資者，選擇「一次請領老年給付」 ，其年資計算方式，前 15 年每滿 1 年給與 1 個月；超過 15 年者，每滿 1 年給與 2 個月，最高以多少個月為限？", "opts": ["40 個月", "45 個月", "50 個月", "60 個月"], "a": 2}, {"id": "6-41", "cat": "勞工保險條例及施行細則", "num": "41", "q": "被保險人在參加勞工保險期間死亡，其喪葬津貼之發給標準，由支出喪葬費之人請領，按被保險人死亡當月起前 6 個月之平均月投保薪資發給幾個月？", "opts": ["3個月", "5 個月", "6 個月", "10 個月"], "a": 2}, {"id": "6-42", "cat": "勞工保險條例及施行細則", "num": "42", "q": "被保險人之父母或配偶死亡時，被保險人得請領之「家屬死亡喪葬津貼」為幾個月？", "opts": ["1.5 個月", "2.5 個月", "3 個月", "5 個月"], "a": 3}, {"id": "6-43", "cat": "勞工保險條例及施行細則", "num": "43", "q": "被保險人年滿 12 歲之子女死亡時，被保險人得請領之「家屬死亡喪葬津貼」為幾個月？", "opts": ["1.5 個月", "2.5 個月", "2 個月", "3 個月"], "a": 2}, {"id": "6-44", "cat": "勞工保險條例及施行細則", "num": "44", "q": "依勞工保險條例規定，遺屬津貼或遺屬年金之受領順序，第一順序為何？", "opts": ["父母", "配偶及子女", "祖父母", "兄弟姊妹"], "a": 2}, {"id": "6-45", "cat": "勞工保險條例及施行細則", "num": "45", "q": "投保單位未依規定為勞工辦理投保手續，致勞工發生保險事故無法領取給付者，其法律責任為何？", "opts": ["由中央主管機關直接補發給付給勞工", "投保單位免責，僅需補繳保險費", "投保單位除受罰鍰外，勞工因此所受之損失，應由投保單位依本條例規定之給付標準賠償之", "移送司法機關科處刑罰"], "a": 3}, {"id": "6-46", "cat": "勞工保險條例及施行細則", "num": "46", "q": "投保單位未依規定為勞工辦理投保手續，按自僱用之日起至參加保險之前一日或解僱之日止應負擔之保險費金額，處以多少倍之罰鍰？又將勞工投保薪資金額以多報少或以少報多者，按其短報或多報之保險費金額，處以幾倍罰鍰？", "opts": ["2倍，2 倍", "4 倍，4 倍", "5 倍，4 倍", "2 倍，4 倍"], "a": 2}, {"id": "6-47", "cat": "勞工保險條例及施行細則", "num": "47", "q": "投保單位扣繳被保險人（勞工）自負之保險費，未按期繳納至保險人（勞保局）者，應處以何種處罰？", "opts": ["處以扣繳金額 2 倍之罰鍰", "移送法院科處 1 年以下有期徒刑", "移送強制執行並通知稅捐稽查", "處以扣繳金額 10% 之固定違約金"], "a": 1}, {"id": "6-48", "cat": "勞工保險條例及施行細則", "num": "48", "q": "投保單位未依規定辦理投保、退保手續，應處以多少金額之罰鍰？", "opts": ["新臺幣6,000 元以上 30,000 元以下", "新臺幣 10,000 元以上 50,000 元以下", "無罰鍰規定，僅限期改善", "新臺幣 20,000 元以上 100,000 元以下"], "a": 4}, {"id": "6-49", "cat": "勞工保險條例及施行細則", "num": "49", "q": "投保單位未於勞工到職當日辦理加保，若於事故發生後始補辦加保手續，該次保險事故之給付如何處理？", "opts": ["保險人照常發給給付，但對單位處以罰鍰", "保險人不予給付，由投保單位負賠償責任", "保險人給付半額，其餘由投保單位補足", "由勞工自行申請專案補償"], "a": 2}, {"id": "6-50", "cat": "勞工保險條例及施行細則", "num": "50", "q": "被保險人（勞工）以詐欺或其他不正當行為領取保險給付，依法應如何處置？", "opts": ["僅需全額退還給付金額，不另處罰", "按其領取之保險給付處以 2 倍罰鍰，並依法追回金額", "永久取消其參加勞工保險之資格", "沒收其已繳納之全部保險費"], "a": 2}, {"id": "7-1", "cat": "勞工退休金條例及施行細則", "num": "1", "q": "依《勞工退休金條例》規定，雇主每月應為勞工提繳退休金，不得低於勞工每月工資多少比例？", "opts": ["3﹪", "5﹪", "6﹪", "8﹪"], "a": 3}, {"id": "7-2", "cat": "勞工退休金條例及施行細則", "num": "2", "q": "勞工自願提繳退休金，每月最高不得超過月工資多少比例？", "opts": ["3﹪", "5﹪", "6﹪", "8﹪"], "a": 3}, {"id": "7-3", "cat": "勞工退休金條例及施行細則", "num": "3", "q": "勞工退休金專戶屬於何人所有？", "opts": ["雇主", "勞工個人", "勞資共有", "勞保局"], "a": 2}, {"id": "7-4", "cat": "勞工退休金條例及施行細則", "num": "4", "q": "雇主不得因勞工自願提繳退休金，而有何種行為？", "opts": ["減少薪資", "終止契約", "不利處分", "以上皆是"], "a": 4}, {"id": "7-5", "cat": "勞工退休金條例及施行細則", "num": "5", "q": "依規定，勞工退休金由哪個機關負責收繳及管理？", "opts": ["勞動部", "勞動力發展署", "勞工保險局", "財政部"], "a": 3}, {"id": "7-6", "cat": "勞工退休金條例及施行細則", "num": "6", "q": "依《勞工退休金條例》規定，勞工年滿幾歲即可請領退休金？", "opts": ["55 歲", "60 歲", "62 歲", "65 歲"], "a": 2}, {"id": "7-7", "cat": "勞工退休金條例及施行細則", "num": "7", "q": "勞工退休金個人專戶的投資收益，如低於一定收益標準時，依法如何處理？", "opts": ["不補足", "由雇主補足", "由國家保證最低收益", "由勞工自行承擔"], "a": 3}, {"id": "7-8", "cat": "勞工退休金條例及施行細則", "num": "8", "q": "勞工退休金專戶內之退休金，可否作為讓與、扣押、抵銷或供擔保？", "opts": ["可以", "經法院許可就可以", "原則不得", "由銀行決定 "], "a": 3}, {"id": "7-9", "cat": "勞工退休金條例及施行細則", "num": "9", "q": "雇主未依規定申報或提繳退休金，主管機關得依法處以何種處分？", "opts": ["勸導即可", "行政罰鍰", "停業", "無任何處分"], "a": 2}, {"id": "7-10", "cat": "勞工退休金條例及施行細則", "num": "10", "q": "勞工退休金制度採何種退休金制度？", "opts": ["確定給付制", "確定提撥制", "年金保險制", "儲蓄保險制"], "a": 2}, {"id": "7-11", "cat": "勞工退休金條例及施行細則", "num": "11", "q": "下列何者不是雇主依法應辦理的事項？", "opts": ["為勞工申報提繳工資", "每月按時提繳退休金", "要求勞工自行繳納雇主應負擔的提繳金額", "配合主管機關查核"], "a": 3}, {"id": "7-12", "cat": "勞工退休金條例及施行細則", "num": "12", "q": "勞工自願提繳退休金的金額，依法享有何種租稅優惠？", "opts": ["全額列入薪資所得課稅", "不計入當年度薪資所得課稅", "只能列舉扣除", "無任何租稅優惠"], "a": 2}, {"id": "7-13", "cat": "勞工退休金條例及施行細則", "num": "13", "q": "勞工轉換工作時，其退休金個人專戶應如何處理？", "opts": ["重新開立新帳戶", "由原雇主領回", "原個人專戶繼續累積，由新雇主接續提撥", "全數提領"], "a": 3}, {"id": "7-14", "cat": "勞工退休金條例及施行細則", "num": "14", "q": "勞工退休金個人專戶之本金及收益，依法屬於", "opts": ["雇主所有", "政府所有", "勞資共有", "勞工個人所有"], "a": 4}, {"id": "7-15", "cat": "勞工退休金條例及施行細則", "num": "15", "q": "雇主應於何時開始為符合規定之勞工提繳退休金？", "opts": ["到職日起", "試用期滿後", "任職滿三個月後", "任職滿六個月後"], "a": 1}, {"id": "7-16", "cat": "勞工退休金條例及施行細則", "num": "16", "q": "下列何者屬於勞工退休金提繳工資之依據？", "opts": ["勞工退休年齡", "勞工每月工資分級表", "雇主資本額", "公司營業額"], "a": 2}, {"id": "7-17", "cat": "勞工退休金條例及施行細則", "num": "17", "q": "勞工符合退休金請領資格時，原則上可向哪一機關提出申請", "opts": ["勞動部勞工保險局", "財政部", "國民年金管理中心", "各地勞工局"], "a": 1}, {"id": "7-18", "cat": "勞工退休金條例及施行細則", "num": "18", "q": "依《勞工退休金條例》規定，雇主不得因勞工參與退休金制度而？", "opts": ["調整工作內容", "給予升遷機會", "給予不利待遇", "提供教育訓練 "], "a": 3}, {"id": "7-19", "cat": "勞工退休金條例及施行細則", "num": "19", "q": "勞工退休金個人專戶之收益，如實際投資績效低於法定最低收益時，依法應由誰補足差額？", "opts": ["雇主", "勞工本人", "政府負擔最低收益保證", "勞工保險基金"], "a": 3}, {"id": "7-20", "cat": "勞工退休金條例及施行細則", "num": "20", "q": "下列何者最符合勞工退休金新制的精神？", "opts": ["採共同基金制，退休金不屬於個人", "退休金只能由雇主保管", "離職後退休金歸雇主所有", "採個人退休金專戶制度，工作年資可跨公司累積"], "a": 4}, {"id": "7-21", "cat": "勞工退休金條例及施行細則", "num": "21", "q": "小陳到職後，雇主表示試用期三個月內不用提繳勞工退休金。依《勞工退休金條例》規定，下列何者正確？", "opts": ["合法，試用期可免提繳", "合法，但須經勞工同意", "不合法，受僱即應依法提繳", "工作滿一年才需提繳"], "a": 3}, {"id": "7-22", "cat": "勞工退休金條例及施行細則", "num": "22", "q": "勞工自願提繳退休金最高可提繳至每月工資多少比例？", "opts": ["3﹪", "5﹪", "6﹪", "8﹪"], "a": 3}, {"id": "7-23", "cat": "勞工退休金條例及施行細則", "num": "23", "q": "金小姐離職後隔一年再到另一家公司工作，其退休金專戶應如何處理？", "opts": ["原專戶繼續累積", "必須重新開戶", "原帳戶作廢", "由前雇主保管"], "a": 1}, {"id": "7-24", "cat": "勞工退休金條例及施行細則", "num": "24", "q": "下列何者屬於勞工退休金制度的特色", "opts": ["年資歸雇主所有", "可攜式退休金制度", "只能工作滿 25 年才能累積", "離職後退休金全部歸政府"], "a": 2}, {"id": "7-25", "cat": "勞工退休金條例及施行細則", "num": "25", "q": "勞工符合退休金請領資格時，其退休金來源主要為：", "opts": ["雇主保管現金", "勞保老年給付", "國民年金", "個人退休金專戶累積本金及收益"], "a": 4}, {"id": "7-26", "cat": "勞工退休金條例及施行細則", "num": "26", "q": "雇主若未依規定提繳退休金，主管機關得依法處以", "opts": ["行政罰鍰，並限期改善", "嘉獎", "不必處理", "由勞工自行補繳"], "a": 1}, {"id": "7-27", "cat": "勞工退休金條例及施行細則", "num": "27", "q": "勞工年滿60 歲時，依法可以：", "opts": ["一定要退休", "向勞保局申請領取個人退休金", "必須離職才能領勞保老年給付", "雇主可停止提繳"], "a": 2}, {"id": "7-28", "cat": "勞工退休金條例及施行細則", "num": "28", "q": "勞工每月工資增加時，雇主應如何辦理退休金提繳工資調整？", "opts": ["不必調整", "依規定辦理提繳工資調整申報", "等勞工退休再調整", "經工會同意才可調整"], "a": 2}, {"id": "7-29", "cat": "勞工退休金條例及施行細則", "num": "29", "q": "依 2026年07 月 17 日起施行的新制度，符合資格的純舊制勞工新增何種選擇", "opts": ["可改領勞保年金", "可免繳勞保費", "可自願提繳退休金最高 6﹪，並得依法提前結清舊年資存入新制專戶", "可直接領取退休金"], "a": 3}, {"id": "7-30", "cat": "勞工退休金條例及施行細則", "num": "30", "q": "依 2026年07 月 17 日起施行的新規定，提前結清舊制退休金後，其結清額應如何處理", "opts": ["直接存入勞工新制退休金個人專戶，符合請領條件始得領取", "由勞工選擇部分存入勞工新制退休金個人專戶，符合請領條件始得領取", "存入雇主帳戶", "直接發給勞工自由運用"], "a": 1}, {"id": "7-31", "cat": "勞工退休金條例及施行細則", "num": "31", "q": "純舊制勞工選擇自願提繳退休金，其自提金額依法享何種優惠", "opts": ["雇主全額補助", "不計入當年度薪資所得課稅", "可隨時申請領回本金", "不需繳納勞保費"], "a": 2}, {"id": "7-32", "cat": "勞工退休金條例及施行細則", "num": "32", "q": "阿金受僱於A 公司，雇主與他約定「因薪資較低，所以不必提繳勞工退休金」。 此約定效力為何？", "opts": ["有效，雙方同意即可", "有效，但須報主管機關備查", "無效，但經工會同意即為有效", "無效，雇主仍應依法提繳退休金"], "a": 4}, {"id": "7-33", "cat": "勞工退休金條例及施行細則", "num": "33", "q": "勞工滿60歲後，符合規定申請退休金，下列何者正確？", "opts": ["依定要先離職才能請領", "可依規定申請請領退休金，不以離職為必要條件", "必須年滿 65 歲才能申請", "僅能一次領取，不得選擇其他請領方式"], "a": 2}, {"id": "7-34", "cat": "勞工退休金條例及施行細則", "num": "34", "q": "雇主未依規定辦理退休金提繳，勞工可向何單位申訴或檢舉？", "opts": ["勞工主管機關", "公司申訴專線", "國稅局", "戶政事務所"], "a": 1}, {"id": "7-35", "cat": "勞工退休金條例及施行細則", "num": "35", "q": "依《勞工退休金條例》規定，勞工自願提繳退休金的主要目的之一為何？", "opts": ["增加退休金累積金額", "降低勞保費率", "增加年假天數", "增加工作年資"], "a": 1}, {"id": "7-36", "cat": "勞工退休金條例及施行細則", "num": "36", "q": "下列何者不是勞工退休金制度的立法目的？", "opts": ["保障勞工退休生活", "建立退休金制度", "確保勞工退休經濟安全", "增加公司營業利益"], "a": 4}, {"id": "7-37", "cat": "勞工退休金條例及施行細則", "num": "37", "q": "有關《勞工退休金條例》規定，下列何者正確？", "opts": ["雇主可要求勞工放棄退休金權利", "勞工退休金專戶依法受保障，原則上不得做為扣押、供擔保或強制執行標的", "勞工離職時，退休金自動歸零", "雇主可自行決定是否提繳退休金"], "a": 2}, {"id": "7-38", "cat": "勞工退休金條例及施行細則", "num": "38", "q": "雇主積欠退休金提繳費用時，下列何者正確", "opts": ["勞工自行負責補繳", "雇主仍應補繳欠繳金額及依法負擔相關責任", "公司倒閉即免繳", "負責人離職後即可免責"], "a": 2}, {"id": "7-39", "cat": "勞工退休金條例及施行細則", "num": "39", "q": "雇主因勞工自願提繳退休金，而降低其薪資或給予不利處分，依法？", "opts": ["合法", "經勞工及工會同意即可", "違反《勞工退休金條例》", "只要未被查核即不違法"], "a": 3}, {"id": "7-40", "cat": "勞工退休金條例及施行細則", "num": "40", "q": "主管機關通知雇主限期改善，雇主仍未改善時，依法可如何處理？", "opts": ["不再處理", "得按次處罰", "自動撤案", "改由勞工負責"], "a": 2}, {"id": "7-41", "cat": "勞工退休金條例及施行細則", "num": "40-2", "q": "雇主以勞工簽署切結書為由，不辦理退休金提繳，其法律效果為何？", "opts": ["切結書有效", "雙方合意即可", "切結書不得免除雇主法定提繳義務", "經主管機關同意即可"], "a": 3}, {"id": "7-42", "cat": "勞工退休金條例及施行細則", "num": "41", "q": "下列何者屬於雇主最容易遭勞動檢查裁罰的情形？", "opts": ["未依規定調整提繳工資", "員工請特休假", "員工申請加班", "員工請病假"], "a": 1}, {"id": "7-43", "cat": "勞工退休金條例及施行細則", "num": "42", "q": "雇主違反《勞工退休金條例》違反第十五條第二項、第二十一條第一項或第三十九條申報、通知規定者，依法可處新台幣多少元罰鍰", "opts": ["5 千元以上 1 萬 5 千元以下", "3 萬元以上 15 萬元以下", "2 萬元以上 3 萬 5 千元以下", "1 萬元以上 5 萬元以下"], "a": 3}, {"id": "7-44", "cat": "勞工退休金條例及施行細則", "num": "43", "q": "雇主未依規定持續提撥舊制勞工退休準備金，可處新台幣多少罰鍰？", "opts": ["2 萬元以上 30萬元以下", "5 萬元以上 50 萬元以下", "10 萬元以上 100 萬元以下", "30 萬元以上150 萬元以下"], "a": 1}, {"id": "7-45", "cat": "勞工退休金條例及施行細則", "num": "44", "q": "雇主未按時繳納退休金提繳費用，除補繳外，依法還可能被加徵", "opts": ["利息", "滯納金", "違約金", "所得稅"], "a": 2}, {"id": "7-46", "cat": "勞工退休金條例及施行細則", "num": "45", "q": "下列何者最可能違反《勞工退休金條例》", "opts": ["雇主依法提繳 6﹪", "雇主未依規定申報提繳工資", "勞工自願提繳 6﹪", "勞工查詢退休金專戶"], "a": 2}, {"id": "7-47", "cat": "勞工退休金條例及施行細則", "num": "46", "q": "主管機關通知事業單位接受勞動檢查，雇主拒絕提供資料，依法可能：", "opts": ["不受處罰", "受行政處罰及罰鍰", "只需補繳資料即可", "僅口頭警告"], "a": 2}, {"id": "7-48", "cat": "勞工退休金條例及施行細則", "num": "47", "q": "《勞工退休金條例》罰則的主要目的為何？", "opts": ["增加政府收入", "保障勞工退休權益並督促雇主守法", "增加企業成本", "處罰勞工"], "a": 2}, {"id": "7-49", "cat": "勞工退休金條例及施行細則", "num": "48", "q": "雇主未按時提繳或繳足勞工退休金，依法除應補繳外，自期限屆滿次日起，每逾一日加徵應提繳金額多少比例的滯納金？", "opts": ["1﹪", "2﹪", "3﹪", "5﹪"], "a": 3}, {"id": "7-50", "cat": "勞工退休金條例及施行細則", "num": "49", "q": "雇主未按時提繳或繳足勞工退休金，依法除應補繳外，自期限屆滿次日起，加徵滯納金的加徵總額最高不得超過", "opts": ["應提繳金額 50﹪", "應提繳金額 1 倍", "應提繳金額2 倍", "無上限"], "a": 2}, {"id": "7-51", "cat": "勞工退休金條例及施行細則", "num": "50", "q": "勞工退休金條例的主管機關在中央為？", "opts": ["勞動部", "行政院", "勞工保險局", "財政部"], "a": 1}, {"id": "8-1", "cat": "勞工職業災害保險及保護法", "num": "1", "q": "《勞工職業災害保險及保護法》自何時正式施行？", "opts": ["109 年 5 月 1 日", "110年 5 月 1 日", "111 年 5 月 1 日", "112 年 1 月 1 日 "], "a": 3}, {"id": "8-2", "cat": "勞工職業災害保險及保護法", "num": "2", "q": "依《勞工職業災害保險及保護法》規定，下列何者應參加勞工職業災害保險？", "opts": ["僱用 5 人以上公司之受僱勞工", "依法受僱從事工作之勞工", "只有全時勞工", "只有本國籍勞工"], "a": 2}, {"id": "8-3", "cat": "勞工職業災害保險及保護法", "num": "3", "q": "依《勞工職業災害保險及保護法》規定，職業災害保險之主管機關為何？", "opts": ["財政部", "勞動部", "衛生福利部", "內政部"], "a": 2}, {"id": "8-4", "cat": "勞工職業災害保險及保護法", "num": "4", "q": "依《勞工職業災害保險及保護法》規定，職業災害保險費原則上由何人負擔？", "opts": ["全由勞工負擔", "全由雇主負擔", "勞雇各負擔一半", "政府全額補助"], "a": 2}, {"id": "8-5", "cat": "勞工職業災害保險及保護法", "num": "5", "q": "下列何者屬於職業災害保險給付種類？", "opts": ["傷病給付", "醫療給付", "失能給付", "以上皆是"], "a": 4}, {"id": "8-6", "cat": "勞工職業災害保險及保護法", "num": "6", "q": "勞工因職業災害死亡，其遺屬得依法請領何種給付？", "opts": ["生育給付", "死亡給付", "老年給付", "失業給付"], "a": 2}, {"id": "8-7", "cat": "勞工職業災害保險及保護法", "num": "7", "q": "下列何者屬於《勞工職業災害保險及保護法》的立法目的？", "opts": ["保障職業災害勞工及其家屬生活", "強化職業災害預防及重建", "分散雇主職業災害風險", "以上皆是"], "a": 4}, {"id": "8-8", "cat": "勞工職業災害保險及保護法", "num": "8", "q": "勞工發生職業災害後，下列何者不是《勞工職業災害保險及保護法》保障內容？", "opts": ["醫療照護", "職能復健", "重建服務", "老年年金"], "a": 4}, {"id": "8-9", "cat": "勞工職業災害保險及保護法", "num": "9", "q": "依《勞工職業災害保險及保護法》規定，勞工因執行職務致受傷，依法可申請？", "opts": ["職業災害醫療給付", "傷病給付", "符合規定時之失能給付", "以上皆可，但仍需視個案符合條件"], "a": 4}, {"id": "8-10", "cat": "勞工職業災害保險及保護法", "num": "10", "q": "小金於上班途中發生車禍受傷，經認定屬職業災害，下列何者正確？", "opts": ["不屬職業災害保險保障範圍", "屬於職業災害保險保障範圍，但須符合相關認定規定", "僅可請領勞工保險普通事故給付", "僅雇主自行負責"], "a": 2}, {"id": "8-11", "cat": "勞工職業災害保險及保護法", "num": "11", "q": "依《勞工職業災害保險及保護法》規定，雇主應於勞工到職之日起何時辦理投保？", "opts": ["到職當日", "到職 3 日內", "到職 30 日內", "試用期滿"], "a": 1}, {"id": "8-12", "cat": "勞工職業災害保險及保護法", "num": "12", "q": "勞工因職業災害無法工作而接受治療，符合規定時可請領：", "opts": ["傷病給付", "老年給付", "生育給付", "失業給付"], "a": 1}, {"id": "8-13", "cat": "勞工職業災害保險及保護法", "num": "13", "q": "依勞工職業災害保險及保護法施行細則規定，雇主為勞工辦理加保資料有異動時，應依法：", "opts": ["不必申報", "辦理異動申報", "等年度結束再辦理", "由勞工自行申報"], "a": 2}, {"id": "8-14", "cat": "勞工職業災害保險及保護法", "num": "14", "q": "依《勞工職業災害保險及保護法》規定，保險給付請求權自得請領之日起，因幾年間不行使而消滅？", "opts": ["2 年", "3 年", "5 年", "10 年"], "a": 3}, {"id": "8-15", "cat": "勞工職業災害保險及保護法", "num": "15", "q": "勞工因職業災害致永久失能，符合規定者可請領：", "opts": ["傷病給付", "老年給付", "失能給付", "失業給付"], "a": 3}, {"id": "8-16", "cat": "勞工職業災害保險及保護法", "num": "16", "q": "勞工因職業災害死亡時，依法可請領死亡給付的人為：", "opts": ["雇主", "醫院", "符合法定資格的遺屬", "工會"], "a": 3}, {"id": "8-17", "cat": "勞工職業災害保險及保護法", "num": "17", "q": "下列何者屬於工職業災害保險及保護法施行細則的重要內容？", "opts": ["投保申報程序", "各項給付申請程序", "保險異動作業", "以上皆是"], "a": 4}, {"id": "8-18", "cat": "勞工職業災害保險及保護法", "num": "18", "q": "勞工因執行職務罹患職業病，經認定符合規定後，下列何者正確？", "opts": ["不屬職業災害", "可依法請領職業災害保險相關給付", "僅能請求雇主賠償", "僅能使用全民健康保險"], "a": 2}, {"id": "8-19", "cat": "勞工職業災害保險及保護法", "num": "19", "q": "依本法規定，職業災害保險除提供保險給付外，也重視：", "opts": ["職業災害預防", "職能復健", "重建服務", "以上皆是"], "a": 4}, {"id": "8-20", "cat": "勞工職業災害保險及保護法", "num": "20", "q": "依勞工職業災害保險及保護法施行細則規定，職業災害保險相關申請資料若有缺漏，保險人通常會如何處理？", "opts": ["直接駁回", "通知補正", "不予受理且不得再申請", "移送法院"], "a": 2}, {"id": "8-21", "cat": "勞工職業災害保險及保護法", "num": "21", "q": "勞工因職業災害死亡，符合資格的遺屬可依法申請", "opts": ["死亡給付", "生育給付", "傷病給付", "育嬰津貼"], "a": 1}, {"id": "8-22", "cat": "勞工職業災害保險及保護法", "num": "22", "q": "雇主依法為勞工參加職業災害保險，其主要目的為何？", "opts": ["降低公司所得稅", "保障勞工遭遇職業災害時的基本權益", "增加公司福利", "提高公司獲利"], "a": 2}, {"id": "8-23", "cat": "勞工職業災害保險及保護法", "num": "23", "q": "依《勞工職業災害保險及保護法》規定，雇主未依法為勞工辦理職業災害保險加保，下列何者正確", "opts": ["勞工不得請領任何給付", "雇主可能依法受罰，並負相關法律責任", "不受任何處分", "勞工自行繳保費即可"], "a": 2}, {"id": "8-24", "cat": "勞工職業災害保險及保護法", "num": "24", "q": "小金下班後依日常合理路線返家途中發生車禍，經認定符合規定，應屬於：", "opts": ["普通事故", "通勤職業災害", "交通違規事故", "與職業災害無關"], "a": 2}, {"id": "8-25", "cat": "勞工職業災害保險及保護法", "num": "25", "q": "雇主發現勞工離職時，應依法辦理", "opts": ["保險退保申報", "不必辦理", "年底再辦理", "由勞工自行辦理"], "a": 1}, {"id": "8-26", "cat": "勞工職業災害保險及保護法", "num": "26", "q": "下列何者不是《勞工職業災害保險及保護法》所提供的保護措施？", "opts": ["職能復健", "職業重建", "復工協助", "失業保險給付"], "a": 4}, {"id": "8-27", "cat": "勞工職業災害保險及保護法", "num": "27", "q": "被保險人因遭遇職業災害住院診療，不能工作，以致未能取得原有薪資，自住院之第幾日起得請領普通傷病補助費？", "opts": ["第 1 日", "第 3 日", "第 4 日", "第 7 日"], "a": 3}, {"id": "8-28", "cat": "勞工職業災害保險及保護法", "num": "28", "q": "依本法規定，下列何者屬於職業災害保險制度的重要特色", "opts": ["保險、預防、重建三者並重", "僅提供現金補助", "僅保障重大事故", "僅適用大型企業"], "a": 1}, {"id": "8-29", "cat": "勞工職業災害保險及保護法", "num": "29", "q": "主管機關對違反《勞工職業災害保險及保護法》的事業單位，依法得採取何種措施", "opts": ["視違規情節處以行政罰鍰，並得命限期改善", "僅口頭勸導", "不得裁罰", "僅通知工會"], "a": 1}, {"id": "8-30", "cat": "勞工職業災害保險及保護法", "num": "30", "q": "職業災害傷病給付之給付標準，第一年按平均月投保薪資之多少比例發給？自2022 年《勞工職業災害保險及保護法》施行後，前兩個月按平均月投保薪資之多少比例發給", "opts": ["50%，70%", "50%，100%", "70%，100%", "100%，100%"], "a": 3}, {"id": "8-31", "cat": "勞工職業災害保險及保護法", "num": "31", "q": "有關通勤職業災害，下列何者正確", "opts": ["只要發生在上下班途中，一律屬職業災害", "須符合合理通勤路線及相關認定規定", "騎機車才適用", "僅限搭乘大眾運輸工具"], "a": 2}, {"id": "8-32", "cat": "勞工職業災害保險及保護法", "num": "32", "q": "雇主未依規定為符合資格之勞工辦理職業災害保險投保，主管機關得依法如何處置？雇主經主管機關通知限期改善，屆期仍未改善者，依法可能？", "opts": ["不予處理；不再處理", "命限期改善並得裁處罰鍰；按次處罰至改善為止", "僅發函提醒；按次處罰至改善為止", "免除責任；政府全額負責"], "a": 2}, {"id": "8-33", "cat": "勞工職業災害保險及保護法", "num": "33", "q": "投保單位未依規定辦理加保、退保或異動申報，可能面臨？", "opts": ["行政罰鍰", "嘉獎", "補助", "減免保費"], "a": 1}, {"id": "8-34", "cat": "勞工職業災害保險及保護法", "num": "34", "q": "下列何者屬於投保單位常見違規行為？", "opts": ["未辦理投保", "未辦理退保", "未辦理投保資料異動", "以上皆是"], "a": 4}, {"id": "8-35", "cat": "勞工職業災害保險及保護法", "num": "35", "q": "雇主因勞工發生職業災害，而要求勞工放棄依法請領保險給付權利，其約定：", "opts": ["有效", "經雙方同意即有效", "不得以契約排除法定權利", "僅僱用 30人以下企業適用"], "a": 3}, {"id": "8-36", "cat": "勞工職業災害保險及保護法", "num": "36", "q": "雇主未依法投保，勞工可向何機關申訴？", "opts": ["勞工主管機關", "警察局", "地政事務所", "國稅局"], "a": 1}, {"id": "8-37", "cat": "勞工職業災害保險及保護法", "num": "37", "q": "勞工因雇主未投保而受有損害時，下列何者正確？", "opts": ["雇主可能負民事賠償責任", "僅政府負責", "不得請求賠償", "勞工自行承擔"], "a": 1}, {"id": "8-38", "cat": "勞工職業災害保險及保護法", "num": "38", "q": "下列何者最符合《勞工職業災害保險及保護法》罰則的立法精神？", "opts": ["懲罰企業", "保障勞工保險權益並督促投保單位依法履行義務", "增加行政收入", "減少勞工請領給付"], "a": 2}, {"id": "8-39", "cat": "勞工職業災害保險及保護法", "num": "39", "q": "勞工因職業災害接受治療，其醫療費用符合規定者，可請領：", "opts": ["老年給付", "醫療給付", "生育給付", "失業給付"], "a": 2}, {"id": "8-40", "cat": "勞工職業災害保險及保護法", "num": "40", "q": "失能給付主要適用於：", "opts": ["已退休勞工", "因職業災害造成失能者", "所有受傷勞工", "一般疾病患者"], "a": 2}, {"id": "8-41", "cat": "勞工職業災害保險及保護法", "num": "41", "q": "職業災害死亡給付主要是保障：", "opts": ["遺屬生活", "雇主", "公司", "工會"], "a": 1}, {"id": "8-42", "cat": "勞工職業災害保險及保護法", "num": "42", "q": "勞工因執行職務罹患職業病，經認定後", "opts": ["不屬職業災害", "僅能請求公司補償", "可依法申請職災保險給付", "不得請領任何給付"], "a": 3}, {"id": "8-43", "cat": "勞工職業災害保險及保護法", "num": "43", "q": "勞工發生職災後，下列何者屬於勞工職業災害保險及保護法保障內容？", "opts": ["職能復健", "職業重建", "復工協助", "以上皆是"], "a": 4}, {"id": "8-44", "cat": "勞工職業災害保險及保護法", "num": "44", "q": "失能給付的核給，主要依據", "opts": ["工作年資", "年齡", "公司規模", "失能程度"], "a": 4}, {"id": "8-45", "cat": "勞工職業災害保險及保護法", "num": "45", "q": "勞工因職災失蹤，符合規定時，其符合資格的受益人可依法申請：", "opts": ["失蹤給付", "生育給付", "老年給付", "傷病給付"], "a": 1}, {"id": "8-46", "cat": "勞工職業災害保險及保護法", "num": "46", "q": "有關職業災害保險給付，下列何者正確？", "opts": ["給付僅限醫療費", "依不同事故情形，可請領醫療、傷病、失能、死亡或失蹤等給付", "只有永久失能才能請領", "只有大型企業勞工才能請領"], "a": 2}, {"id": "8-47", "cat": "勞工職業災害保險及保護法", "num": "47", "q": "遺屬申請職災死亡給付時，應於法定請求權時效內提出申請，否則：", "opts": ["請求權可能消滅", "可永久保留權利", "政府仍須給付", "雇主代為請領"], "a": 1}, {"id": "8-48", "cat": "勞工職業災害保險及保護法", "num": "48", "q": "職災勞工逾法定請求權期間才申請保險給付，依法可能", "opts": ["仍可全額領取", "請求權消滅", "自動延期", "政府補助"], "a": 2}, {"id": "8-49", "cat": "勞工職業災害保險及保護法", "num": "49", "q": "關於職災保險給付時效，下列何者正確？", "opts": ["完全沒有時效限制", "各項給付均應注意法定請求權時效", "只有醫療給付有時效", "只有死亡給付有時效"], "a": 2}, {"id": "8-50", "cat": "勞工職業災害保險及保護法", "num": "50", "q": "下列何者最符合保險給付請求權時效制度的目的？", "opts": ["督促權利人及時行使權利", "增加行政收入", "降低保險費", "減少醫療支出"], "a": 1}, {"id": "9-1", "cat": "就業服務法", "num": "1", "q": "《就業服務法》之立法目的，下列何者正確？", "opts": ["增加企業獲利", "促進國民就業、增進社會及經濟發展", "提高勞工工時", "降低失業給付 "], "a": 2}, {"id": "9-2", "cat": "就業服務法", "num": "2", "q": "下列何者屬於公立就業服務機構辦理之業務？", "opts": ["提供求職、求才服務", "就業諮詢", "就業媒合", "以上皆是"], "a": 4}, {"id": "9-3", "cat": "就業服務法", "num": "3", "q": "《就業服務法》中央主管機關為何？", "opts": ["經濟部", "勞動部", "行政院", "內政部"], "a": 2}, {"id": "9-4", "cat": "就業服務法", "num": "4", "q": "依《就業服務法》規定，雇主對求職人不得因下列何種因素予以就業歧視？", "opts": ["宗教", "性別", "年齡", "以上皆是"], "a": 4}, {"id": "9-5", "cat": "就業服務法", "num": "5", "q": "依《就業服務法》規定，私立就業服務機構應向何機關申請許可？", "opts": ["財政部", "勞動部或其授權機關", "經濟部", "內政部"], "a": 2}, {"id": "9-6", "cat": "就業服務法", "num": "6", "q": "下列何者不是《就業服務法》規範的主要內容？", "opts": ["就業服務", "外國人聘僱管理", "就業歧視禁止", "全民健康保險"], "a": 4}, {"id": "9-7", "cat": "就業服務法", "num": "7", "q": "依《就業服務法》規定，雇主刊登求才廣告時，內容應：", "opts": ["不得有虛偽或引人錯誤情形", "誇大薪資", "隱瞞工作內容", "任意限制求職者資格"], "a": 1}, {"id": "9-8", "cat": "就業服務法", "num": "8", "q": "依《就業服務法》規定，下列何者屬於合法就業服務？", "opts": ["經許可設立之私立就業服務機構提供服務", "無照經營人力仲介", "非法仲介收費介紹工作", "收取高額保證金介紹工作"], "a": 1}, {"id": "9-9", "cat": "就業服務法", "num": "9", "q": "《就業服務法》主要希望建立何種就業環境？", "opts": ["只限定大型企業可以招募", "公平就業市場", "自由收費仲介市場", "雇主可任意限制求職資格"], "a": 2}, {"id": "9-10", "cat": "就業服務法", "num": "10", "q": "依《就業服務法》規定，雇主招募員工時，對求職人之下列何種資料，不得無正當理由要求提供？", "opts": ["工作經歷", "學歷", "與就業無關之隱私資料", "專業證照"], "a": 3}, {"id": "9-11", "cat": "就業服務法", "num": "11", "q": "私立就業服務機構經營就業服務業務，應先取得：", "opts": ["營利事業登記即可", "主管機關許可", "工會同意", "鄉鎮市公所同意"], "a": 2}, {"id": "9-12", "cat": "就業服務法", "num": "12", "q": "下列何者屬於《就業服務法》禁止之行為？", "opts": ["無合法許可經營就業服務業務", "提供合法求職服務", "辦理就業媒合", "提供就業諮詢"], "a": 1}, {"id": "9-13", "cat": "就業服務法", "num": "13", "q": "雇主刊登徵才廣告時，應遵守下列何者？", "opts": ["可任意誇大薪資待遇", "應公開真實工作內容及勞動條件", "可隱瞞工作地點", "可要求先繳保證金"], "a": 2}, {"id": "9-14", "cat": "就業服務法", "num": "14", "q": "外國人在臺工作，原則上應由何者依法申請聘僱許可？", "opts": ["外國人本人", "雇主", "工會", "鄉鎮市公所"], "a": 2}, {"id": "9-15", "cat": "就業服務法", "num": "15", "q": "依《就業服務法》規定，非法媒介就業或介紹工作，依法可能：", "opts": ["依法受行政處分或罰鍰", "不受任何處罰", "僅口頭警告", "政府補助"], "a": 1}, {"id": "9-16", "cat": "就業服務法", "num": "16", "q": "公立就業服務機構提供求職服務時，下列何者正確？", "opts": ["可向求職人收取介紹費", "原則上免費提供就業服務", "可任意收費", "依公司規定收費"], "a": 2}, {"id": "9-17", "cat": "就業服務法", "num": "17", "q": "《就業服務法》規範就業服務制度的主要目的為何？", "opts": ["保障求職者及雇主權益，建立公平就業市場", "增加企業利潤", "降低工資", "提高工時"], "a": 1}, {"id": "9-18", "cat": "就業服務法", "num": "18", "q": "依《就業服務法》規定，下列何者不是雇主聘僱外國人工作應符合的基本原則？", "opts": ["應依法申請聘僱許可", "未經許可不得聘僱", "可先聘僱再補辦許可", "應符合就業服務法相關規定"], "a": 3}, {"id": "9-19", "cat": "就業服務法", "num": "19", "q": "依《就業服務法》規定，下列何者屬於非法就業服務行為？", "opts": ["經許可設立的私立就業服務機構介紹工作", "公立就業服務機構提供媒合服務", "未經許可從事就業服務業務", "公立就業服務機構辦理徵才活動"], "a": 3}, {"id": "9-20", "cat": "就業服務法", "num": "20", "q": "下列何者最符合《就業服務法》保障求職人權益的精神？", "opts": ["雇主可任意蒐集求職者個人資料", "不得要求提供與就業無關的隱私資料", "可要求提供家庭財產資料", "可要求提供宗教信仰證明"], "a": 2}, {"id": "9-21", "cat": "就業服務法", "num": "21", "q": "外國人在臺工作，工作許可期限屆滿後，雇主如仍有聘僱需求，應如何辦理？", "opts": ["不必辦理任何手續", "依法申請展延或重新申請許可", "自動延長", "由外國人自行申請即可"], "a": 2}, {"id": "9-22", "cat": "就業服務法", "num": "22", "q": "私立就業服務機構從業人員執行業務時，對求職人個人資料應：", "opts": ["任意公開", "依法保密", "提供其他仲介公司使用", "公布於網路"], "a": 2}, {"id": "9-23", "cat": "就業服務法", "num": "23", "q": "《就業服務法》對私立就業服務機構的管理，主要目的為何？", "opts": ["增加仲介收入", "維護求職者及求才者權益，建立健全就業服務制度", "提高服務收費及品質", "增加外國人聘僱人數"], "a": 2}, {"id": "9-24", "cat": "就業服務法", "num": "24", "q": "求職人認為遭受就業歧視時，可向何機關提出申訴？", "opts": ["地方主管機關", "國稅局", "地政事務所", "戶政事務所"], "a": 1}, {"id": "9-25", "cat": "就業服務法", "num": "25", "q": "依《就業服務法》規定，雇主聘僱外國人工作，應先取得何種文件？", "opts": ["工作許可", "身分證", "健保卡", "居留證即可"], "a": 1}, {"id": "9-26", "cat": "就業服務法", "num": "26", "q": "下列何者屬於《就業服務法》所禁止的就業歧視？", "opts": ["因身心障礙而拒絕錄用，且無法律依據", "因工作能力錄取員工", "依工作內容要求具備必要證照", "依法律規定辦理聘僱"], "a": 1}, {"id": "9-27", "cat": "就業服務法", "num": "27", "q": "雇主刊登徵才廣告，薪資內容與實際提供薪資不符，可能違反：", "opts": ["就業服務法有關不實徵才廣告規定", "公司法", "民法", "消費者保護法"], "a": 1}, {"id": "9-28", "cat": "就業服務法", "num": "28", "q": "依《就業服務法》規定，主管機關對違法的私立就業服務機構得採取何種措施？", "opts": ["僅口頭勸導", "不得處分", "命限期改善、裁處罰鍰，情節重大者並得廢止許可", "由工會自行處理"], "a": 3}, {"id": "9-29", "cat": "就業服務法", "num": "29", "q": "下列何者符合《就業服務法》保障公平就業的精神？", "opts": ["因婚姻狀況一律不錄取", "招募以工作能力及職務需求為主要考量", "任意限制求職人的宗教信仰", "因性傾向拒絕錄用"], "a": 2}, {"id": "9-30", "cat": "就業服務法", "num": "30", "q": "私立就業服務機構依法應妥善保管求職人資料，其主要目的為何？", "opts": ["提供其他公司自由使用", "保護個人資料及求職者權益", "作為商業販售用途", "確保其他公司可以完全掌握求職者"], "a": 2}, {"id": "9-31", "cat": "就業服務法", "num": "31", "q": "依《就業服務法》及其施行細則規定，下列何者正確？", "opts": ["雇主可要求求職人繳交保證金", "雇主可要求提供與就業無關的隱私資料", "求才廣告應真實，不得有虛偽或引人錯誤的表示", "未經許可即可經營私立就業服務業務"], "a": 3}, {"id": "9-32", "cat": "就業服務法", "num": "32", "q": "依《就業服務法》規定，雇主刊登或散布不實徵才廣告，依法可處新臺幣多少元罰鍰？", "opts": ["3 萬元以上 15 萬元以下", "6 萬元以上 30 萬元以下", "30 萬元以上150萬元以下", "15 萬元以上 75 萬元以下"], "a": 2}, {"id": "9-33", "cat": "就業服務法", "num": "33", "q": "雇主違反《就業服務法》第 5 條就業歧視規定，依法可處新臺幣多少元罰鍰？", "opts": ["3 萬元以上 15 萬元以下", "6 萬元以上 30 萬元以下", "30 萬元以上 150 萬元以下", "150 萬元以上 750 萬元以下"], "a": 3}, {"id": "9-34", "cat": "就業服務法", "num": "34", "q": "依《就業服務法》規定，非法容留外國人在臺工作，最高可處多少元罰鍰？", "opts": ["15萬元", "30 萬元", "75 萬元", "150 萬元"], "a": 3}, {"id": "9-35", "cat": "就業服務法", "num": "35", "q": "私立就業服務機構未經許可經營就業服務業務，依法除罰鍰外，主管機關並得：", "opts": ["命停止營業", "核發補助", "不予處理", "給予獎勵"], "a": 1}, {"id": "9-36", "cat": "就業服務法", "num": "36", "q": "依《就業服務法》規定，私立就業服務機構違法情節重大者，主管機關得：", "opts": ["不得處分", "給予補助", "延長許可", "廢止許可"], "a": 4}, {"id": "9-37", "cat": "就業服務法", "num": "37", "q": "雇主要求求職人提供與就業無關的隱私資料，違反《就業服務法》規定，可處新臺幣多少元罰鍰？", "opts": ["3 萬元以上 15 萬元以下", "6 萬元以上 30 萬元以下", "30萬元以上 150 萬元以下", "150 萬元以上 750 萬元以下"], "a": 2}, {"id": "9-38", "cat": "就業服務法", "num": "38", "q": "依《就業服務法》規定，雇主聘僱外國人工作，應於何時取得工作許可？", "opts": ["到職後7 日內", "到職後 30 日內", "聘僱前", "工作滿 3 個月後"], "a": 3}, {"id": "9-39", "cat": "就業服務法", "num": "39", "q": "依《就業服務法》規定，外國人未經許可不得在我國工作，主要目的為何？", "opts": ["增加仲介收入", "維護我國就業秩序及勞動市場管理", "增加企業成本", "限制外國人居留"], "a": 2}, {"id": "9-40", "cat": "就業服務法", "num": "40", "q": "依《就業服務法》第 5 條規定，雇主提供職缺之經常性薪資未達多少元時，應公開揭示或告知薪資範圍？", "opts": ["新臺幣 29,500 元", "新臺幣 36,000 元", "新臺幣40,000元", "新臺幣 45,000 元"], "a": 3}, {"id": "9-41", "cat": "就業服務法", "num": "41", "q": "雇主提供職缺之經常性薪資未達新臺幣 4 萬元，卻未公開揭示或告知薪資範圍，可處新臺幣多少元罰鍰？", "opts": ["3 萬元以上 15 萬元以下", "6 萬元以上 30 萬元以下", "30 萬元以上 150 萬元以下", "15 萬元以上 75 萬元以下"], "a": 2}, {"id": "9-42", "cat": "就業服務法", "num": "42", "q": "違反就業服務法第 5 條第 1 項就業歧視規定，經裁罰後仍未改善者，主管機關應如何處理？", "opts": ["不再處理", "加倍處罰一次即可", "按次處罰", "僅口頭警告"], "a": 3}, {"id": "9-43", "cat": "就業服務法", "num": "43", "q": "違反《就業服務法》第 68 條第 2 項規定，按被解僱或資遣人數，每人可處多少元罰鍰？", "opts": ["每人 1 萬元以上 5 萬元以下", "每人 2 萬元以上 10 萬元以下", "每人3 萬元以上 15 萬元以下", "每人 6 萬元以上 30 萬元以下"], "a": 2}, {"id": "9-44", "cat": "就業服務法", "num": "44", "q": "違反《就業服務法》第 67 條規定者，可處新臺幣多少元罰鍰？", "opts": ["3 萬元以上15萬元以下", "6 萬元以上 30 萬元以下", "30 萬元以上 150 萬元以下", "150萬元以上750 萬元以下"], "a": 2}, {"id": "9-45", "cat": "就業服務法", "num": "45", "q": "違反《就業服務法》第 65 條規定者，可處新臺幣多少元罰鍰？", "opts": ["3 萬元以上15萬元以下", "6 萬元以上 30 萬元以下", "30 萬元以上 150 萬元以下", "150萬元以上750 萬元以下"], "a": 3}, {"id": "9-46", "cat": "就業服務法", "num": "46", "q": "依《就業服務法》規定，就業服務應遵循何種原則？", "opts": ["公平、公正", "公開、透明", "不得有就業歧視", "以上皆是"], "a": 4}, {"id": "9-47", "cat": "就業服務法", "num": "47", "q": "依《就業服務法》規定，下列何者可以合法經營私立就業服務業務？", "opts": ["經主管機關許可者", "任何公司", "任何個人", "工會即可"], "a": 1}, {"id": "9-48", "cat": "就業服務法", "num": "48", "q": "求職人向公立就業服務機構求職，原則上：", "opts": ["收取服務費", "免費", "收取介紹費", "收取保證金"], "a": 2}, {"id": "9-49", "cat": "就業服務法", "num": "49", "q": "下列何者屬於求職人應受保障的權益？", "opts": ["公平求職機會", "就業不受歧視", "個人資料保護", "以上皆是"], "a": 4}, {"id": "9-50", "cat": "就業服務法", "num": "50", "q": "主管機關查核私立就業服務機構時，該機構應：", "opts": ["配合查核", "拒絕提供資料", "自行決定是否配合", "無須配合"], "a": 1}];
+
+// 各科模擬考抽題配額（依 578 題比例精準分配共 100 題）
+const EXAM_QUOTAS = {
+  "現場作業注意事項": 9,
+  "職業安全衛生法規": 9,
+  "商品的認識": 14,
+  "品保概念": 9,
+  "勞動法令": 25,
+  "勞工保險條例及施行細則": 9,
+  "勞工退休金條例及施行細則": 9,
+  "勞工職業災害保險及保護法": 8,
+  "就業服務法": 8
+};
+
+const STORAGE_KEY = "KKL_115_STUDY_STATE_V1";
+
+let state = {
+  // qStats[id] = { seen: number, correct: number, wrong: number }
+  qStats: {},
+  // mistakes[id] = { wrongCount: number, streak: number }  (streak reaches 2 -> remove)
+  mistakes: {},
+  // examHistory = [{ date, score, durationSec, wrongIds }]
+  examHistory: []
+};
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      state.qStats = parsed.qStats || {};
+      state.mistakes = parsed.mistakes || {};
+      state.examHistory = parsed.examHistory || [];
+    }
+  } catch (e) {
+    console.error("Failed to load state", e);
+  }
+}
+
+function saveState() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch (e) {
+    console.error("Failed to save state", e);
+  }
+  updateGlobalBadges();
+}
+
+// 考試倒數計時器（目標：2026-11-01 09:00:00）
+function updateCountdown() {
+  const now = new Date();
+  let targetYear = now.getFullYear();
+  let examDate = new Date(targetYear, 10, 1, 9, 0, 0); // Month 10 is November
+  if (now > new Date(targetYear, 10, 2)) {
+    examDate = new Date(targetYear + 1, 10, 1, 9, 0, 0);
+  }
+  const diff = examDate - now;
+  const el = document.getElementById("countdown-text");
+  if (diff <= 0) {
+    el.textContent = "今日登場！金榜題名";
+    return;
+  }
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const mins = Math.floor((diff / (1000 * 60)) % 60);
+  el.textContent = `${days}天 ${hours}時 ${mins}分`;
+}
+
+// 更新首頁與導覽列統計
+function updateGlobalBadges() {
+  const mistakeIds = Object.keys(state.mistakes);
+  const mCount = mistakeIds.length;
+  const dot = document.getElementById("nav-mistake-dot");
+  if (mCount > 0) {
+    dot.textContent = mCount;
+    dot.classList.remove("hidden");
+  } else {
+    dot.classList.add("hidden");
+  }
+  const homeBadge = document.getElementById("home-mistake-badge");
+  if (homeBadge) homeBadge.textContent = mCount;
+  const mPill = document.getElementById("m-count-pill");
+  if (mPill) mPill.textContent = `${mCount} 題`;
+}
+
+function renderDashboard() {
+  updateGlobalBadges();
+  const totalQ = QUESTIONS.length;
+  let practicedCount = 0;
+  let totalAttempts = 0;
+  let totalCorrect = 0;
+
+  QUESTIONS.forEach(q => {
+    const st = state.qStats[q.id];
+    if (st && st.seen > 0) {
+      practicedCount++;
+      totalAttempts += st.seen;
+      totalCorrect += st.correct;
+    }
+  });
+
+  const coveragePct = Math.round((practicedCount / totalQ) * 100);
+  const accPct = totalAttempts > 0 ? Math.round((totalCorrect / totalAttempts) * 100) : 0;
+
+  document.getElementById("stat-practiced").textContent = practicedCount;
+  document.getElementById("stat-coverage").textContent = coveragePct;
+  document.getElementById("stat-accuracy").textContent = `${accPct}%`;
+  document.getElementById("stat-progress-bar").style.width = `${coveragePct}%`;
+  document.getElementById("stat-total-attempts").textContent = `${totalAttempts} 次`;
+  document.getElementById("stat-mistake-count").textContent = `${Object.keys(state.mistakes).length} 題`;
+
+  if (state.examHistory.length > 0) {
+    const sum = state.examHistory.reduce((acc, r) => acc + r.score, 0);
+    const avg = (sum / state.examHistory.length).toFixed(1);
+    document.getElementById("stat-exam-avg").textContent = `${avg} 分`;
+  } else {
+    document.getElementById("stat-exam-avg").textContent = `-- 分`;
+  }
+
+  // Render Category Breakdown
+  const catContainer = document.getElementById("category-list");
+  catContainer.innerHTML = "";
+  Object.keys(EXAM_QUOTAS).forEach(cat => {
+    const catQs = QUESTIONS.filter(q => q.cat === cat);
+    let done = 0;
+    let cAttempts = 0;
+    let cCorrect = 0;
+    catQs.forEach(q => {
+      const st = state.qStats[q.id];
+      if (st && st.seen > 0) {
+        done++;
+        cAttempts += st.seen;
+        cCorrect += st.correct;
+      }
+    });
+    const pct = Math.round((done / catQs.length) * 100);
+    const cAcc = cAttempts > 0 ? Math.round((cCorrect / cAttempts) * 100) : 0;
+    const quota = EXAM_QUOTAS[cat];
+
+    const item = document.createElement("div");
+    item.className = "p-3 rounded-xl bg-slate-50 hover:bg-slate-100 active:scale-[0.99] transition cursor-pointer border border-slate-200/60";
+    item.onclick = () => startPractice(cat, 'UNSEEN_FIRST');
+    item.innerHTML = `
+      <div class="flex items-center justify-between mb-1.5">
+        <div class="flex items-center space-x-2">
+          <span class="text-xs font-extrabold text-slate-800">${cat}</span>
+          <span class="text-[10px] bg-indigo-50 text-indigo-700 font-bold px-1.5 py-0.5 rounded">模考抽 ${quota} 題</span>
+        </div>
+        <span class="text-[11px] font-bold text-slate-600">${done}/${catQs.length} 題 (${cAcc}%)</span>
+      </div>
+      <div class="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden">
+        <div class="bg-amber-500 h-full rounded-full" style="width: ${pct}%"></div>
+      </div>
+    `;
+    catContainer.appendChild(item);
+  });
+}
+
+// ---------------- TAB NAVIGATION ----------------
+function switchTab(tab) {
+  ['home', 'practice', 'mistakes', 'exam'].forEach(t => {
+    document.getElementById(`view-${t}`).classList.toggle('hidden', t !== tab);
+    const navBtn = document.getElementById(`nav-${t}`);
+    if (t === tab) {
+      navBtn.classList.remove('text-slate-400', 'font-medium');
+      navBtn.classList.add('text-amber-600', 'font-bold');
+    } else {
+      navBtn.classList.add('text-slate-400', 'font-medium');
+      navBtn.classList.remove('text-amber-600', 'font-bold');
+    }
+  });
+
+  if (tab === 'home') renderDashboard();
+  if (tab === 'practice' && practicePool.length === 0) initPracticePool('ALL', 'UNSEEN_FIRST');
+  if (tab === 'mistakes') initMistakeView();
+  if (tab === 'exam') renderExamHistory();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ---------------- PRACTICE MODE ----------------
+let practicePool = [];
+let practiceIdx = 0;
+let practiceAnswered = false;
+
+function populateCategorySelect() {
+  const sel = document.getElementById("practice-cat-select");
+  Object.keys(EXAM_QUOTAS).forEach(cat => {
+    const cnt = QUESTIONS.filter(q => q.cat === cat).length;
+    const opt = document.createElement("option");
+    opt.value = cat;
+    opt.textContent = `${cat} (${cnt}題)`;
+    sel.appendChild(opt);
+  });
+}
+
+function startPractice(cat, order) {
+  document.getElementById("practice-cat-select").value = cat;
+  document.getElementById("practice-order-select").value = order;
+  initPracticePool(cat, order);
+  switchTab('practice');
+}
+
+function onChangePracticeFilter() {
+  const cat = document.getElementById("practice-cat-select").value;
+  const order = document.getElementById("practice-order-select").value;
+  initPracticePool(cat, order);
+}
+
+function shuffleArray(arr) {
+  const copy = [...arr];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+function initPracticePool(cat, order) {
+  let pool = cat === 'ALL' ? [...QUESTIONS] : QUESTIONS.filter(q => q.cat === cat);
+  if (order === 'RANDOM') {
+    pool = shuffleArray(pool);
+  } else if (order === 'UNSEEN_FIRST') {
+    const unseen = shuffleArray(pool.filter(q => !state.qStats[q.id] || state.qStats[q.id].seen === 0));
+    const seen = shuffleArray(pool.filter(q => state.qStats[q.id] && state.qStats[q.id].seen > 0));
+    pool = [...unseen, ...seen];
+  }
+  practicePool = pool;
+  practiceIdx = 0;
+  renderPracticeQuestion();
+}
+
+function renderPracticeQuestion() {
+  if (practicePool.length === 0) return;
+  practiceAnswered = false;
+  const q = practicePool[practiceIdx];
+  document.getElementById("practice-progress-label").textContent = `目前進度：${practiceIdx + 1} / ${practicePool.length}`;
+  document.getElementById("p-cat-badge").textContent = q.cat;
+  document.getElementById("p-qnum-badge").textContent = `原卷第 ${q.num} 題`;
+  document.getElementById("p-question-text").textContent = q.q;
+  document.getElementById("p-feedback-text").textContent = "點選選項立即對答";
+  document.getElementById("p-feedback-text").className = "text-xs font-bold text-slate-400";
+
+  const optsContainer = document.getElementById("p-options");
+  optsContainer.innerHTML = "";
+  q.opts.forEach((optText, idx) => {
+    const optNum = idx + 1;
+    const btn = document.createElement("button");
+    btn.className = "opt-btn w-full text-left p-3.5 rounded-xl border-2 border-slate-200 bg-slate-50/60 hover:bg-slate-100 flex items-start space-x-3";
+    btn.innerHTML = `
+      <span class="opt-circle flex-shrink-0 w-6 h-6 rounded-full bg-white border border-slate-300 text-slate-700 font-bold text-xs flex items-center justify-center mt-0.5">${optNum}</span>
+      <span class="text-sm font-medium text-slate-800 leading-snug">${optText}</span>
+    `;
+    btn.onclick = () => handlePracticeAnswer(q, optNum, btn);
+    optsContainer.appendChild(btn);
+  });
+}
+
+function recordAnswerResult(qId, isCorrect, isFromMistakeView = false) {
+  if (!state.qStats[qId]) {
+    state.qStats[qId] = { seen: 0, correct: 0, wrong: 0 };
+  }
+  state.qStats[qId].seen++;
+  if (isCorrect) {
+    state.qStats[qId].correct++;
+    if (isFromMistakeView && state.mistakes[qId]) {
+      state.mistakes[qId].streak = (state.mistakes[qId].streak || 0) + 1;
+      if (state.mistakes[qId].streak >= 2) {
+        delete state.mistakes[qId];
+      }
+    }
+  } else {
+    state.qStats[qId].wrong++;
+    if (!state.mistakes[qId]) {
+      state.mistakes[qId] = { wrongCount: 1, streak: 0 };
+    } else {
+      state.mistakes[qId].wrongCount++;
+      state.mistakes[qId].streak = 0; // 答錯就歸零連勝次數
+    }
+  }
+  saveState();
+}
+
+function handlePracticeAnswer(q, chosenNum, clickedBtn) {
+  if (practiceAnswered) return;
+  practiceAnswered = true;
+  const isCorrect = chosenNum === q.a;
+  recordAnswerResult(q.id, isCorrect, false);
+
+  const buttons = document.getElementById("p-options").children;
+  for (let i = 0; i < buttons.length; i++) {
+    const optNum = i + 1;
+    const b = buttons[i];
+    if (optNum === q.a) {
+      b.className = "opt-btn w-full text-left p-3.5 rounded-xl border-2 border-emerald-500 bg-emerald-50 flex items-start space-x-3";
+      b.querySelector('.opt-circle').className = "opt-circle flex-shrink-0 w-6 h-6 rounded-full bg-emerald-500 text-white font-bold text-xs flex items-center justify-center mt-0.5";
+      b.querySelector('.opt-circle').textContent = "✓";
+    } else if (optNum === chosenNum && !isCorrect) {
+      b.className = "opt-btn w-full text-left p-3.5 rounded-xl border-2 border-rose-500 bg-rose-50 flex items-start space-x-3";
+      b.querySelector('.opt-circle').className = "opt-circle flex-shrink-0 w-6 h-6 rounded-full bg-rose-500 text-white font-bold text-xs flex items-center justify-center mt-0.5";
+      b.querySelector('.opt-circle').textContent = "✕";
+    } else {
+      b.classList.add("opacity-50");
+    }
+  }
+
+  const fb = document.getElementById("p-feedback-text");
+  if (isCorrect) {
+    fb.textContent = "🎉 答對了！";
+    fb.className = "text-xs font-black text-emerald-600";
+    if (document.getElementById("auto-next-toggle").checked) {
+      setTimeout(() => {
+        if (practiceAnswered) nextPracticeQuestion();
+      }, 550);
+    }
+  } else {
+    fb.textContent = `❌ 答錯了！已自動收錄至錯題本（正確答案：${q.a}）`;
+    fb.className = "text-xs font-black text-rose-600";
+  }
+}
+
+function nextPracticeQuestion() {
+  if (practicePool.length === 0) return;
+  practiceIdx = (practiceIdx + 1) % practicePool.length;
+  renderPracticeQuestion();
+}
+
+function prevPracticeQuestion() {
+  if (practicePool.length === 0) return;
+  practiceIdx = (practiceIdx - 1 + practicePool.length) % practicePool.length;
+  renderPracticeQuestion();
+}
+
+// ---------------- MISTAKE NOTEBOOK (連對 2 次移除) ----------------
+let mistakePool = [];
+let mistakeIdx = 0;
+let mistakeAnswered = false;
+
+function initMistakeView() {
+  const ids = Object.keys(state.mistakes);
+  mistakePool = QUESTIONS.filter(q => ids.includes(q.id));
+  if (mistakeIdx >= mistakePool.length) mistakeIdx = 0;
+
+  const emptyEl = document.getElementById("m-empty-state");
+  const activeEl = document.getElementById("m-active-container");
+
+  if (mistakePool.length === 0) {
+    emptyEl.classList.remove("hidden");
+    activeEl.classList.add("hidden");
+  } else {
+    emptyEl.classList.add("hidden");
+    activeEl.classList.remove("hidden");
+    renderMistakeQuestion();
+  }
+}
+
+function renderMistakeQuestion() {
+  if (mistakePool.length === 0) {
+    initMistakeView();
+    return;
+  }
+  mistakeAnswered = false;
+  const q = mistakePool[mistakeIdx];
+  const mInfo = state.mistakes[q.id] || { wrongCount: 1, streak: 0 };
+
+  document.getElementById("m-cat-badge").textContent = `${q.cat}・第 ${q.num} 題`;
+  document.getElementById("m-wrong-times").textContent = `累計錯 ${mInfo.wrongCount} 次`;
+  document.getElementById("m-streak-badge").textContent = `連對進度：${mInfo.streak} / 2`;
+  document.getElementById("m-question-text").textContent = q.q;
+  document.getElementById("m-progress-text").textContent = `第 ${mistakeIdx + 1} / ${mistakePool.length} 題`;
+
+  const optsContainer = document.getElementById("m-options");
+  optsContainer.innerHTML = "";
+  q.opts.forEach((optText, idx) => {
+    const optNum = idx + 1;
+    const btn = document.createElement("button");
+    btn.className = "opt-btn w-full text-left p-3.5 rounded-xl border-2 border-slate-200 bg-slate-50/60 hover:bg-slate-100 flex items-start space-x-3";
+    btn.innerHTML = `
+      <span class="opt-circle flex-shrink-0 w-6 h-6 rounded-full bg-white border border-slate-300 text-slate-700 font-bold text-xs flex items-center justify-center mt-0.5">${optNum}</span>
+      <span class="text-sm font-medium text-slate-800 leading-snug">${optText}</span>
+    `;
+    btn.onclick = () => handleMistakeAnswer(q, optNum);
+    optsContainer.appendChild(btn);
+  });
+}
+
+function handleMistakeAnswer(q, chosenNum) {
+  if (mistakeAnswered) return;
+  mistakeAnswered = true;
+  const isCorrect = chosenNum === q.a;
+  recordAnswerResult(q.id, isCorrect, true);
+
+  const buttons = document.getElementById("m-options").children;
+  for (let i = 0; i < buttons.length; i++) {
+    const optNum = i + 1;
+    const b = buttons[i];
+    if (optNum === q.a) {
+      b.className = "opt-btn w-full text-left p-3.5 rounded-xl border-2 border-emerald-500 bg-emerald-50 flex items-start space-x-3";
+      b.querySelector('.opt-circle').className = "opt-circle flex-shrink-0 w-6 h-6 rounded-full bg-emerald-500 text-white font-bold text-xs flex items-center justify-center mt-0.5";
+      b.querySelector('.opt-circle').textContent = "✓";
+    } else if (optNum === chosenNum && !isCorrect) {
+      b.className = "opt-btn w-full text-left p-3.5 rounded-xl border-2 border-rose-500 bg-rose-50 flex items-start space-x-3";
+      b.querySelector('.opt-circle').className = "opt-circle flex-shrink-0 w-6 h-6 rounded-full bg-rose-500 text-white font-bold text-xs flex items-center justify-center mt-0.5";
+      b.querySelector('.opt-circle').textContent = "✕";
+    } else {
+      b.classList.add("opacity-50");
+    }
+  }
+
+  const stillInMistakes = !!state.mistakes[q.id];
+  const streakBadge = document.getElementById("m-streak-badge");
+  if (!stillInMistakes) {
+    streakBadge.textContent = "🎉 連對 2 次！已消滅移除";
+    streakBadge.className = "text-[11px] font-bold bg-emerald-500 text-white px-2 py-0.5 rounded";
+    setTimeout(() => {
+      initMistakeView();
+    }, 850);
+  } else if (isCorrect) {
+    streakBadge.textContent = `連對進度：1 / 2（再對1次即移除）`;
+    streakBadge.className = "text-[11px] font-bold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded";
+  } else {
+    streakBadge.textContent = `答錯歸零：0 / 2`;
+    streakBadge.className = "text-[11px] font-bold bg-rose-100 text-rose-800 px-2 py-0.5 rounded";
+  }
+}
+
+function nextMistakeQuestion() {
+  if (mistakePool.length === 0) return;
+  mistakeIdx = (mistakeIdx + 1) % mistakePool.length;
+  renderMistakeQuestion();
+}
+
+function prevMistakeQuestion() {
+  if (mistakePool.length === 0) return;
+  mistakeIdx = (mistakeIdx - 1 + mistakePool.length) % mistakePool.length;
+  renderMistakeQuestion();
+}
+
+// ---------------- MOCK EXAM (100題 / 60分鐘 / 依各科比例抽題) ----------------
+let examQuestions = [];
+let examAnswers = {}; // index -> chosenNum
+let examCurrentIdx = 0;
+let examSecondsLeft = 3600;
+let examTimerInterval = null;
+
+function startNewExam() {
+  // 依各科題數配額隨機抽出 100 題
+  let selected = [];
+  Object.keys(EXAM_QUOTAS).forEach(cat => {
+    const quota = EXAM_QUOTAS[cat];
+    const catPool = shuffleArray(QUESTIONS.filter(q => q.cat === cat));
+    selected.push(...catPool.slice(0, quota));
+  });
+  examQuestions = selected; // 按科目順序排列，貼近真實考卷體驗
+  examAnswers = {};
+  examCurrentIdx = 0;
+  examSecondsLeft = 3600;
+
+  document.getElementById("exam-lobby").classList.add("hidden");
+  document.getElementById("exam-result").classList.add("hidden");
+  document.getElementById("exam-runner").classList.remove("hidden");
+  document.getElementById("exam-grid-drawer").classList.add("hidden");
+
+  if (examTimerInterval) clearInterval(examTimerInterval);
+  updateExamTimerDisplay();
+  examTimerInterval = setInterval(() => {
+    examSecondsLeft--;
+    updateExamTimerDisplay();
+    if (examSecondsLeft <= 0) {
+      clearInterval(examTimerInterval);
+      alert("60 分鐘作答時間到！系統將自動為您交卷計分。");
+      submitExam();
+    }
+  }, 1000);
+
+  renderExamQuestion();
+}
+
+function updateExamTimerDisplay() {
+  const m = String(Math.floor(examSecondsLeft / 60)).padStart(2, '0');
+  const s = String(examSecondsLeft % 60).padStart(2, '0');
+  document.getElementById("exam-timer").textContent = `${m}:${s}`;
+}
+
+function renderExamQuestion() {
+  const q = examQuestions[examCurrentIdx];
+  const answeredCount = Object.keys(examAnswers).length;
+  document.getElementById("exam-answered-count").textContent = `${answeredCount} / 100`;
+  document.getElementById("e-cat-badge").textContent = q.cat;
+  document.getElementById("e-qindex-badge").textContent = `第 ${examCurrentIdx + 1} / 100 題`;
+  document.getElementById("e-question-text").textContent = q.q;
+
+  const chosen = examAnswers[examCurrentIdx];
+  const optsContainer = document.getElementById("e-options");
+  optsContainer.innerHTML = "";
+  q.opts.forEach((optText, idx) => {
+    const optNum = idx + 1;
+    const isSelected = chosen === optNum;
+    const btn = document.createElement("button");
+    btn.className = isSelected
+      ? "opt-btn w-full text-left p-3.5 rounded-xl border-2 border-indigo-600 bg-indigo-50 flex items-start space-x-3"
+      : "opt-btn w-full text-left p-3.5 rounded-xl border-2 border-slate-200 bg-slate-50/60 hover:bg-slate-100 flex items-start space-x-3";
+    btn.innerHTML = `
+      <span class="flex-shrink-0 w-6 h-6 rounded-full ${isSelected ? 'bg-indigo-600 text-white' : 'bg-white border border-slate-300 text-slate-700'} font-bold text-xs flex items-center justify-center mt-0.5">${optNum}</span>
+      <span class="text-sm font-medium text-slate-800 leading-snug">${optText}</span>
+    `;
+    btn.onclick = () => {
+      examAnswers[examCurrentIdx] = optNum;
+      renderExamQuestion();
+      if (examCurrentIdx < 99) {
+        setTimeout(() => {
+          examCurrentIdx++;
+          renderExamQuestion();
+        }, 180);
+      }
+    };
+    optsContainer.appendChild(btn);
+  });
+
+  renderExamGridButtons();
+}
+
+function toggleExamGrid() {
+  const drawer = document.getElementById("exam-grid-drawer");
+  drawer.classList.toggle("hidden");
+  renderExamGridButtons();
+}
+
+function renderExamGridButtons() {
+  const container = document.getElementById("exam-grid-buttons");
+  if (container.parentElement.classList.contains("hidden")) return;
+  container.innerHTML = "";
+  for (let i = 0; i < 100; i++) {
+    const btn = document.createElement("button");
+    const isAns = examAnswers[i] !== undefined;
+    const isCurr = i === examCurrentIdx;
+    btn.className = `py-1.5 rounded-lg text-xs font-bold ${
+      isCurr ? 'ring-2 ring-amber-500 bg-indigo-700 text-white' :
+      isAns ? 'bg-indigo-100 text-indigo-800' : 'bg-slate-100 text-slate-500'
+    }`;
+    btn.textContent = i + 1;
+    btn.onclick = () => {
+      examCurrentIdx = i;
+      document.getElementById("exam-grid-drawer").classList.add("hidden");
+      renderExamQuestion();
+    };
+    container.appendChild(btn);
+  }
+}
+
+function prevExamQuestion() {
+  if (examCurrentIdx > 0) {
+    examCurrentIdx--;
+    renderExamQuestion();
+  }
+}
+
+function nextExamQuestion() {
+  if (examCurrentIdx < 99) {
+    examCurrentIdx++;
+    renderExamQuestion();
+  }
+}
+
+function confirmSubmitExam() {
+  const unanswered = 100 - Object.keys(examAnswers).length;
+  const msg = unanswered > 0
+    ? `還有 ${unanswered} 題尚未作答，確定要現在交卷算分嗎？`
+    : `100 題已全數作答完畢！確定要交卷嗎？`;
+  if (confirm(msg)) {
+    submitExam();
+  }
+}
+
+function submitExam() {
+  if (examTimerInterval) clearInterval(examTimerInterval);
+  let correctCount = 0;
+  let wrongItems = [];
+
+  examQuestions.forEach((q, idx) => {
+    const userAns = examAnswers[idx];
+    const isCorrect = userAns === q.a;
+    if (isCorrect) {
+      correctCount++;
+      recordAnswerResult(q.id, true, false);
+    } else {
+      recordAnswerResult(q.id, false, false);
+      wrongItems.push({ idx: idx + 1, q, userAns });
+    }
+  });
+
+  const usedSec = 3600 - examSecondsLeft;
+  const usedMin = Math.max(1, Math.round(usedSec / 60));
+
+  state.examHistory.unshift({
+    date: new Date().toLocaleString('zh-TW', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }),
+    score: correctCount,
+    usedMin
+  });
+  if (state.examHistory.length > 20) state.examHistory.pop();
+  saveState();
+
+  document.getElementById("exam-runner").classList.add("hidden");
+  document.getElementById("exam-result").classList.remove("hidden");
+  document.getElementById("exam-score-big").textContent = `${correctCount} 分`;
+  document.getElementById("exam-result-summary").textContent = `答對 ${correctCount} 題 ／ 答錯或未答 ${100 - correctCount} 題（已自動加入錯題本）・耗時約 ${usedMin} 分鐘`;
+
+  const reviewList = document.getElementById("exam-wrong-review-list");
+  reviewList.innerHTML = "";
+  if (wrongItems.length === 0) {
+    reviewList.innerHTML = `<div class="p-4 text-center text-emerald-600 font-bold text-xs">太強了！100 題全對，沒有任何錯題！</div>`;
+  } else {
+    wrongItems.forEach(item => {
+      const card = document.createElement("div");
+      card.className = "p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs space-y-1.5";
+      const userText = item.userAns ? `(${item.userAns}) ${item.q.opts[item.userAns - 1]}` : "未作答";
+      const corrText = `(${item.q.a}) ${item.q.opts[item.q.a - 1]}`;
+      card.innerHTML = `
+        <div class="flex items-center justify-between text-[11px] text-slate-500">
+          <span class="font-bold text-indigo-700">第 ${item.idx} 題・${item.q.cat}</span>
+          <span>原卷第 ${item.q.num} 題</span>
+        </div>
+        <div class="font-bold text-slate-900 leading-relaxed">${item.q.q}</div>
+        <div class="text-rose-600 font-medium">你的作答：${userText}</div>
+        <div class="text-emerald-700 font-bold">正確答案：${corrText}</div>
+      `;
+      reviewList.appendChild(card);
+    });
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function backToExamLobby() {
+  document.getElementById("exam-result").classList.add("hidden");
+  document.getElementById("exam-lobby").classList.remove("hidden");
+  renderExamHistory();
+}
+
+function renderExamHistory() {
+  const container = document.getElementById("exam-history-list");
+  if (!state.examHistory || state.examHistory.length === 0) {
+    container.innerHTML = `<div class="text-slate-400 py-2">尚未進行過模擬考</div>`;
+    return;
+  }
+  container.innerHTML = "";
+  state.examHistory.forEach((h, i) => {
+    const row = document.createElement("div");
+    row.className = "flex items-center justify-between py-2 px-3 rounded-lg bg-slate-50 border border-slate-100";
+    row.innerHTML = `
+      <span class="text-slate-600 font-medium">#${state.examHistory.length - i}・${h.date}（${h.usedMin}分鐘）</span>
+      <span class="font-black ${h.score >= 80 ? 'text-emerald-600' : 'text-indigo-600'}">${h.score} 分</span>
+    `;
+    container.appendChild(row);
+  });
+}
+
+// ---------------- BACKUP / RESTORE / RESET ----------------
+function exportProgress() {
+  const code = btoa(encodeURIComponent(JSON.stringify(state)));
+  navigator.clipboard?.writeText(code).then(() => {
+    alert("已將學習進度碼複製到剪貼簿！可貼到記事本或 LINE 保存。");
+  }).catch(() => {
+    prompt("請複製以下學習進度碼保存：", code);
+  });
+}
+
+function importProgress() {
+  const code = prompt("請貼上先前匯出的學習進度碼：");
+  if (!code) return;
+  try {
+    const parsed = JSON.parse(decodeURIComponent(atob(code.trim())));
+    if (parsed && typeof parsed === 'object') {
+      state.qStats = parsed.qStats || {};
+      state.mistakes = parsed.mistakes || {};
+      state.examHistory = parsed.examHistory || [];
+      saveState();
+      renderDashboard();
+      alert("學習進度匯入成功！");
+    }
+  } catch (e) {
+    alert("進度碼格式不正確，無法匯入。");
+  }
+}
+
+function resetAllData() {
+  if (confirm("確定要清空所有刷題紀錄、錯題本與模擬考成績嗎？此動作無法復原。")) {
+    state = { qStats: {}, mistakes: {}, examHistory: [] };
+    saveState();
+    renderDashboard();
+  }
+}
+
+// Init
+loadState();
+populateCategorySelect();
+updateCountdown();
+setInterval(updateCountdown, 30000);
+renderDashboard();
+</script>
+</body>
+</html>
